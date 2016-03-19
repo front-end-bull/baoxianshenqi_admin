@@ -1,0 +1,539 @@
+<!doctype html>
+<html lang="en" ng-app="phonecatApp">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+  <title>保险锦囊</title>
+  <link href="css/bootstrap-cerulean.min.css" rel="stylesheet">
+  <link href="css/charisma-app.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/animate.min.css" />
+  <script>
+    const IP = "182.254.212.33"
+     // const IP = "192.168.0.250"
+     // const IP = "192.168.0.101"
+
+  </script>
+  <style>
+
+    @font-face{
+      font-family: 'Jian';
+      src:url("fonts/Jian_simplify.ttf");
+    }
+    
+    @font-face{
+      font-family: 'Tan';
+      src:url("fonts/Tan.ttf");
+    }
+  
+    .paper-title{
+      background-color: #f5f5f5;
+      line-height: 2;
+      margin-left: -10px;
+      margin-right: -10px;
+      padding-left: 8px;
+    }
+
+    .paper-row{
+      margin-top:10px;
+      margin-bottom: 10px;
+      margin-left: 15px;
+    }
+  
+    .paper-row input{
+      width: 150px;
+    }
+  
+    .paper-row select{
+      width: 140px;
+      /*height: 26px;*/
+      font-size: 20px;
+    }
+
+    .paper-row input,.paper-row select{
+      /*width: 100%;*/
+      padding-left: 5px;
+    }
+
+    .add-year::after{
+      content:" 年"
+    }
+
+    .add-yuan::after{
+      content:" 元"
+    }
+
+    .add-guanxi::after{
+      content: " 关系"
+    } 
+
+    .add-sui::after{
+      content: " 岁"
+    }
+  
+    @-webkit-keyframes QiuBaoBao{
+      from{position:relative;left:0;}
+      to{position:relative;left:10px;}
+    } 
+
+    .genjin-icon{
+      -webkit-animation: QiuBaoBao 600ms infinite linear;
+    }
+
+    .genjin i{
+      margin-right: 10px;
+    }
+
+    #header-title span{
+      position: relative;
+    }
+  </style>
+  
+
+  <style>
+
+  *{
+      box-sizing: border-box;
+    }
+      .start,.end{
+        width: 40px;
+        height: 40px;
+        border-radius: 20px;
+        background-color: #899cb3;
+        position: absolute;
+        left: 50%;
+        margin-left: -20px;
+        text-align: center;
+        color: white;
+        line-height: 40px;
+        font-size: 12px;
+      }
+      .start{
+        
+      }
+      .end{
+        top: 275px;
+      }
+
+      .first-line{
+        position: absolute;
+        left: 50%;
+        margin-left: -2px;
+        top:44px;
+        width: 4px;
+        /* .end - 48px */
+        height: 227px; 
+        background-color: #899cb3;
+      }
+
+      .point{
+        width: 22px;
+        height: 22px;
+        border-radius: 11px;
+        background-color: white;
+        z-index: 1;
+        position: absolute;
+        left: 50%;
+        margin-left: -11px;
+        top:70px;
+      }
+      .inner{
+        width: 14px;
+        height: 14px;
+        border-radius: 7px;
+        background-color: #df5fe1;
+        z-index: 2;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        margin-left: -7px;
+        margin-top: -7px;
+      }
+
+      .article{
+        position: absolute;
+        left: 50%;
+        right: 50%;
+        margin-left:23px;
+        top:51px;
+      }
+
+      .title{
+        width: 260px;
+        height: 60px;
+        background-color: #df5fe1;
+        border-radius: 2px;
+        line-height: 60px;
+        color: white;
+        padding-left: 20px;
+        font-size: 46px;
+        font-weight: 500;
+      }
+
+      .content{
+        width: 260px;
+        height: 153px;
+        border: 1px solid #EFEAEA;
+        padding: 8px;
+      }
+
+      .triangle{
+        width: 20px;
+        height: 20px;
+        background-color: #df5fe1;
+        transform: rotate(45deg);
+        position: absolute;
+
+        top: 20px;
+        left:-7px;
+      }
+
+      
+
+      .stage{
+        width: 800px;
+        height: 800px;
+        position: relative;
+        left: 50%;
+        margin-left: -400px;
+      }
+
+      .yuyue-text{
+        width: 400px;
+        height: 200px;
+        position: relative;
+        left: 50%;
+        margin-left:-200px;
+        margin-top: 42px;
+        border:1px solid #9bdf70;background:#f0fbeb;
+        /*border:1px solid #adcd3c;background:#f2fddb;*/
+      }
+
+      .yuyue-save{
+        position: relative;
+        left: 50%;
+        margin-left: -40px;
+        margin-top:20px;
+        margin-bottom: 20px;
+      }
+
+      .article-reverse{
+        margin-left: -281px;
+      }
+      .triangle-reverse{
+        left:246px;
+      }
+      
+
+      .paper-row input{
+        color: black;
+      }
+
+
+      .tab-container{
+        border-top:1px solid #848484;
+        /*border-bottom: 1px solid #848484;*/
+        text-align: center;
+      }
+
+      .tab-container span{
+        display: block;
+        float: left;
+        width: 25%;
+        padding: 10px;
+        border-bottom: 1px solid #848484;
+
+      }
+
+      .tab{
+        height: 350px;
+        border-bottom: 1px solid #848484;
+      }
+
+      .tab textarea{
+        width: 700px;
+        height: 280px;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        margin-left: -350px;
+        margin-top: -140px;
+        border-radius: 10px;
+        border:1px solid #9bdf70;
+        background:#f0fbeb;
+        padding: 8px;
+      }
+
+      #c_tab4{
+        padding-top: 30px;
+        padding-left: 30px;
+      }
+
+      #c_tab2{
+        padding-left: 50px;
+        padding-top: 30px;
+      }
+
+      .pre-odd{
+        border: 0;
+        background-color: #f9f9f9;
+      }
+
+      .pre-even{
+        border:0;
+        background-color: white;
+      }
+  </style>
+  
+
+  <script src="bower_components/jquery/dist/jquery.js"></script>
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/angular-animate/angular-animate.js"></script>
+  <script src="bower_components/angular-route/angular-route.js"></script>
+  <script src="bower_components/angular-resource/angular-resource.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/animations.js"></script>
+  <script src="js/controllers.js"></script>
+  <script src="js/filters.js"></script>
+  <script src="js/services.js"></script>
+  <script src="js/My97DatePicker/WdatePicker.js"></script>
+  <script src="js/jquery.min.2.1.4.js"></script> 
+  
+  <!-- start 七牛上传 -->
+  <script src="js/CryptoJS.js"></script> 
+  <script src="js/base64.js"></script> 
+  <!-- end 七牛上传 -->
+
+  <script src="js/layer/layer.js"></script> 
+  <script src="js/jquery.easing.min.js"></script>
+  
+
+
+
+ 
+</head>
+
+<body>
+  <!-- 登录部分 start-->
+    <div class="ch-container" id="loginSection">
+      <div class="row">
+          <div class="row">
+              <div class="col-md-12 center login-header">
+                  <h2>订单管理系统</h2>
+              </div>
+          </div>
+          <div class="row">
+              <div class="well col-md-5 center login-box">
+                  <div class="alert alert-info">
+                      Please login with your Username and Password.
+                  </div>
+                  <form class="form-horizontal">
+                      <fieldset>
+                          <div class="input-group input-group-lg">
+                              <span class="input-group-addon"><i class="glyphicon glyphicon-user red"></i></span>
+                              <input type="text" class="form-control" placeholder="Username" id="username">
+                          </div>
+                          <div class="clearfix"></div><br>
+
+                          <div class="input-group input-group-lg">
+                              <span class="input-group-addon"><i class="glyphicon glyphicon-lock red"></i></span>
+                              <input type="password" class="form-control" placeholder="Password" id="password">
+                          </div>
+                          <div class="clearfix"></div>
+
+                          <div class="input-prepend">
+                             <!--  <label class="remember" for="remember"><input type="checkbox" id="remember"> Remember me</label> -->
+                          </div>
+                          <div class="clearfix"></div>
+
+                          <p class="center col-md-5">
+                              <button type="button" class="btn btn-primary" id="login" onclick="Login()">Login</button>
+                          </p>
+                      </fieldset>
+                  </form>
+              </div>
+          </div>
+      </div>
+    </div>
+  <!-- 登录部分 end-->
+
+  <!-- 顶部导航栏 start-->
+  <div class="navbar navbar-default" id="navigation" style="display: none;">
+
+        <div class="navbar-inner">
+            <button type="button" class="navbar-toggle pull-left animated flip">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html"> 
+                <!-- <img alt="Charisma Logo" src="img/logo20.png" class="hidden-xs"/> -->
+                <span  style="font-family: 'tan';font-size: 23px;" id="header-title">
+                  <span>订</span><span>单</span><span>管</span><span>理</span><span>系</span><span>统</span>
+                </span>
+            </a>
+
+            <!-- user dropdown starts -->
+            <div class="btn-group pull-right">
+                <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                    <i class="glyphicon glyphicon-user"></i><span class="hidden-sm hidden-xs"> admin</span>
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a href="#">Profile</a></li>
+                    <li class="divider"></li>
+                    <li><a href="login.html">Logout</a></li>
+                </ul>
+            </div>
+            <!-- user dropdown ends -->
+            
+            <form class="navbar-search pull-right animated tada" style="width: 250px;position:relative;right: 100px;">
+                <input placeholder="请输入订单号或者跟进人姓名" class="search-query form-control col-md-10" name="query"
+                       type="text">
+            </form>
+
+        </div>
+  </div>
+  <!-- 顶部导航栏 end-->
+
+
+  <!-- 左部导航栏＋ng-view start-->
+  <div class="ch-container" id="ch-container" style="display: none;">
+    <div class="row">
+        
+        <!-- left menu starts -->
+        <div class="col-sm-2 col-lg-2">
+            <div class="sidebar-nav">
+                <div class="nav-canvas">
+                    <div class="nav-sm nav nav-stacked">
+
+                    </div>
+                    <ul class="nav nav-pills nav-stacked main-menu">
+                        <li class="nav-header">预约</li>
+                          <li  id="menu7" onclick="getFocus(this.id)">
+                              <a class="ajax-link" href="#/yuYue"><i class="glyphicon glyphicon-envelope"></i><span> 预约列表</span></a>
+                          </li>
+
+
+                        <li class="nav-header">订单中心</li>
+                          <!-- <li  id="menu1" onclick="getFocus(this.id)">
+                              <a class="ajax-link" href="#/yuChuangJian"><i class="glyphicon glyphicon-plus"></i><span> 预创建</span></a>
+                          </li> -->
+                         
+                          <li id="menu2" onclick="getFocus(this.id)">
+                              <a class="ajax-link" href="#/genJinZhong"><i class="glyphicon glyphicon-eye-open"></i><span> 跟进中</span></a>
+                          </li>
+
+                          <!-- <li id="menu3" onclick="getFocus(this.id)">
+                             <a href="#/yiWanCheng"><i class="glyphicon glyphicon-lock"></i><span> 已完成</span></a>
+                          </li>
+                         
+                        <li class="nav-header hidden-md">我的订单</li>
+                          <li id="menu4" onclick="getFocus(this.id)">
+                              <a class="ajax-link" href="#/dingDanLieBiao"><i
+                                      class="glyphicon glyphicon-shopping-cart"></i><span> 订单列表</span></a>
+                          </li>
+                         
+                        <li class="nav-header hidden-md">个人中心</li>
+                          <li id="menu5" onclick="getFocus(this.id)">
+                              <a class="ajax-link" href="#/bianJiXinXi"><i class="glyphicon glyphicon-edit"></i><span> 编辑信息</span></a>
+                          </li>
+                          <li id="menu6" onclick="getFocus(this.id)">
+                              <a class="ajax-link" href="#/woDeXinXi"><i class="glyphicon glyphicon-list-alt"></i><span> 我的信息</span></a>
+                          </li> -->
+
+                         <li class="nav-header hidden-md">代理人查询</li>
+                          <li id="menu8" onclick="getFocus(this.id)">
+                              <a class="ajax-link" href="#/daiLiRenChaXun"><i class="glyphicon glyphicon-edit"></i><span> 代理人查询</span></a>
+                          </li>
+                         <!--  <li id="menu9" onclick="getFocus(this.id)">
+                              <a class="ajax-link" href="#/tuiJianLianXiRenChaXun"><i class="glyphicon glyphicon-list-alt"></i><span> 推荐联系人查询</span></a>
+                          </li>  -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!--/span-->
+        <!-- left menu ends -->
+
+        <noscript>
+            <div class="alert alert-block col-md-12">
+                <h4 class="alert-heading">Warning!</h4>
+
+                <p>You need to have <a href="http://en.wikipedia.org/wiki/JavaScript" target="_blank">JavaScript</a>
+                    enabled to use this site.</p>
+            </div>
+        </noscript>
+
+        <div ng-view id="content" class="col-lg-10 col-sm-10">
+            
+        </div><!--/fluid-row-->
+
+  <!-- 左部导航栏＋ng-view end-->
+
+
+  <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script type="text/javascript">
+
+    $(function(){
+      $("#loginSection").hide()
+      $('#container').show()
+      $('#navigation').show()
+      $("#ch-container").show()
+
+
+      setInterval(tiaodong,2000)
+
+
+
+    })
+
+    function tiaodong(){
+      $('#header-title').children().stop(true).each(function(i){
+        var tm = $(this).outerHeight()/2 *-1 + "px";
+        d = i*120;
+        $(this).delay(d).animate({top:tm},400,'linear').animate({top:0},400,'linear')
+      })
+    }
+
+
+    function Login(){
+      var username = $("#username").val()
+      if(username==""||username==undefined){
+        layer.tips('用户名不能为空', '#username');
+        return
+      }
+
+      var password = $("#password").val()
+      if(password==""||password==undefined){
+        layer.tips('用户名不能为空', '#password');
+        return
+      }
+
+      $("#loginSection").hide()
+      $('#container').show()
+      $('#navigation').show()
+      $("#ch-container").show()
+
+    }
+
+    function getFocus(id){
+      // $('#menu1').removeClass('active')
+      $('#menu2').removeClass('active')
+      // $('#menu3').removeClass('active')
+      // $('#menu4').removeClass('active')
+      // $('#menu5').removeClass('active')
+      // $('#menu6').removeClass('active')
+      $('#menu7').removeClass('active')
+      $('#menu8').removeClass('active')
+      // $('#menu9').removeClass('active')
+
+      $('#'+id).addClass('active')
+
+    }
+  </script>
+  
+</body>
+
+</html>

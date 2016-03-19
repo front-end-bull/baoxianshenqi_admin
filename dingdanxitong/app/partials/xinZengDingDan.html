@@ -1,0 +1,306 @@
+            <div>
+                <ul class="breadcrumb">
+                    <li>
+                        <a href="#/xinZengDingDan">订单中心</a>
+                    </li>
+                    <li>
+                        <a href="#/xinZengDingDan">跟进中</a>
+                    </li>
+                    <li>
+                        <a href="#/xinZengDingDan">新增订单</a>
+                    </li>
+                </ul>
+            </div>
+
+          
+
+            <div class="row">
+                <div class="box col-md-12">
+                    <div class="box-inner">
+                        <div class="box-header well">
+                            <h2><i class="glyphicon glyphicon-info-sign"></i> 新增订单</h2>
+
+                            <div class="box-icon">
+                               
+                                <a href="javascript:void(0)" class="btn btn-minimize btn-round btn-default" ng-click="post()"><i
+                                        class="glyphicon glyphicon-ok" style="color:#2bd394;"></i></a>
+                                <a href="#/genJinZhong" class="btn btn-close btn-round btn-default" ><i
+                                        class="glyphicon glyphicon-remove" style="color: red;"></i></a>
+                            </div>
+                        </div>
+                        <div class="box-content">
+                            <div class="paper-title" >
+                               代理人信息
+                            </div>
+
+                                <div class="paper-row row">
+                                    <div class="col-md-1" style="padding-right: 0;" >姓名:</div>
+                                    <div class="col-md-2" style="padding-left: 0;"><input disabled="disabled" ng-model="name"></input></div>
+                                    <div class="col-md-1"></div>
+                                    <div class="col-md-1" style="padding-right: 0;">UID:</div>
+                                    <div class="col-md-2" style="padding-left: 0;"><input ng-change="change_uid()" ng-model="uid"></input></div>
+                                    <div class="col-md-1"></div>
+                                    <div class="col-md-1" style="padding-right: 0;">公司:</div>
+                                    <div class="col-md-2" style="padding-left: 0;"><input disabled="disabled" ng-model="company"></input></div>
+                                    <div class="col-md-1"></div>
+                                </div> 
+
+                                <div class="paper-row row">
+                                    <div class="col-md-1" style="padding-right: 0;" >身份证号:</div>
+                                    <div class="col-md-2" style="padding-left: 0;"><input disabled="disabled" ng-model="id_card"></input></div>
+                                    <div class="col-md-1"></div>
+                                    <div class="col-md-1" style="padding-right: 0;">手机号:</div>
+                                    <div class="col-md-2" style="padding-left: 0;"><input disabled="disabled" ng-model="phonenumber"></input></div>
+                                    <div class="col-md-1"></div>
+                                    <div class="col-md-1" style="padding-right: 0;">邮箱:</div>
+                                    <div class="col-md-2" style="padding-left: 0;"><input ng-model="email"></input></div>
+                                    <div class="col-md-1"></div>
+                                </div>
+
+                                <div class="paper-row row">
+                                    <div class="col-md-1" style="padding-right: 0;">开卡银行:</div>
+                                    <div class="col-md-2" style="padding-left: 0;">
+                                        <select ng-model="bank"></select>
+                                    </div>
+                                    <div class="col-md-1"></div>
+                                    <div class="col-md-1" style="padding-right: 0;">银行卡号:</div>
+                                    <div class="col-md-2" style="padding-left: 0;"><input ng-model="banknummber"></input></div>
+                                    <div class="col-md-1"></div>
+                                    <div class="col-md-1" style="padding-right: 0;">佣金:</div>
+                                    <div class="col-md-2" style="padding-left: 0;"><input ng-model="yongjin"></input></div>
+                                    <div class="col-md-1"></div>
+
+
+                                </div>
+                               
+                                <div class="paper-row row">
+                                    <div class="col-md-1" style="padding-right: 0;">开户行地址:</div>
+                                    <div class="col-md-6" style="padding-left: 0;"><input style="width: 100%;" ng-model="bankaddress"></input></div>
+                                </div>
+
+                            <div class="paper-title" style="margin-bottom: 15px;margin-top: 50px;">
+                               产品信息 
+                               <!-- <span style="background-color: #F99406;border-radius:2px;color: white;padding:3px 8px;margin-left: 10px;">总保费：16861.57 元</span> -->
+                                    <i onclick="add_block()" class="glyphicon glyphicon-plus" style="color:black;float: right;margin-top: 5px;
+                                    margin-right: 25px;"></i>
+                            </div>   
+                                <div style="background-color: #2bd394;color:white;padding-top: 10px;padding-bottom: 10px;border-radius: 20px;position: relative;" id="a_block1">
+                                    <div class="paper-row row">
+                                        <div class="col-md-1" style="padding-right: 0;" >产品名称:</div>
+                                        <div class="col-md-2" style="padding-left: 0;"><select style="color: black;" id="block1_name">
+                                            <option value="7165">泰康乐安康</option>
+                                            <option value="7167">华夏健康人生</option>
+                                        </select></div>
+                                        <div class="col-md-1"></div>
+                                        <div class="col-md-1" style="padding-right: 0;">保额:</div>
+                                        <div class="col-md-2 add-yuan" style="padding-left: 0;"><input id="block1_baoe"></input></div>
+                                        <div class="col-md-1"></div>
+                                        <div class="col-md-1" style="padding-right: 0;">保费:</div>
+                                        <div class="col-md-2 add-yuan" style="padding-left: 0;"><input id="block1_baofee"></input></div>
+                                        <div class="col-md-1"></div>
+                                    </div> 
+
+                                    <div class="paper-row row">
+                                        <div class="col-md-1" style="padding-right: 0;" >保障期间:</div>
+                                        <div class="col-md-2 add-year" style="padding-left: 0;"><input id="block1_baozhangqijian"></input></div>
+                                        <div class="col-md-1"></div>
+                                        <div class="col-md-1" style="padding-right: 0;">缴费年限:</div>
+                                        <div class="col-md-2 add-year" style="padding-left: 0;"><input id="block1_jiaofeinianxian"></input></div>
+                                        <div class="col-md-1"></div>
+                                    </div> 
+
+                                    <div style="position: absolute;left: 100%;top: 10px;margin-left: -30px;" id="block1" 
+                                    onclick="delete_block(this.id)"><i class="glyphicon glyphicon-remove"></i></div>
+                                </div>
+
+                             
+                            <div class="paper-title" style="margin-top: 50px;">
+                               投保人信息
+                            </div> 
+                                <div class="paper-row row">
+                                    <div class="col-md-1" style="padding-right: 0;" >姓名:</div>
+                                    <div class="col-md-2" style="padding-left: 0;"><input ng-model="toubaoren_name"></input></div>
+                                    <div class="col-md-1"></div>
+                                    <div class="col-md-1" style="padding-right: 0;">性别:</div>
+                                    <div class="col-md-2 " style="padding-left: 0;"><select ng-model="toubaoren_gender" class="select-gender"></select></div>
+                                    <div class="col-md-1"></div>
+                                    <div class="col-md-1" style="padding-right: 0;">身份证号:</div>
+                                    <div class="col-md-2" style="padding-left: 0;"><input ng-model="toubaoren_id"></input></div>
+                                    <div class="col-md-1"></div>
+                                </div> 
+                                <div class="paper-row row">
+                                    <div class="col-md-1" style="padding-right: 0;" >年龄:</div>
+                                    <div class="col-md-2 add-sui" style="padding-left: 0;"><input ng-model="toubaoren_age"></input></div>
+                                    <div class="col-md-1"></div>
+                                    <div class="col-md-1" style="padding-right: 0;" >划款卡号:</div>
+                                    <div class="col-md-2" style="padding-left: 0;"><input ng-model="toubaoren_bankNum"></input></div>
+                                </div> 
+
+                            <div class="paper-title" style="margin-top: 50px;">
+                               被保人信息
+                              <!--  <i onclick="add_beibaoren()" class="glyphicon glyphicon-plus" style="color:black;float: right;margin-top: 5px;
+                                margin-right: 25px;"></i> -->
+                            </div> 
+                                <div id="a_beibaoren1">
+                                    <div class="paper-row row">
+                                        <div class="col-md-1" style="padding-right: 0;" >姓名:</div>
+                                        <div class="col-md-2" style="padding-left: 0;"><input id="beibaoren1_name"></input></div>
+                                        <div class="col-md-1"></div>
+                                        <div class="col-md-1" style="padding-right: 0;">性别:</div>
+                                        <div class="col-md-2 " style="padding-left: 0;"><select id="beibaoren1_gender" class="select-gender"></select></div>
+                                        <div class="col-md-1"></div>
+                                        <div class="col-md-1" style="padding-right: 0;">身份证号:</div>
+                                        <div class="col-md-2" style="padding-left: 0;"><input id="beibaoren1_ID"></input></div>
+                                        <div class="col-md-1"></div>
+                                    </div> 
+                                    <div class="paper-row row">
+                                        <div class="col-md-1" style="padding-right: 0;" >年龄:</div>
+                                        <div class="col-md-2 add-sui" style="padding-left: 0;"><input id="beibaoren1_age"></input></div>
+                                        <div class="col-md-1"></div>
+                                        <div class="col-md-1" style="padding-right: 0;" >与投保人</div>
+                                        <div class="col-md-2 add-guanxi" style="padding-left: 0;" ><select id="beibaoren1_relationship"><option value="1">本人</option><option value="2">夫妻</option><option value="3">父子</option><option value="4">母子</option><option value="5">其他</option></select></div>
+                                    </div> 
+                                </div>
+
+                                
+
+                            <div class="paper-title" style="margin-top: 50px;">
+                               受益人信息
+                               <i onclick="add_shouyiren()" class="glyphicon glyphicon-plus" style="color:black;float: right;margin-top: 5px;
+                                margin-right: 25px;"></i>
+                            </div> 
+                                <div id="a_shouyiren1">
+                                    <div class="paper-row row">
+                                        <div class="col-md-1" style="padding-right: 0;" >姓名:</div>
+                                        <div class="col-md-2" style="padding-left: 0;"><input id="shouyiren1_name"></input></div>
+                                        <div class="col-md-1"></div>
+                                        <div class="col-md-1" style="padding-right: 0;">性别:</div>
+                                        <div class="col-md-2 " style="padding-left: 0;"><select id="shouyiren1_gender" class="select-gender"></select></div>
+                                        <div class="col-md-1"></div>
+                                        <div class="col-md-1" style="padding-right: 0;">身份证号:</div>
+                                        <div class="col-md-2" style="padding-left: 0;"><input id="shouyiren1_ID"></input></div>
+                                        <div class="col-md-1"></div>
+                                    </div> 
+                                    <div class="paper-row row">
+                                        <div class="col-md-1" style="padding-right: 0;" >年龄:</div>
+                                        <div class="col-md-2 add-sui" style="padding-left: 0;"><input id="shouyiren1_age"></input></div>
+                                        <div class="col-md-1"></div>
+                                        <div class="col-md-1" style="padding-right: 0;" >与投保人</div>
+                                        <div class="col-md-2 add-guanxi" style="padding-left: 0;"><select id="shouyiren1_relationship"><option value="1">本人</option><option value="2">夫妻</option><option value="3">父子</option><option value="4">母子</option><option value="5">其他</option></select></div>
+                                    </div> 
+                                </div>
+                            
+                           
+
+                                    
+                                    </tbody>
+                                </table>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <input type="hidden" id="blockList" value="">
+            <input type="hidden" id="beibaorenList" value="">
+            <input type="hidden" id="shouyirenList" value="">
+
+
+            <script type="text/javascript">
+
+                $(function(){
+                    $('.select-gender').html('<option value="0">男</option><option value="1">女</option>')
+                })
+
+                
+
+                var num = 1
+                var color = "#2bd394";
+                
+                var blockList = {}
+                //1有效，0被删除
+                blockList.a_block1 = 1 
+                blockList.length = 1
+                $('#blockList').val(JSON.stringify(blockList))
+
+                function add_block(){
+                    var i = num 
+                    num++
+                    blockList.length = num
+                    eval("blockList.a_block"+num+" = 1")
+
+                    if(num%3==2){color="#ff8f2e"}
+                    if(num%3==0){color="#2fa4e7"}
+                    if(num%3==1){color="#2bd394"}
+                    var html = '<div style="background-color:'+color+';color:#fff;padding-top:10px;padding-bottom:10px;border-radius:20px;position:relative" id="a_block'+num+'"><div class="paper-row row"><div class="col-md-1" style="padding-right:0">产品名称:</div><div class="col-md-2" style="padding-left:0"><select id="block'+num+'_name" style="color:black"><option value="7165">泰康乐安康</option><option value="7167">华夏健康人生</option></select></div><div class="col-md-1"></div><div class="col-md-1" style="padding-right:0">保额:</div><div class="col-md-2 add-yuan" style="padding-left:0"><input id="block'+num+'_baoe"></div><div class="col-md-1"></div><div class="col-md-1" style="padding-right:0">保费:</div><div class="col-md-2 add-yuan" style="padding-left:0"><input id="block'+num+'_baofee"></div><div class="col-md-1"></div></div><div class="paper-row row"><div class="col-md-1" style="padding-right:0">保障期间:</div><div class="col-md-2 add-year" style="padding-left:0"><input id="block'+num+'_baozhangqijian"></div><div class="col-md-1"></div><div class="col-md-1" style="padding-right:0">缴费年限:</div><div class="col-md-2 add-year" style="padding-left:0"><input id="block'+num+'_jiaofeinianxian"></div><div class="col-md-1"></div></div><div style="position:absolute;left:100%;top:10px;margin-left:-30px" id="block'+num+'" onclick="delete_block(this.id)"><i class="glyphicon glyphicon-remove"></i></div></div>';
+                    $('#a_block'+i).after(html)
+                    $('#blockList').val(JSON.stringify(blockList))
+                }
+
+                function delete_block(id){
+                    $('#a_'+id).css('display','none')
+                    eval("blockList.a_"+id+"=0")
+                    $('#blockList').val(JSON.stringify(blockList))
+                }
+
+
+                var beibaorenList = {}
+                //1有效，0被删除
+                beibaorenList.a_beibaoren1 = 1 
+                beibaorenList.length = 1
+                $('#beibaorenList').val(JSON.stringify(beibaorenList))
+
+                var beibaoren_num = 1
+                function add_beibaoren(){
+                    var i = beibaoren_num
+                    beibaoren_num++
+
+                    beibaorenList.length = beibaoren_num
+                    eval("beibaorenList.a_beibaoren"+beibaoren_num+" = 1")
+
+                    var html = '<div id="a_beibaoren'+beibaoren_num+'" style="border-top:1px dashed #848484;margin-top:30px;position:relative"><div class="paper-row row" style="margin-top:20px"><div class="col-md-1" style="padding-right:0">姓名:</div><div class="col-md-2" style="padding-left:0"><input id="beibaoren'+beibaoren_num+'_name"></div><div class="col-md-1"></div><div class="col-md-1" style="padding-right:0">性别:</div><div class="col-md-2" style="padding-left:0"><select id="beibaoren'+beibaoren_num+'_gender"><option value="0">男</option><option value="1">女</option></select></div><div class="col-md-1"></div><div class="col-md-1" style="padding-right:0">身份证号:</div><div class="col-md-2" style="padding-left:0"><input id="beibaoren'+beibaoren_num+'_ID"></div><div class="col-md-1"></div></div><div class="paper-row row"><div class="col-md-1" style="padding-right:0">与投保人</div><div class="col-md-2 add-guanxi" style="padding-left:0"><select id="beibaoren'+beibaoren_num+'_relationship"></select></div></div><div style="position:absolute;left:100%;top:10px;margin-left:-30px;color:red" id="beibaoren'+beibaoren_num+'" onclick="delete_beibaoren(this.id)"><i class="glyphicon glyphicon-remove"></i></div></div>';
+                    $('#a_beibaoren'+i).after(html)
+                    $('#beibaorenList').val(JSON.stringify(beibaorenList))
+
+
+                }
+
+                function delete_beibaoren(id){
+                    $('#a_'+id).css('display','none')
+                    eval("beibaorenList.a_"+id+"=0")
+                    $('#beibaorenList').val(JSON.stringify(beibaorenList))
+                }
+
+
+                var shouyirenList = {}
+                //1有效，0被删除
+                shouyirenList.a_shouyiren1 = 1 
+                shouyirenList.length = 1
+                $('#shouyirenList').val(JSON.stringify(shouyirenList))
+
+
+                var shouyiren_num = 1
+                function add_shouyiren(){
+                    var i = shouyiren_num
+                    shouyiren_num++
+                    shouyirenList.length = shouyiren_num
+                    eval("shouyirenList.a_shouyiren"+shouyiren_num+" = 1")
+
+                    var html = '<div id="a_shouyiren'+shouyiren_num+'" style="border-top:1px dashed #848484;margin-top:30px;position:relative"><div class="paper-row row" style="margin-top:20px"><div class="col-md-1" style="padding-right:0">姓名:</div><div class="col-md-2" style="padding-left:0"><input id="shouyiren'+shouyiren_num+'_name"></div><div class="col-md-1"></div><div class="col-md-1" style="padding-right:0">性别:</div><div class="col-md-2" style="padding-left:0"><select id="shouyiren'+shouyiren_num+'_gender"><option value="0">男</option><option value="1">女</option></select></div><div class="col-md-1"></div><div class="col-md-1" style="padding-right:0">身份证号:</div><div class="col-md-2" style="padding-left:0"><input id="shouyiren'+shouyiren_num+'_ID"></div><div class="col-md-1"></div></div><div class="paper-row row"><div class="col-md-1" style="padding-right: 0;" >年龄:</div><div class="col-md-2 add-sui" style="padding-left: 0;"><input id="shouyiren'+shouyiren_num+'_age"></input></div><div class="col-md-1"></div><div class="col-md-1" style="padding-right:0">与投保人</div><div class="col-md-2 add-guanxi" style="padding-left:0"><select id="shouyiren'+shouyiren_num+'_relationship"><option value="1">本人</option><option value="2">夫妻</option><option value="3">父子</option><option value="4">母子</option><option value="5">其他</option></select></div></div><div style="position:absolute;left:100%;top:10px;margin-left:-30px;color:red" id="shouyiren'+shouyiren_num+'" onclick="delete_shouyiren(this.id)"><i class="glyphicon glyphicon-remove"></i></div></div>';
+                    $('#a_shouyiren'+i).after(html)
+                    $('#shouyirenList').val(JSON.stringify(shouyirenList))
+
+                }
+
+                function delete_shouyiren(id){
+                    $('#a_'+id).css('display','none')
+                     eval("shouyirenList.a_"+id+"=0")
+                    $('#shouyirenList').val(JSON.stringify(shouyirenList))
+                }
+
+               
+
+            </script>
+    
+

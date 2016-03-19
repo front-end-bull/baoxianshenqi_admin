@@ -1,0 +1,104 @@
+
+            <div>
+                <ul class="breadcrumb">
+                    <li>
+                        <a href="#/yuYue">预约</a>
+                    </li>
+                    <li>
+                        <a href="#/yuYue">预约列表</a>
+                    </li>
+                </ul>
+            </div>
+
+          
+
+            <div class="row">
+                <div class="box col-md-12">
+                    <div class="box-inner">
+
+                        <div class="box-header well">
+                            <h2><i class="glyphicon glyphicon-info-sign"></i> 预约列表</h2>
+
+                            <div class="box-icon">
+                                <a href="javascript:void(0)" class="btn btn-setting btn-round btn-default"><i
+                                        class="glyphicon glyphicon-cog"></i></a>
+                                <a href="javascript:void(0)" class="btn btn-minimize btn-round btn-default"><i
+                                        class="glyphicon glyphicon-chevron-up"></i></a>
+                                <a href="javascript:void(0)" class="btn btn-close btn-round btn-default"><i
+                                        class="glyphicon glyphicon-remove"></i></a>
+                            </div>
+                        </div>
+
+                        <div class="box-content ">
+                            
+                          
+
+
+
+                            <table class="table table-striped table-bordered bootstrap-datatable datatable responsive">
+                                <thead>
+                                    <tr>
+                                        <th>代理人姓名</th>
+                                        <th>手机</th>
+                                        <th>预约产品</th>
+                                        <th>预约时间</th>
+                                        <th>操作</th>
+                                    </tr>
+                                </thead>
+
+                                    
+                                    <tr ng-repeat="user in users">
+                                        <td>{{user.username}}</td>
+                                        <td>{{user.phonenumber}}</td>
+                                        <td>{{user.yuyue_productid}}</td>
+                                        <td>{{user.yuyue_time_format}}</td>
+                                        <td>
+                                            <a class="btn btn-success" href="javascript:void(0)" ng-click="beizhu(user.userid)">
+                                                <i class="glyphicon glyphicon-edit icon-white" ></i>
+                                                备注
+                                            </a>
+                                        </td>
+                                    </tr>
+                                <tbody>
+                               
+                                
+                                </tbody>
+                            </table>
+                            
+                             <div>共 <i class="yellow">{{totalCount}}</i> 条</div>
+
+                            <div class="center-block">
+                                <div class="dataTables_paginate paging_bootstrap pagination">
+                                    <ul class="pagination">
+                                        <li class="prev disabled"><a href="#">← Previous</a></li>
+                                        <li class="active"><a href="#">1</a></li><li><a href="#">2</a></li>
+                                        <li><a href="#">3</a></li><li><a href="#">4</a></li>
+                                        <li class="next"><a href="#">Next → </a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+<script>
+    $('.genjin').mouseenter(function(a) {
+        var id = a.toElement.children[0].id
+        // console.log(id) 
+        $('#'+id).addClass('genjin-icon')
+    })
+
+     $('.genjin').mouseleave(function(a) {
+        // console.log(a)
+        var id = a.target.children[0].id
+        // console.log(id)
+        $('#'+id).removeClass('genjin-icon')
+    })
+</script>
+       
+               
+                
+            
+    
+

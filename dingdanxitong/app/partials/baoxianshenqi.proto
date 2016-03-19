@@ -1,0 +1,92 @@
+
+enum MainType {
+	MT_Life = 0;
+ 	MT_CriticalIllness = 1;
+	MT_Accident = 2;
+	MT_Annuity =3 ;
+	MT_Medical = 4;
+	MT_Other = 101;
+};
+
+enum SmallType {
+	ST_Fixed_Payment_Medical = 0;
+	ST_Cost_Compensated_Medical = 1;
+	ST_Non_Pension = 2;
+	ST_Pension = 3;
+	ST_Cancer = 4;
+	ST_Nursing = 5;
+	ST_Whole_Life = 6;
+	ST_Term = 7;
+	ST_Endowment = 8;
+	ST_Critical_Illness = 9;
+	ST_Other_Disease = 10;
+	ST_Loss_Of_Income = 11;
+	ST_Accident = 12;
+	ST_Other = 101;
+}
+
+enum DebtType {
+	DT_HOUSE = 0;
+	DT_OTHER = 1;
+}
+
+enum RoleType {
+	RT_HUSBAND = 0;
+	RT_WIFE = 1;
+	RT_CHILD = 2;
+	RT_ELDER = 3;
+}
+
+enum FeilvCalType {
+	FCT_BAOFEI_SUAN_BAOE_SHUANGXIANG = 1;
+	FCT_BAOFEI_SUAN_BAOE	 	 = 2;
+	FCT_BAOE_SUAN_BAOFEI  	 	 = 3;
+}
+
+
+message Debt {
+	optional DebtType type = 1;
+	optional double amount = 2; 
+	optional int32 period    = 3;
+	optional double repayment = 4;
+}
+
+message Feilv {
+	optional int32  sexNumber = 1;
+	repeated int32  durations = 2;
+	repeated int32  lingqushijian = 3;
+	repeated int32  baoxianqijian = 4;
+	repeated string	jihua	      = 5;
+	repeated int32  gudingbaoe    = 6;
+	repeated string lingqufangshi = 7;
+	
+	optional int32  startAge      = 8;
+	optional int32  endAge        = 9;
+	
+	optional FeilvCalType fctype  = 10;
+	repeated double feilv         = 11;
+	optional int32  gudingfenshu  = 12;
+}
+
+message InsProduct {
+	optional int32 productid = 1;
+	optional string fullname = 2;
+	optional int32 companyid = 3;
+	optional string title = 4;
+	optional string pdfurl = 5;
+	optional string con = 6;
+	optional MainType type1 = 7;
+	optional SmallType type2 = 8;
+	optional int32 status = 9;
+	optional string logourl = 10;
+	optional int32 ishot = 11;
+	optional int32 isnew = 12;
+	optional int32 issell = 13;
+	optional string detail = 14;
+	optional int32 human = 15;
+	optional string isfujia = 16;
+	optional string type3 = 17;
+	optional string type4 = 18;
+	optional Feilv  feilv = 19;	
+}
+
