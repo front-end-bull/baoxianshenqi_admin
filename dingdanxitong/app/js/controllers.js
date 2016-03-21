@@ -404,9 +404,9 @@ phonecatControllers.controller('bianJiDingDanCtrl', ['$scope','$http','$routePar
 
               for(var m in status){
                 var s = status[m]
-                if(s.status_date==null){
-                  s.date = formatTime_date(new Date(s.createtime))
-                  s.time = formatTime_time(new Date(s.createtime))
+                if(s.status_date==null||s.status_date==""){
+                  s.date = ""
+                  s.time = ""
                 }else{
                   s.status_date = parseInt(s.status_date,10)
                   s.date = formatTime_date(new Date(s.status_date))
@@ -494,7 +494,7 @@ phonecatControllers.controller('bianJiDingDanCtrl', ['$scope','$http','$routePar
         '<div class="tab-container clearfix"><span style="border-right:1px solid #848484;border-bottom:0" onclick="tab(this.id)" id="tab1">上传资料</span> <span style="border-right:1px solid #848484" onclick="tab(this.id)" id="tab2">寄送方式</span> <span style="border-right:1px solid #848484" onclick="tab(this.id)" id="tab3">备注</span> <span id="tab4">&nbsp;</span></div><div class="tab" id="c_tab1" style="padding-top:20px;padding-left:20px;">注：请修改好文件名再上传。<br><br><input type="file" id="file" multiple="true" onchange="upload()"><br><span id="upload_results">上传结果：</span></div><div class="tab" id="c_tab2" style="display:none"><div class="radios clearfix"><div class="radio-group" style="float:left"><input type="radio">&nbsp;自选</div><div class="radio-group" style="float:left;margin-left:100px"><input type="radio">&nbsp;快递</div></div><div class="input-group" style="margin-top:30px">快递公司：<input type="text" placeholder="请输入快递公司" style="width:300px;height:30px;padding:5px"></div><div class="input-group" style="margin-top:30px">快递单号：<input type="text" placeholder="请输入快递单号" style="width:300px;height:30px;padding:5px"></div></div><div class="tab" id="c_tab3" style="display:none;position:relative"><textarea id="beizhu"></textarea></div><div class="tab" id="c_tab4" style="display:none;position:relative"></div><div class="yuyue-save"><a class="btn btn-success" href="javascript:void(0)" onclick="save()"><i class="glyphicon glyphicon-edit icon-white"></i> 添加</a></div><input id="order_id" type="hidden" value="'+order_id+'">'+
         '<script>'+
         'var fujianList=[];var fujian={};function Qiniu_upload(file,token,key,oldName){var xhr=new XMLHttpRequest();xhr.open(\'POST\',URL,true);var formData=new FormData();if(key!==null&&key!==undefined){formData.append(\'key\',key)};formData.append(\'token\',token);formData.append(\'file\',file);xhr.onreadystatechange=function(response){if(xhr.readyState==4&&xhr.status==200&&xhr.responseText!=""){var blkRet=JSON.parse(xhr.responseText);layer.msg(\'上传成功\');var url=\'http://7xrfbc.com2.z0.glb.qiniucdn.com/\'+blkRet.key;var html=\'<a href="http://7xrfbc.com2.z0.glb.qiniucdn.com/\'+blkRet.key+\'" style="margin-left:20px;">\'+oldName+\'</a>\';$(\'#upload_results\').after(html);fujian={};fujian.name=oldName;fujian.url=url;fujianList.push(fujian);console.log(JSON.stringify(fujianList));$(\'#fujianList\').val(JSON.stringify(fujianList))}else if(xhr.status!=200&&xhr.responseText){var blkRet=JSON.parse(xhr.responseText)}};xhr.send(formData)};'+
-        'function tab(o){$("#c_tab1").hide(),$("#c_tab2").hide(),$("#c_tab3").hide(),$("#c_tab4").hide(),$("#c_"+o).show(),$("#tab1").css({"border-bottom":"1px solid #848484"}),$("#tab2").css({"border-bottom":"1px solid #848484"}),$("#tab3").css({"border-bottom":"1px solid #848484"}),$("#tab4").css({"border-bottom":"1px solid #848484"}),$("#"+o).css({"border-bottom":"0"})}function save(){var order_id=$("#order_id").val();var status=$("#status").val();var status_date = new Date($("#status_date").val()).getTime();var value=$("#beizhu").val();var status_content = $("#beizhu").val();'+
+        'function tab(o){$("#c_tab1").hide(),$("#c_tab2").hide(),$("#c_tab3").hide(),$("#c_tab4").hide(),$("#c_"+o).show(),$("#tab1").css({"border-bottom":"1px solid #848484"}),$("#tab2").css({"border-bottom":"1px solid #848484"}),$("#tab3").css({"border-bottom":"1px solid #848484"}),$("#tab4").css({"border-bottom":"1px solid #848484"}),$("#"+o).css({"border-bottom":"0"})}function save(){var order_id=$("#order_id").val();var status=$("#status").val();var status_date = $("#status_date").val();console.log(status_date);if(status_date==null||status_date==""){}else{status_date=new Date(status_date).getTime()};var value=$("#beizhu").val();var status_content = $("#beizhu").val();'+
         'console.log(fujianList);for(var i in fujianList){if(i==0){value=value+"\\n\\n附件详情如下:"};var fujian=fujianList[i];var name=fujian.name;var url=fujian.url;value=value+"\\n"+name+": "+url};console.log(value);$.ajax({url:"http://'+IP+':3000/add_order_status",type:"POST",data:{orderid:order_id,status_id:status,value:value,'+
 
         'status_date:status_date,status_content:status_content'+//状态更新时间
@@ -537,8 +537,9 @@ phonecatControllers.controller('bianJiDingDanCtrl', ['$scope','$http','$routePar
         var status_id = currentStatus.status_id
         var status_date = currentStatus.status_date
 
-        if(status_date==null){
-          status_date=""
+        // console.log(currentStatus.)
+
+        if(status_date==null||status_date==""){
         }else{
           status_date=parseInt(status_date,10);
           status_date = formatTime(new Date(status_date))
