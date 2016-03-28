@@ -547,10 +547,10 @@ phonecatControllers.controller('bianJiDingDanCtrl', ['$scope','$http','$routePar
 
         
 
-        if(!currentStatus.value){
-          currentStatus.value = ""
+        if(!currentStatus.status_content){
+          currentStatus.status_content = ""
         }
-        var beizhu = currentStatus.value
+        var beizhu = currentStatus.status_content
 
         // if(beizhu==""){beizhu="\\r\\n"}
 
@@ -586,9 +586,8 @@ phonecatControllers.controller('bianJiDingDanCtrl', ['$scope','$http','$routePar
 
          '$(\'#upload_results\').after(html);fujian={};fujian.name=oldName;fujian.url=url;fujianList.push(fujian);$(\'#fujianList\').val(JSON.stringify(fujianList))}else if(xhr.status!=200&&xhr.responseText){var blkRet=JSON.parse(xhr.responseText)}};xhr.send(formData)};'+        
          '$("#status").val('+status_id+');$("#status_date").val("'+status_date+'");var beizhu_format = "'+beizhu+'";'+
-         'var str = beizhu_format;var patt = new RegExp("Batman附件详情如下","g");var result = patt.exec(str);'+
-         'if(result==null){$("#beizhu").val(str.replace(/Batman/g,"\\r\\n"))}else{'+
-         'var Iwant =  str.substring(0,result.index);$("#beizhu").val(Iwant.replace(/Batman/g,"\\r\\n"));}'+
+         'var str = beizhu_format;'+
+         '$("#beizhu").val(str.replace(/Batman/g,"\\r\\n"));'+
          '$("#upload_results").after("'+html_fujians+'");'+
          'function tab(o){$("#c_tab1").hide(),$("#c_tab2").hide(),$("#c_tab3").hide(),$("#c_tab4").hide(),$("#c_"+o).show(),$("#tab1").css({"border-bottom":"1px solid #848484"}),$("#tab2").css({"border-bottom":"1px solid #848484"}),$("#tab3").css({"border-bottom":"1px solid #848484"}),$("#tab4").css({"border-bottom":"1px solid #848484"}),$("#"+o).css({"border-bottom":"0"})}function save(){ var order_id = $("#order_id").val(); $.ajax({url:"http://'+IP+':3000/delete_fujian_by_seq",type:"POST",data:{orderid:order_id,seq:'+seq+'},success:function(data){console.log("delete!");console.log(data)}});var status = $("#status").val(); var value = $("#beizhu").val();var status_content = $("#beizhu").val();for(var i in fujianList){if(i==0){value=value+"\\n\\n附件详情如下:";};var fujian=fujianList[i];var name=fujian.name;var url=fujian.url;value = value+"\\n"+name+" :"+url;};'+
          'var statusid = $("#status").val();var status_date = new Date($("#status_date").val()).getTime();$.ajax({ url: "http://'+IP+':3000/update_order_status", type:"POST", data:{orderid:order_id,seq:'+seq+',statusid:statusid,value:value,status_date:status_date,status_content:status_content}, success: function(data){var seq = '+seq+';var uid=$("#uid").val();for(var i in fujianList){var fujian=fujianList[i];var name=fujian.name;var url=fujian.url;var fujianData={orderid:order_id,seq:seq,name:name,url:url,userid:uid};$.ajax({url:"http://"+IP+":3000/add_fujian",type:"POST",data:fujianData,success:function(data){}})};layer.msg("修改成功!"); } }); };'+
