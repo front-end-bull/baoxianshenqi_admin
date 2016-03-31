@@ -197,7 +197,7 @@ phonecatControllers.controller('genJinZhongCtrl', ['$scope','$http',
      $http.post('http://'+IP+':3000/get_all_orders').success(function(data){
         // console.log(data)
         var orders = data.orders
-        // console.log(orders)
+        console.log(orders)
         for(var i in orders){
           var order = orders[i]
           orders[i].createtime = formatTime(new Date(order.createtime))
@@ -694,7 +694,7 @@ phonecatControllers.controller('bianJiDingDanCtrl', ['$scope','$http','$routePar
 phonecatControllers.controller('daiLiRenChaXunCtrl', ['$scope','$http',
   function($scope,$http) {
 
-    // $scope.type = "name"
+    $scope.type = "id"
     // $scope.queryStr = "彭鹏"
 
 
