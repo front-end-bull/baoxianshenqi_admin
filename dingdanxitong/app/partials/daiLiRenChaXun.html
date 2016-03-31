@@ -64,11 +64,14 @@
                                         <th>城市</th>
                                         <th>推荐人ID</th>
                                         <th>状态</th> 
+                                        <th>IP</th>
+                                        <th>Agent</th>
+                                        <th>是否作弊</th>
                                     </tr>
                                 </thead>
 
                                     
-                                    <tr ng-repeat="user in users">
+                                    <tr ng-repeat="user in users" ng-class="{true:'dangerous'}[user.spam==1]">
                                         <td>{{user.id}}</td>
                                         <td>{{user.name}}</td>
                                         <td>{{user.phonenumber}}</td>
@@ -76,6 +79,10 @@
                                         <td>{{user.phone_city}}</td>
                                         <td>{{user.promotecode}}</td>
                                         <td>{{user.status}}</td>
+                                        <td>{{user.clientip}}</td>
+                                        <td>{{user.clientagent}}</td>
+                                        <td>{{user.spam}}</td>
+                                        
                                       <!--   <td>
                                             <a class="btn btn-success" href="javascript:void(0)" ng-click="beizhu(user.userid)">
                                                 <i class="glyphicon glyphicon-edit icon-white" ></i>
