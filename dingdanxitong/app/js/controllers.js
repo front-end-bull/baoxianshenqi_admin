@@ -195,12 +195,26 @@ phonecatControllers.controller('yuChuangJianCtrl', ['$scope','$http',
 phonecatControllers.controller('genJinZhongCtrl', ['$scope','$http',
   function($scope,$http) {
      $http.post('http://'+IP+':3000/get_all_orders').success(function(data){
-        // console.log(data)
         var orders = data.orders
         console.log(orders)
         for(var i in orders){
           var order = orders[i]
-          orders[i].createtime = formatTime(new Date(order.createtime))
+
+          var createTime = new Date(order.createtime).getTime()
+          var currentTime = new  Date().getTime()
+          var deadline = 9*24*60*6000
+
+
+          order.createtime = formatTime(new Date(order.createtime))
+          var status =  order.status
+
+
+          
+         
+
+          if(status=="进入犹豫期"&&(currentTime-createTime>deadline)){
+            order.expire = 1
+          }
         }
 
         $scope.orders = orders
@@ -537,7 +551,7 @@ phonecatControllers.controller('bianJiDingDanCtrl', ['$scope','$http','$routePar
         var status_id = currentStatus.status_id
         var status_date = currentStatus.status_date
 
-        // console.log(currentStatus.)
+        // console.log(currentStatus.status_date)
 
         if(status_date==null||status_date==""){
         }else{

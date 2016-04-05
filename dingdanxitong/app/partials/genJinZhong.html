@@ -83,7 +83,7 @@
                                
                                
 
-                                <tr ng-repeat="order in orders">
+                                <tr ng-repeat="order in orders" ng-class="{true:'dangerous'}[order.expire==1]">
                                     <td>{{order.id}}</td>
                                     <td class="center">{{order.agent_id}}</td>
                                     <td class="center">{{order.agent_name}}</td>
