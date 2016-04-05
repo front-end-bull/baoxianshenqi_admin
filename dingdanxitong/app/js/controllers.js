@@ -13,7 +13,6 @@ function formatTime(time){
     if(month<10){month="0"+month}
     // console.log("----month----"+month)
 
-
     var day = time.getDate()
     if(day<10){day="0"+day}
     // console.log("----day-----"+day)
@@ -200,9 +199,11 @@ phonecatControllers.controller('genJinZhongCtrl', ['$scope','$http',
         for(var i in orders){
           var order = orders[i]
 
-          var createTime = new Date(order.createtime).getTime()
+          var createTime_test = formatTime_date(new Date(order.createtime)) + " 00:00:00"
+
+          var createTime = new Date(createTime_test).getTime()
           var currentTime = new  Date().getTime()
-          var deadline = 9*24*60*6000
+          var deadline = 9*24*60*60000
 
 
           order.createtime = formatTime(new Date(order.createtime))
@@ -213,6 +214,7 @@ phonecatControllers.controller('genJinZhongCtrl', ['$scope','$http',
          
 
           if(status=="进入犹豫期"&&(currentTime-createTime>deadline)){
+            // console.log(createTime_test)
             order.expire = 1
           }
         }
