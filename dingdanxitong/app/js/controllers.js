@@ -193,9 +193,12 @@ phonecatControllers.controller('yuChuangJianCtrl', ['$scope','$http',
 //跟进中
 phonecatControllers.controller('genJinZhongCtrl', ['$scope','$http',
   function($scope,$http) {
+      var allOrders
+      $scope.type = "agent_name"
      $http.post('http://'+IP+':3000/get_all_orders').success(function(data){
         var orders = data.orders
-        console.log(orders)
+        allOrders = orders
+        // console.log(orders)
         for(var i in orders){
           var order = orders[i]
 
@@ -209,10 +212,6 @@ phonecatControllers.controller('genJinZhongCtrl', ['$scope','$http',
           order.createtime = formatTime(new Date(order.createtime))
           var status =  order.status
 
-
-          
-         
-
           if(status=="进入犹豫期"&&(currentTime-createTime>deadline)){
             // console.log(createTime_test)
             order.expire = 1
@@ -222,6 +221,38 @@ phonecatControllers.controller('genJinZhongCtrl', ['$scope','$http',
         $scope.orders = orders
         $scope.totalNum = orders.length
      })
+
+
+     $scope.query = function(){
+
+        var orders = []
+
+        var type = $scope.type
+        // console.log(type)
+
+        var queryStr = $scope.queryStr
+        // console.log(queryStr)
+
+        if(typeof queryStr === 'undefined' || queryStr ==''){ 
+          $scope.orders = allOrders 
+          $scope.totalNum = allOrders.length 
+          return 
+        }
+
+        allOrders.forEach(function(e){
+          if(eval('e.'+type+'.indexOf(queryStr)>=0')){
+            orders.push(e)
+          }
+        })
+
+        $scope.orders = orders
+        $scope.totalNum = orders.length
+
+     }
+
+     
+
+
 
   }]);
 
@@ -690,7 +721,7 @@ phonecatControllers.controller('bianJiDingDanCtrl', ['$scope','$http','$routePar
           postData.order.toubaoren = toubaoren
           postData.order.yongjin = $scope.yongjin
 
-          // console.log(postData)
+          console.log(postData)
           // console.log(JSON.stringify(postData))
 
           $http.post('http://'+IP+':3000/update_order',postData).success(function(data){

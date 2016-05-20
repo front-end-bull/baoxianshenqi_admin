@@ -44,6 +44,21 @@
                             </div>
                         </div>
                         <div class="box-content ">
+                            <div style="padding-bottom:20px;" class="clearfix">
+                                <div style="float: left;line-height: 38px;">
+                                    <select name="" id="" style="font-size:20px;" ng-model="type">
+                                        <option value="agent_name">代理人</option>
+                                        <option value="customer_name">投保人</option>
+                                    </select>
+                                </div>
+                                <div style="float: left;">
+                                    <input type="text" style="line-height: 31px;width: 200px;padding-left: 8px;" placeholder="请输入查询条件" ng-model="queryStr">    
+                                    <a class="btn btn-success" href="javascript:void(0)" ng-click="query()">
+                                        <i class="glyphicon glyphicon-edit icon-white" ></i>
+                                        查询
+                                    </a>
+                                </div>
+                            </div>
                              
                            <!--  <div class="row" style="margin: 10px 0;">
                                 <div class="col-md-3">
@@ -125,7 +140,7 @@
 
                             <div>共 <i class="yellow">{{totalNum}}</i> 条</div>
 
-                            <div class="center-block">
+                           <!--  <div class="center-block">
                                 <div class="dataTables_paginate paging_bootstrap pagination">
                                     <ul class="pagination">
                                         <li class="prev disabled"><a href="#">← Previous</a></li>
@@ -134,7 +149,7 @@
                                         <li class="next"><a href="#">Next → </a></li>
                                     </ul>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
 
                         </div>
