@@ -170,7 +170,7 @@ phonecatControllers.controller('yuYueCtrl', ['$scope','$http',
 
         $scope.query = function(){
           $http.get('http://'+IP+':3000/list_yuyue').success(function(data){
-            // console.log(21212)
+            console.log(data.users)
             var users = data.users
             var length = data.users.length
 
@@ -201,6 +201,12 @@ phonecatControllers.controller('genJinZhongCtrl', ['$scope','$http',
         // console.log(orders)
         for(var i in orders){
           var order = orders[i]
+
+          console.log(order.order_status[0].createtime)
+
+          var firsttime = formatTime(new Date(order.order_status[0].createtime))
+
+          if(firsttime!='NaN-NaN-NaN NaN:NaN:NaN'){order.firsttime = firsttime}else{order.firsttime=''}
 
           var createTime_test = formatTime_date(new Date(order.createtime)) + " 00:00:00"
 

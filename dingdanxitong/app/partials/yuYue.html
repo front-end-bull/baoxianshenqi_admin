@@ -38,20 +38,26 @@
                             <table class="table table-striped table-bordered bootstrap-datatable datatable responsive">
                                 <thead>
                                     <tr>
+                                        <th>ID</th>
                                         <th>代理人姓名</th>
                                         <th>手机</th>
+                                        <th>城市</th>
                                         <th>预约产品</th>
                                         <th>预约时间</th>
+                                        <th>状态</th> 
                                         <th>操作</th>
                                     </tr>
                                 </thead>
 
                                     
                                     <tr ng-repeat="user in users">
+                                        <td>{{user.userid}}</td>
                                         <td>{{user.username}}</td>
                                         <td>{{user.phonenumber}}</td>
+                                        <th>{{user.phone_city}}</th>
                                         <td>{{user.yuyue_productid}}</td>
                                         <td>{{user.yuyue_time_format}}</td>
+                                        <td>{{user.status}}</td>
                                         <td>
                                             <a class="btn btn-success" href="javascript:void(0)" ng-click="beizhu(user.userid)">
                                                 <i class="glyphicon glyphicon-edit icon-white" ></i>
