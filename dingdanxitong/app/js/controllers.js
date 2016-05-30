@@ -202,9 +202,8 @@ phonecatControllers.controller('genJinZhongCtrl', ['$scope','$http',
         for(var i in orders){
           var order = orders[i]
 
-          console.log(order.order_status[0].createtime)
 
-          var firsttime = formatTime(new Date(order.order_status[0].createtime))
+          var firsttime = formatTime(new Date(parseInt(order.order_status[0].createtime)))
 
           if(firsttime!='NaN-NaN-NaN NaN:NaN:NaN'){order.firsttime = firsttime}else{order.firsttime=''}
 
