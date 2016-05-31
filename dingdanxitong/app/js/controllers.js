@@ -747,6 +747,7 @@ phonecatControllers.controller('daiLiRenChaXunCtrl', ['$scope','$http',
     $scope.type = "id"
     // $scope.queryStr = "彭鹏"
 
+    var isChange = false
 
     $scope.query = function(){
       var type = $scope.type
@@ -768,6 +769,26 @@ phonecatControllers.controller('daiLiRenChaXunCtrl', ['$scope','$http',
         $scope.users = users  
 
       })
+    }
+
+    $scope.isChange = function(){
+      // console.log(isChange)
+      isChange = true
+    }
+
+
+    $scope.updateName = function(id,name){
+      // console.log(id)
+      // console.log(name)
+      // console.log(isChange)
+      if(isChange){
+        var KEY = "cbb4906093d48f827a7322d85af9ac52"
+
+        $http.get('http://'+IP+':3000/change_username?key='+KEY+'&userid='+id+'&username='+name).success(function(data){
+          layer.msg('姓名修改成功!')
+        })
+        isChange = false
+      }
     }
   }]);
 

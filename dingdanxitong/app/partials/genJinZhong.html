@@ -48,7 +48,7 @@
                                 <div style="float: left;line-height: 38px;">
                                     <select name="" id="" style="font-size:20px;" ng-model="type">
                                         <option value="agent_name">代理人</option>
-                                        <option value="customer_name">投保人</option>
+                                        <option value="customer_name">被保险人</option>
                                     </select>
                                 </div>
                                 <div style="float: left;">
@@ -91,7 +91,7 @@
                                     <th>保费</th>
                                     <th>最新状态</th>
                                     <th>更新时间</th>
-                                    <th>跟进人</th>
+                                    <!-- <th>跟进人</th> -->
                                     <th>创建时间</th>
                                     <th>操作</th>
                                 </tr>
@@ -110,7 +110,7 @@
                                     <td class="center">{{order.baofei}}元</td>
                                     <td class="center">{{order.status}}</td>
                                     <td class="center">{{order.createtime}}</td>
-                                    <td class="center"></td>
+                                    <!-- <td class="center"></td> -->
                                     <td class="center">{{order.firsttime}}</td>
                                     <td>
                                         <a class="btn btn-info" href="#/bianJiDingDan/{{order.id}}">

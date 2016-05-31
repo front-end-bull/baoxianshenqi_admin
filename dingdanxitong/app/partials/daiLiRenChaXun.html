@@ -70,10 +70,11 @@
                                     </tr>
                                 </thead>
 
+                                <tbody class="updateUser">
                                     
-                                    <tr ng-repeat="user in users" ng-class="{true:'dangerous'}[user.spam==1]">
+                                    <tr ng-repeat="user in users" ng-class="{true:'dangerous'}[user.spam==1]" >
                                         <td>{{user.id}}</td>
-                                        <td>{{user.name}}</td>
+                                        <td><input type="text" ng-model="user.name"  ng-change="isChange()"  ng-blur="updateName(user.id,user.name)"></td>
                                         <td>{{user.phonenumber}}</td>
                                         <td>{{user.shengfenzheng}}</td>
                                         <td>{{user.phone_city}}</td>
@@ -82,7 +83,6 @@
                                         <td>{{user.clientip}}</td>
                                         <td>{{user.clientagent}}</td>
                                         <td>{{user.spam}}</td>
-                                        
                                       <!--   <td>
                                             <a class="btn btn-success" href="javascript:void(0)" ng-click="beizhu(user.userid)">
                                                 <i class="glyphicon glyphicon-edit icon-white" ></i>
@@ -90,7 +90,6 @@
                                             </a>
                                         </td> -->
                                     </tr>
-                                <tbody>
                                
                                 
                                 </tbody>
