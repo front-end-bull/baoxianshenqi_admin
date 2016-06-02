@@ -199,9 +199,17 @@ phonecatControllers.controller('genJinZhongCtrl', ['$scope','$http',
         var orders = data.orders
         allOrders = orders
         console.log(orders)
+
+        var totalbaofei = 0
+
+
+
+
         for(var i in orders){
           var order = orders[i]
 
+          if(order.baofei==''){order.baofei = 0}
+          totalbaofei += order.baofei*100
 
           var firsttime = formatTime(new Date(parseInt(order.order_status[0].createtime)))
 
@@ -224,6 +232,9 @@ phonecatControllers.controller('genJinZhongCtrl', ['$scope','$http',
         }
 
         $scope.orders = orders
+        $scope.totalbaofei = totalbaofei/100
+
+
         $scope.totalNum = orders.length
      })
 
