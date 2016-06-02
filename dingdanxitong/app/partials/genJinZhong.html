@@ -44,21 +44,75 @@
                             </div>
                         </div>
                         <div class="box-content ">
-                            <div style="padding-bottom:20px;" class="clearfix">
-                                <div style="float: left;line-height: 38px;">
+
+                            <div class="row" style="margin: 10px 0;">
+                                <div class="col-md-4">
+                                    <label style="width:100px" for="">代理人</label>
+                                    <input type="text" style="line-height: 31px;width: 200px;padding-left: 8px;" placeholder="请输入代理人姓名" ng-model="query_agent_name">
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label style="width:100px" for="">被保险人</label>
+                                    <input type="text" style="line-height: 31px;width: 200px;padding-left: 8px;" placeholder="请输入被保险人姓名" ng-model="query_customer_name">
+                                </div>
+
+                                <div class="col-md-4">
+                                   
+                                </div>
+                            </div>
+                                    
+
+                            <div class="row" style="margin: 10px 0;">
+                                <div class="col-md-4">
+                                    <label style="width:100px" for="">创建起始时间</label>
+                                    <input id="chuangjian_startTime" style="padding-left:8px;line-height: 31px;width: 200px;" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" placeholder="请选择起始时间">
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label style="width:100px" for="">创建截止时间</label>
+                                    <input id="chuangjian_endTime" style="padding-left:8px;line-height: 31px;width: 200px;" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" placeholder="请选择截止时间">
+                                </div>
+
+                                <div class="col-md-4">
+                                   
+                                </div>
+                            </div>
+                            
+                            <div class="row" style="margin: 10px 0;">
+                                <div class="col-md-4">
+                                    <label style="width:100px" for="">更新起始时间</label>
+                                    <input id="gengxin_startTime" style="padding-left:8px;line-height: 31px;width: 200px;" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" placeholder="请选择起始时间">
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label style="width:100px" for="">更新截止时间</label>
+                                    <input id="gengxin_endTime" style="padding-left:8px;line-height: 31px;width: 200px;" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" placeholder="请选择截止时间">
+                                </div>
+
+                                <div class="col-md-4">
+                                    <a class="btn btn-success" href="javascript:void(0)" ng-click="query()">
+                                        <i class="glyphicon glyphicon-edit icon-white" ></i>
+                                        查询
+                                    </a>
+                                    <a class="btn btn-danger" href="javascript:void(0)" ng-click="clear()">
+                                        <i class="glyphicon glyphicon-edit icon-white" ></i>
+                                        清空
+                                    </a>
+                                </div>
+                            </div>
+                         
+
+                            <!-- <div style="padding-bottom:20px;" class="clearfix">
                                     <select name="" id="" style="font-size:20px;" ng-model="type">
                                         <option value="agent_name">代理人</option>
                                         <option value="customer_name">被保险人</option>
                                     </select>
-                                </div>
-                                <div style="float: left;">
                                     <input type="text" style="line-height: 31px;width: 200px;padding-left: 8px;" placeholder="请输入查询条件" ng-model="queryStr">    
                                     <a class="btn btn-success" href="javascript:void(0)" ng-click="query()">
                                         <i class="glyphicon glyphicon-edit icon-white" ></i>
                                         查询
                                     </a>
-                                </div>
-                            </div>
+                            </div> -->
                              
                            <!--  <div class="row" style="margin: 10px 0;">
                                 <div class="col-md-3">
@@ -142,7 +196,7 @@
                                 </tbody>
                             </table>
 
-                            <div>共 <i class="yellow">{{totalNum}}</i> 条&nbsp;&nbsp;&nbsp;&nbsp;保费共 <i class="red" style="font-size:18px;">{{totalbaofei}}</i> 元</div>
+                            <div>共 <i class="yellow">{{totalNum}}</i> 条&nbsp;&nbsp;&nbsp;&nbsp;保费共 <i class="red" style="font-size:18px;">{{totalbaofei}}</i>元</div>
 
                            <!--  <div class="center-block">
                                 <div class="dataTables_paginate paging_bootstrap pagination">

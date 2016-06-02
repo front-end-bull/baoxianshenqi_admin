@@ -198,7 +198,7 @@ phonecatControllers.controller('genJinZhongCtrl', ['$scope','$http',
      $http.post('http://'+IP+':3000/get_all_orders').success(function(data){
         var orders = data.orders
         allOrders = orders
-        console.log(orders)
+        // console.log(orders)
 
         var totalbaofei = 0
 
@@ -242,31 +242,117 @@ phonecatControllers.controller('genJinZhongCtrl', ['$scope','$http',
      $scope.query = function(){
 
         var orders = []
+        var totalbaofei = 0
 
-        var type = $scope.type
-        // console.log(type)
+        var agent_name = $scope.query_agent_name
+        var customer_name = $scope.query_customer_name
+        var gengxin_startTime = $('#gengxin_startTime').val()
+        var gengxin_endTime = $('#gengxin_endTime').val()
+        var chuangjian_startTime = $('#chuangjian_startTime').val()
+        var chuangjian_endTime = $('#chuangjian_endTime').val()
+        // console.log(agent_name)
+        // console.log(customer_name)
+        // console.log(gengxin_startTime)
+        // console.log(gengxin_endTime)
 
-        var queryStr = $scope.queryStr
-        // console.log(queryStr)
 
-        if(typeof queryStr === 'undefined' || queryStr ==''){ 
-          $scope.orders = allOrders 
-          $scope.totalNum = allOrders.length 
-          return 
+        function isName(name,query){
+          if(query!=='' && typeof query !=='undefined'){
+            if(name.indexOf(query)>=0){
+              return true
+            }else{
+              return false
+            }
+          }else{
+            return true
+          }
         }
 
+        function timeIsTrue(time){
+          if(time ==='' || typeof time === 'undefined'){
+            return false
+          }else{
+            return true
+          }
+        }
+
+        // console.log(timeIsTrue(gengxin_startTime))
+        // console.log(timeIsTrue(gengxin_endTime))
+
+        function isTime(time,startTime,endTime){
+          time = new Date(time).getTime()
+          if(timeIsTrue(startTime)&&timeIsTrue(endTime)){
+            startTime = new Date(startTime+" 00:00:00").getTime()
+            endTime = new Date(endTime+" 23:59:59").getTime()
+            if(startTime<=time && time <=endTime){
+              return true
+            }else{
+              return false
+            }
+          }else if(!timeIsTrue(startTime)&&timeIsTrue(endTime)){
+            endTime = new Date(endTime+" 23:59:59").getTime()
+            if(time<=endTime){
+              return true
+            }else{
+              return false
+            }
+          }else if(timeIsTrue(startTime)&&!timeIsTrue(endTime)){
+            startTime = new Date(startTime+" 00:00:00").getTime()
+            if(startTime<=time){
+              return true
+            }else{
+              return false
+            }
+          }else{
+            return true
+          }
+        }
+
+
         allOrders.forEach(function(e){
-          if(eval('e.'+type+'.indexOf(queryStr)>=0')){
+          if(   isName(e.agent_name,agent_name)
+              &&isName(e.customer_name,customer_name)
+              &&isTime(e.createtime,gengxin_startTime,gengxin_endTime)
+              &&isTime(e.firsttime,chuangjian_startTime,chuangjian_endTime)
+            ){
+            totalbaofei += e.baofei*100
             orders.push(e)
           }
         })
 
+        // console.log(start_time)
+        // console.log(end_time)
+
+
+        // var type = $scope.type
+        // var queryStr = $scope.queryStr
+
+        // if(typeof queryStr === 'undefined' || queryStr ==''){ 
+        //   $scope.orders = allOrders 
+        //   $scope.totalNum = allOrders.length 
+        //   return 
+        // }
+
+        // allOrders.forEach(function(e){
+        //   if(eval('e.'+type+'.indexOf(queryStr)>=0')){
+        //     orders.push(e)
+        //   }
+        // })
+
         $scope.orders = orders
+        $scope.totalbaofei = totalbaofei/100
         $scope.totalNum = orders.length
 
      }
 
-     
+     $scope.clear = function(){
+      $scope.query_agent_name = ''
+      $scope.query_customer_name = ''
+      $('#chuangjian_startTime').val('')
+      $('#chuangjian_endTime').val('')
+      $('#gengxin_startTime').val('')
+      $('#gengxin_endTime').val('')
+     }
 
 
 
