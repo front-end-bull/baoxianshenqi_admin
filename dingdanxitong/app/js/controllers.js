@@ -284,7 +284,7 @@ phonecatControllers.controller('genJinZhongCtrl', ['$scope','$http',
           order.createtime = formatTime(new Date(order.createtime))
           var status =  order.status
 
-          if(status=="进入犹豫期"&&(currentTime-createTime>deadline)){
+          if((status=="进入犹豫期"||status=="回访失败"||status=="回访成功")&&(currentTime-createTime>deadline)){
             // console.log(createTime_test)
             order.expire = 1
           }
