@@ -46,50 +46,65 @@
                         <div class="box-content ">
 
                             <div class="row" style="margin: 10px 0;">
-                                <div class="col-md-4">
-                                    <label style="width:100px" for="">代理人</label>
+                                <div class="col-md-6">
+                                    <label style="width:80px" for="">代理人</label>
                                     <input type="text" style="line-height: 31px;width: 200px;padding-left: 8px;" placeholder="请输入代理人姓名" ng-model="query_agent_name">
                                 </div>
 
-                                <div class="col-md-4">
-                                    <label style="width:100px" for="">被保险人</label>
+                                <div class="col-md-6">
+                                    <label style="width:80px" for="">被保险人</label>
                                     <input type="text" style="line-height: 31px;width: 200px;padding-left: 8px;" placeholder="请输入被保险人姓名" ng-model="query_customer_name">
                                 </div>
-
-                                <div class="col-md-4">
-                                   
-                                </div>
                             </div>
-                                    
 
                             <div class="row" style="margin: 10px 0;">
-                                <div class="col-md-4">
-                                    <label style="width:100px" for="">创建起始时间</label>
-                                    <input id="chuangjian_startTime" style="padding-left:8px;line-height: 31px;width: 200px;" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" placeholder="请选择起始时间">
+                                <div class="col-md-6">
+                                    <label style="width:80px" for="">创建时间</label>
+                                    <input id="chuangjian_startTime" style="padding-left:8px;line-height: 31px;width: 200px;" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})"  placeholder="请选择起始时间" onchange="compareCJ()">
+                                    -
+                                    <input id="chuangjian_endTime" style="padding-left:8px;line-height: 31px;width: 200px;" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" placeholder="请选择截止时间" onchange="compareCJ()">
                                 </div>
 
-                                <div class="col-md-4">
-                                    <label style="width:100px" for="">创建截止时间</label>
-                                    <input id="chuangjian_endTime" style="padding-left:8px;line-height: 31px;width: 200px;" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" placeholder="请选择截止时间">
-                                </div>
-
-                                <div class="col-md-4">
-                                   
+                                <div class="col-md-6">
+                                    <label style="width:80px" for="">最新状态</label>
+                                      <button class="btn btn-default dropdown-toggle" style="width:200px;text-align:left;" type="button" id="status" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                        请选择最新状态 <span class="caret" style="float:right;margin-top:9px;"></span>
+                                      </button>
+                                      <ul class="dropdown-menu nodes" aria-labelledby="dropdownMenu1">
+                                        <li><a onclick="setStatus(this.text)" href="javascript:void(0)">订单初始化</a></li>
+                                        <li><a onclick="setStatus(this.text)" href="javascript:void(0)">已预约面签</a></li>
+                                        <li><a onclick="setStatus(this.text)" href="javascript:void(0)">材料有误</a></li>
+                                        <li><a onclick="setStatus(this.text)" href="javascript:void(0)">材料已提交保险公司</a></li>
+                                        <li><a onclick="setStatus(this.text)" href="javascript:void(0)">通知体检</a></li>
+                                        <li><a onclick="setStatus(this.text)" href="javascript:void(0)">拒保,订单取消</a></li>
+                                        <li><a onclick="setStatus(this.text)" href="javascript:void(0)">调整保费</a></li>
+                                        <li><a onclick="setStatus(this.text)" href="javascript:void(0)">拒绝,订单取消</a></li>
+                                        <li><a onclick="setStatus(this.text)" href="javascript:void(0)">同意调整保费</a></li>
+                                        <li><a onclick="setStatus(this.text)" href="javascript:void(0)">划款失败</a></li>
+                                        <li><a onclick="setStatus(this.text)" href="javascript:void(0)">划款成功</a></li>
+                                        <li><a onclick="setStatus(this.text)" href="javascript:void(0)">保险公司下发合同</a></li>
+                                        <li><a onclick="setStatus(this.text)" href="javascript:void(0)">到时限后弃保</a></li>
+                                        <li><a onclick="setStatus(this.text)" href="javascript:void(0)">合同已转交</a></li>
+                                        <li><a onclick="setStatus(this.text)" href="javascript:void(0)">回执已提交保险公司</a></li>
+                                        <li><a onclick="setStatus(this.text)" href="javascript:void(0)">进入犹豫期</a></li>
+                                        <li><a onclick="setStatus(this.text)" href="javascript:void(0)">回访失败</a></li>
+                                        <li><a onclick="setStatus(this.text)" href="javascript:void(0)">回访成功</a></li>
+                                        <li><a onclick="setStatus(this.text)" href="javascript:void(0)">佣金已结</a></li>
+                                        <li role="separator" class="divider"></li>
+                                        <li><a onclick="setStatus(this.text)" href="javascript:void(0)">全部</a></li>
+                                      </ul>
                                 </div>
                             </div>
                             
                             <div class="row" style="margin: 10px 0;">
-                                <div class="col-md-4">
-                                    <label style="width:100px" for="">更新起始时间</label>
-                                    <input id="gengxin_startTime" style="padding-left:8px;line-height: 31px;width: 200px;" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" placeholder="请选择起始时间">
+                                <div class="col-md-9">
+                                    <label style="width:80px" for="">更新时间</label>
+                                    <input id="gengxin_startTime" style="padding-left:8px;line-height: 31px;width: 200px;" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" placeholder="请选择起始时间" onchange="compareGX()">
+                                    -
+                                    <input id="gengxin_endTime" style="padding-left:8px;line-height: 31px;width: 200px;" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" placeholder="请选择截止时间" onchange="compareGX()">
                                 </div>
 
-                                <div class="col-md-4">
-                                    <label style="width:100px" for="">更新截止时间</label>
-                                    <input id="gengxin_endTime" style="padding-left:8px;line-height: 31px;width: 200px;" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" placeholder="请选择截止时间">
-                                </div>
-
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <a class="btn btn-success" href="javascript:void(0)" ng-click="query()">
                                         <i class="glyphicon glyphicon-edit icon-white" ></i>
                                         查询
@@ -100,7 +115,13 @@
                                     </a>
                                 </div>
                             </div>
-                         
+
+                            <div class="row" style="margin: 20px 0;">
+                                <div class="col-md-4"></div>
+                                <div class="col-md-4"></div>
+                                <div class="col-md-4">
+                                </div>
+                            </div>
 
                             <!-- <div style="padding-bottom:20px;" class="clearfix">
                                     <select name="" id="" style="font-size:20px;" ng-model="type">
@@ -216,4 +237,50 @@
 
             </div>
     
+            <script>
 
+                function timeIsTrue(time){
+                  if(time ==='' || typeof time === 'undefined'){
+                    return false
+                  }else{
+                    return true
+                  }
+                }
+
+                function compareTime(startTime,endTime){
+                  if(timeIsTrue(startTime)&&timeIsTrue(endTime)){
+                    startTime = new Date(startTime+" 00:00:00").getTime()
+                    endTime = new Date(endTime+" 23:59:59").getTime()
+                    if(startTime>endTime){
+                      return false
+                    }
+                  }
+                  return true
+                }
+
+                var compareCJ = function(){
+                  var chuangjian_startTime = $('#chuangjian_startTime').val()
+                  var chuangjian_endTime = $('#chuangjian_endTime').val()
+                  if(!compareTime(chuangjian_startTime,chuangjian_endTime)){
+                    layer.msg('创建起始时间大于截止时间!')
+                    $('#chuangjian_endTime').val('')
+                  }
+                }
+
+                var compareGX = function(){
+                  var gengxin_startTime = $('#gengxin_startTime').val()
+                  var gengxin_endTime = $('#gengxin_endTime').val()
+                  if(!compareTime(gengxin_startTime,gengxin_endTime)){
+                    layer.msg('更新起始时间大于截止时间!')
+                    $('#gengxin_endTime').val('')
+                  }
+                }
+
+                function setStatus(text){
+                    $('#status').html(text+' <span class="caret" style="float:right;margin-top:9px;"></span>')
+                }
+                   
+               
+
+                //console log function var window apply call use strict this null document getElementById onclick return alert name Ivy bind Function prototype bind Mary shift slice getName getElementsByTagName Object toString for length
+            </script>

@@ -91,6 +91,65 @@ function getPostfix(str){
   return postfix
 }
 
+function isName(name,query){
+        if(query!=='' && typeof query !=='undefined'){
+          if(name.indexOf(query)>=0){
+            return true
+          }else{
+            return false
+          }
+        }else{
+          return true
+        }
+}
+
+function timeIsTrue(time){
+  if(time ==='' || typeof time === 'undefined'){
+    return false
+  }else{
+    return true
+  }
+}
+
+function isTime(time,startTime,endTime){
+  time = new Date(time).getTime()
+  if(timeIsTrue(startTime)&&timeIsTrue(endTime)){
+    startTime = new Date(startTime+" 00:00:00").getTime()
+    endTime = new Date(endTime+" 23:59:59").getTime()
+    if(startTime<=time && time <=endTime){
+      return true
+    }else{
+      return false
+    }
+  }else if(!timeIsTrue(startTime)&&timeIsTrue(endTime)){
+    endTime = new Date(endTime+" 23:59:59").getTime()
+    if(time<=endTime){
+      return true
+    }else{
+      return false
+    }
+  }else if(timeIsTrue(startTime)&&!timeIsTrue(endTime)){
+    startTime = new Date(startTime+" 00:00:00").getTime()
+    if(startTime<=time){
+      return true
+    }else{
+      return false
+    }
+  }else{
+    return true
+  }
+}
+
+function compareTime(startTime,endTime){
+  if(timeIsTrue(startTime)&&timeIsTrue(endTime)){
+    startTime = new Date(startTime+" 00:00:00").getTime()
+    endTime = new Date(endTime+" 23:59:59").getTime()
+    if(startTime>endTime){
+      return false
+    }
+  }
+  return true
+}
 //预约
 phonecatControllers.controller('yuYueCtrl', ['$scope','$http',
   function($scope,$http) {
@@ -193,9 +252,9 @@ phonecatControllers.controller('yuChuangJianCtrl', ['$scope','$http',
 //跟进中
 phonecatControllers.controller('genJinZhongCtrl', ['$scope','$http',
   function($scope,$http) {
-      var allOrders
-      $scope.type = "agent_name"
-     $http.post('http://'+IP+':3000/get_all_orders').success(function(data){
+    var allOrders
+    $scope.type = "agent_name"
+    $http.post('http://'+IP+':3000/get_all_orders').success(function(data){
         var orders = data.orders
         allOrders = orders
         // console.log(orders)
@@ -236,125 +295,99 @@ phonecatControllers.controller('genJinZhongCtrl', ['$scope','$http',
 
 
         $scope.totalNum = orders.length
-     })
+    })
 
 
-     $scope.query = function(){
+    $scope.query = function(){
 
-        var orders = []
-        var totalbaofei = 0
+      var orders = []
+      var totalbaofei = 0
 
-        var agent_name = $scope.query_agent_name
-        var customer_name = $scope.query_customer_name
-        var gengxin_startTime = $('#gengxin_startTime').val()
-        var gengxin_endTime = $('#gengxin_endTime').val()
-        var chuangjian_startTime = $('#chuangjian_startTime').val()
-        var chuangjian_endTime = $('#chuangjian_endTime').val()
-        // console.log(agent_name)
-        // console.log(customer_name)
-        // console.log(gengxin_startTime)
-        // console.log(gengxin_endTime)
+      var agent_name = $scope.query_agent_name
+      var customer_name = $scope.query_customer_name
+      var gengxin_startTime = $('#gengxin_startTime').val()
+      var gengxin_endTime = $('#gengxin_endTime').val()
+      var chuangjian_startTime = $('#chuangjian_startTime').val()
+      var chuangjian_endTime = $('#chuangjian_endTime').val()
+      var status = $('#status').html()
+      status = status.replace(/(^\s*)|(\s*$)/g,"")
+      status = status.substring(0,status.length-64)
+      // console.log(status)
+      // console.log(agent_name)
+      // console.log(customer_name)
+      // console.log(gengxin_startTime)
+      // console.log(gengxin_endTime)
 
 
-        function isName(name,query){
-          if(query!=='' && typeof query !=='undefined'){
-            if(name.indexOf(query)>=0){
-              return true
-            }else{
-              return false
-            }
-          }else{
-            return true
-          }
+     
+
+
+      allOrders.forEach(function(e){
+        if(   isName(e.agent_name,agent_name)
+            &&isName(e.customer_name,customer_name)
+            &&isTime(e.createtime,gengxin_startTime,gengxin_endTime)
+            &&isTime(e.firsttime,chuangjian_startTime,chuangjian_endTime)
+            &&status==e.status
+          ){
+          totalbaofei += e.baofei*100
+          orders.push(e)
         }
+      })
 
-        function timeIsTrue(time){
-          if(time ==='' || typeof time === 'undefined'){
-            return false
-          }else{
-            return true
-          }
-        }
-
-        // console.log(timeIsTrue(gengxin_startTime))
-        // console.log(timeIsTrue(gengxin_endTime))
-
-        function isTime(time,startTime,endTime){
-          time = new Date(time).getTime()
-          if(timeIsTrue(startTime)&&timeIsTrue(endTime)){
-            startTime = new Date(startTime+" 00:00:00").getTime()
-            endTime = new Date(endTime+" 23:59:59").getTime()
-            if(startTime<=time && time <=endTime){
-              return true
-            }else{
-              return false
-            }
-          }else if(!timeIsTrue(startTime)&&timeIsTrue(endTime)){
-            endTime = new Date(endTime+" 23:59:59").getTime()
-            if(time<=endTime){
-              return true
-            }else{
-              return false
-            }
-          }else if(timeIsTrue(startTime)&&!timeIsTrue(endTime)){
-            startTime = new Date(startTime+" 00:00:00").getTime()
-            if(startTime<=time){
-              return true
-            }else{
-              return false
-            }
-          }else{
-            return true
-          }
-        }
+      // console.log(start_time)
+      // console.log(end_time)
 
 
-        allOrders.forEach(function(e){
-          if(   isName(e.agent_name,agent_name)
-              &&isName(e.customer_name,customer_name)
-              &&isTime(e.createtime,gengxin_startTime,gengxin_endTime)
-              &&isTime(e.firsttime,chuangjian_startTime,chuangjian_endTime)
-            ){
-            totalbaofei += e.baofei*100
-            orders.push(e)
-          }
-        })
+      // var type = $scope.type
+      // var queryStr = $scope.queryStr
 
-        // console.log(start_time)
-        // console.log(end_time)
+      // if(typeof queryStr === 'undefined' || queryStr ==''){ 
+      //   $scope.orders = allOrders 
+      //   $scope.totalNum = allOrders.length 
+      //   return 
+      // }
 
+      // allOrders.forEach(function(e){
+      //   if(eval('e.'+type+'.indexOf(queryStr)>=0')){
+      //     orders.push(e)
+      //   }
+      // })
 
-        // var type = $scope.type
-        // var queryStr = $scope.queryStr
+      $scope.orders = orders
+      $scope.totalbaofei = totalbaofei/100
+      $scope.totalNum = orders.length
 
-        // if(typeof queryStr === 'undefined' || queryStr ==''){ 
-        //   $scope.orders = allOrders 
-        //   $scope.totalNum = allOrders.length 
-        //   return 
-        // }
+    }
 
-        // allOrders.forEach(function(e){
-        //   if(eval('e.'+type+'.indexOf(queryStr)>=0')){
-        //     orders.push(e)
-        //   }
-        // })
-
-        $scope.orders = orders
-        $scope.totalbaofei = totalbaofei/100
-        $scope.totalNum = orders.length
-
-     }
-
-     $scope.clear = function(){
+    $scope.clear = function(){
       $scope.query_agent_name = ''
       $scope.query_customer_name = ''
       $('#chuangjian_startTime').val('')
       $('#chuangjian_endTime').val('')
       $('#gengxin_startTime').val('')
       $('#gengxin_endTime').val('')
-     }
+      $('#status').html('全部'+' <span class="caret" style="float:right;margin-top:9px;"></span>')
+    }
 
+    
 
+    // $scope.compareCJ = function(){
+    //   var chuangjian_startTime = $('#chuangjian_startTime').val()
+    //   var chuangjian_endTime = $('#chuangjian_endTime').val()
+    //   if(!compareTime(chuangjian_startTime,chuangjian_endTime)){
+    //     layer.msg('创建起始时间大于截止时间!')
+    //     $('#chuangjian_endTime').val('')
+    //   }
+    // }
+
+    // $scope.compareGX = function(){
+    //   var gengxin_startTime = $('#gengxin_startTime').val()
+    //   var gengxin_endTime = $('#gengxin_endTime').val()
+    //   if(!compareTime(gengxin_startTime,gengxin_endTime)){
+    //     layer.msg('更新起始时间大于截止时间!')
+    //     $('#gengxin_endTime').val('')
+    //   }
+    // }
 
   }]);
 
