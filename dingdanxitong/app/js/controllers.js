@@ -312,7 +312,7 @@ phonecatControllers.controller('genJinZhongCtrl', ['$scope','$http',
       var status = $('#status').html()
       status = status.replace(/(^\s*)|(\s*$)/g,"")
       status = status.substring(0,status.length-64)
-      // console.log(status)
+      console.log(status)
       // console.log(agent_name)
       // console.log(customer_name)
       // console.log(gengxin_startTime)
@@ -327,7 +327,7 @@ phonecatControllers.controller('genJinZhongCtrl', ['$scope','$http',
             &&isName(e.customer_name,customer_name)
             &&isTime(e.createtime,gengxin_startTime,gengxin_endTime)
             &&isTime(e.firsttime,chuangjian_startTime,chuangjian_endTime)
-            &&status==e.status
+            &&(status=='全部'||status=='请选择最新状态'||status==e.status)
           ){
           totalbaofei += e.baofei*100
           orders.push(e)
