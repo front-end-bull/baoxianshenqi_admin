@@ -6,7 +6,7 @@ var phonecatControllers = angular.module('phonecatControllers', []);
 
 // const IP = "182.254.212.33" //外网
 // const IP = "192.168.0.109" //pp Mac
-
+const KEY = "cbb4906093d48f827a7322d85af9ac52";
 function formatTime(time){
     var month = time.getMonth()
     month++
@@ -316,7 +316,7 @@ phonecatControllers.controller('genJinZhongCtrl', ['$scope','$http',
       var status = $('#status').html()
       status = status.replace(/(^\s*)|(\s*$)/g,"")
       status = status.substring(0,status.length-64)
-      console.log(status)
+      // console.log(status)
       // console.log(agent_name)
       // console.log(customer_name)
       // console.log(gengxin_startTime)
@@ -412,6 +412,35 @@ phonecatControllers.controller('genJinZhongCtrl', ['$scope','$http',
         })//layer.prompt
     }//$scope.copyOrder
 
+
+
+    $scope.delOrder = function(){
+      layer.prompt(
+        {
+          title: '请输入要删除的订单号',
+          formType: 0 //prompt风格，支持0-2
+        }, function(pass){
+          var order_id = pass
+          
+
+          var isExist = false
+          allOrders.forEach(function(e){
+            if(e.id == order_id){
+              isExist = true
+            }
+          })
+
+          if(isExist){
+            $http.post('http://'+IP+':3000/delete_order',{orderid:order_id,key:KEY}).success(function(data){
+                  layer.msg('删除成功!')
+                  $scope.getAllOrders()
+                  $scope.query()
+            })//get_one_order
+          }else{
+            layer.msg('该订单不存在，请重新输入!')
+          }
+        })//layer.prompt
+    }//$scope.copyOrder
     $scope.getAllOrders()
   }]);
 
