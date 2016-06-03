@@ -10,9 +10,6 @@
             </div>
 
             <div class="row">
-                
-
-               
                 <div class="col-md-3 col-sm-3 col-xs-6">
                     <a data-toggle="tooltip" title="$34 new sales." class="well top-block" href="#/xinZengDingDan">
                         <i class="glyphicon glyphicon-file yellow"></i>
@@ -23,7 +20,15 @@
                     </a>
                 </div>
 
-                
+                <div class="col-md-3 col-sm-3 col-xs-6">
+                    <a data-toggle="tooltip" title="$34 new sales." class="well top-block" href="javascript:void(0)" ng-click="copyOrder()">
+                        <i class="glyphicon glyphicon-repeat green"></i>
+
+                        <div>复制订单</div>
+                        <!-- <div>$13320</div> -->
+                        <span class="notification green">+</span>
+                    </a>
+                </div>
             </div>
 
 
@@ -60,9 +65,9 @@
                             <div class="row" style="margin: 10px 0;">
                                 <div class="col-md-6">
                                     <label style="width:80px" for="">创建时间</label>
-                                    <input id="chuangjian_startTime" style="padding-left:8px;line-height: 31px;width: 200px;" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})"  placeholder="请选择起始时间" onchange="compareCJ()">
+                                    <input id="chuangjian_startTime" style="padding-left:8px;line-height: 31px;width: 200px;" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})"  placeholder="请选择起始日期" onchange="compareCJ()">
                                     -
-                                    <input id="chuangjian_endTime" style="padding-left:8px;line-height: 31px;width: 200px;" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" placeholder="请选择截止时间" onchange="compareCJ()">
+                                    <input id="chuangjian_endTime" style="padding-left:8px;line-height: 31px;width: 200px;" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" placeholder="请选择截止日期" onchange="compareCJ()">
                                 </div>
 
                                 <div class="col-md-6">
@@ -99,9 +104,9 @@
                             <div class="row" style="margin: 10px 0;">
                                 <div class="col-md-9">
                                     <label style="width:80px" for="">更新时间</label>
-                                    <input id="gengxin_startTime" style="padding-left:8px;line-height: 31px;width: 200px;" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" placeholder="请选择起始时间" onchange="compareGX()">
+                                    <input id="gengxin_startTime" style="padding-left:8px;line-height: 31px;width: 200px;" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" placeholder="请选择起始日期" onchange="compareGX()">
                                     -
-                                    <input id="gengxin_endTime" style="padding-left:8px;line-height: 31px;width: 200px;" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" placeholder="请选择截止时间" onchange="compareGX()">
+                                    <input id="gengxin_endTime" style="padding-left:8px;line-height: 31px;width: 200px;" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" placeholder="请选择截止日期" onchange="compareGX()">
                                 </div>
 
                                 <div class="col-md-3">
@@ -189,9 +194,10 @@
                                     <td class="center">{{order.firsttime}}</td>
                                     <td>
                                         <a class="btn btn-info" href="#/bianJiDingDan/{{order.id}}">
-                                        <i class="glyphicon glyphicon-edit icon-white"></i>
-                                        编辑
+                                            <i class="glyphicon glyphicon-edit icon-white"></i>
+                                            编辑
                                         </a>
+                                        
                                     </td>
                                 </tr>
 
@@ -262,7 +268,7 @@
                   var chuangjian_startTime = $('#chuangjian_startTime').val()
                   var chuangjian_endTime = $('#chuangjian_endTime').val()
                   if(!compareTime(chuangjian_startTime,chuangjian_endTime)){
-                    layer.msg('创建起始时间大于截止时间!')
+                    layer.tips('截止日期应大于起始日期!', '#chuangjian_endTime');
                     $('#chuangjian_endTime').val('')
                   }
                 }
@@ -271,7 +277,7 @@
                   var gengxin_startTime = $('#gengxin_startTime').val()
                   var gengxin_endTime = $('#gengxin_endTime').val()
                   if(!compareTime(gengxin_startTime,gengxin_endTime)){
-                    layer.msg('更新起始时间大于截止时间!')
+                    layer.tips('截止日期应大于起始日期!', '#gengxin_endTime');
                     $('#gengxin_endTime').val('')
                   }
                 }
@@ -280,7 +286,11 @@
                     $('#status').html(text+' <span class="caret" style="float:right;margin-top:9px;"></span>')
                 }
                    
-               
+
+
+              
+
+                    
 
                 //console log function var window apply call use strict this null document getElementById onclick return alert name Ivy bind Function prototype bind Mary shift slice getName getElementsByTagName Object toString for length
             </script>

@@ -253,8 +253,11 @@ phonecatControllers.controller('yuChuangJianCtrl', ['$scope','$http',
 phonecatControllers.controller('genJinZhongCtrl', ['$scope','$http',
   function($scope,$http) {
     var allOrders
-    $scope.type = "agent_name"
-    $http.post('http://'+IP+':3000/get_all_orders').success(function(data){
+    // $scope.type = "agent_name"
+
+
+    $scope.getAllOrders = function(){
+       $http.post('http://'+IP+':3000/get_all_orders').success(function(data){
         var orders = data.orders
         allOrders = orders
         // console.log(orders)
@@ -295,8 +298,9 @@ phonecatControllers.controller('genJinZhongCtrl', ['$scope','$http',
 
 
         $scope.totalNum = orders.length
-    })
-
+      })
+    }
+   
 
     $scope.query = function(){
 
@@ -370,25 +374,45 @@ phonecatControllers.controller('genJinZhongCtrl', ['$scope','$http',
     }
 
     
+    $scope.copyOrder = function(){
+      layer.prompt(
+        {
+          title: '请输入要复制的订单号',
+          formType: 0 //prompt风格，支持0-2
+        }, function(pass){
+          var order_id = pass
+          
 
-    // $scope.compareCJ = function(){
-    //   var chuangjian_startTime = $('#chuangjian_startTime').val()
-    //   var chuangjian_endTime = $('#chuangjian_endTime').val()
-    //   if(!compareTime(chuangjian_startTime,chuangjian_endTime)){
-    //     layer.msg('创建起始时间大于截止时间!')
-    //     $('#chuangjian_endTime').val('')
-    //   }
-    // }
+          var isExist = false
+          allOrders.forEach(function(e){
+            if(e.id == order_id){
+              isExist = true
+            }
+          })
 
-    // $scope.compareGX = function(){
-    //   var gengxin_startTime = $('#gengxin_startTime').val()
-    //   var gengxin_endTime = $('#gengxin_endTime').val()
-    //   if(!compareTime(gengxin_startTime,gengxin_endTime)){
-    //     layer.msg('更新起始时间大于截止时间!')
-    //     $('#gengxin_endTime').val('')
-    //   }
-    // }
+          if(isExist){
+            $http.post('http://'+IP+':3000/get_one_order',{orderid:order_id}).success(function(data){
+                // console.log(data)
+                var order = data.order
+                // console.log(order)
+                var postData = {}
+                postData.userid = order.agent_id
+                postData.order = order.order_content
+                postData.order.yongjin = order.yongjin
+                $http.post('http://'+IP+':3000/add_order',postData).success(function(data){
+                  // console.log(data)
+                  layer.msg('复制成功!')
+                  $scope.getAllOrders()
+                  $scope.query()
+                })//add_order
+            })//get_one_order
+          }else{
+            layer.msg('该订单不存在，请重新输入!')
+          }
+        })//layer.prompt
+    }//$scope.copyOrder
 
+    $scope.getAllOrders()
   }]);
 
 //新增订单
@@ -488,7 +512,6 @@ phonecatControllers.controller('xinZengDingDanCtrl', ['$scope','$http',
 //编辑订单
 phonecatControllers.controller('bianJiDingDanCtrl', ['$scope','$http','$routeParams',
   function($scope,$http,$routeParams) {
-
 
     var isFirst = true
 
