@@ -260,7 +260,6 @@ phonecatControllers.controller('genJinZhongCtrl', ['$scope','$http',
        $http.post('http://'+IP+':3000/get_all_orders').success(function(data){
         var orders = data.orders
         allOrders = orders
-        // console.log(orders)
 
         var totalbaofei = 0
 
@@ -286,8 +285,17 @@ phonecatControllers.controller('genJinZhongCtrl', ['$scope','$http',
 
           order.createtime = formatTime(new Date(order.createtime))
           var status =  order.status
+          var order_status = order.order_status
 
-          if((status=="进入犹豫期"||status=="回访失败"||status=="回访成功")&&(currentTime-createTime>deadline)){
+          var inTime = ''
+
+          order_status.forEach(function(e){
+            if(e.status=="进入犹豫期"){
+              inTime = parseInt(e.status_date)
+            }
+          })
+
+          if((status=="进入犹豫期"||status=="回访失败"||status=="回访成功")&&(currentTime-inTime>deadline)){
             // console.log(createTime_test)
             order.expire = 1
           }
