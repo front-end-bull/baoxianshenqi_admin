@@ -260,7 +260,7 @@ phonecatControllers.controller('genJinZhongCtrl', ['$scope','$http',
        $http.post('http://'+IP+':3000/get_all_orders').success(function(data){
         var orders = data.orders
         allOrders = orders
-
+        console.log(orders)
         var totalbaofei = 0
 
 
@@ -272,7 +272,20 @@ phonecatControllers.controller('genJinZhongCtrl', ['$scope','$http',
           if(order.baofei==''){order.baofei = 0}
           totalbaofei += order.baofei*100
 
-          var firsttime = formatTime(new Date(parseInt(order.order_status[0].createtime)))
+          var order_status = order.order_status
+          var inTime = ''
+          var firsttime = ''
+          order_status.forEach(function(e){
+            if(e.status=="进入犹豫期"){
+              inTime = parseInt(e.status_date)
+            }
+            if(e.status=="订单初始化"){
+              firsttime = parseInt(e.createtime)
+            }
+          })
+
+
+          firsttime = formatTime(new Date(firsttime))
 
           if(firsttime!='NaN-NaN-NaN NaN:NaN:NaN'){order.firsttime = firsttime}else{order.firsttime=''}
 
@@ -285,15 +298,9 @@ phonecatControllers.controller('genJinZhongCtrl', ['$scope','$http',
 
           order.createtime = formatTime(new Date(order.createtime))
           var status =  order.status
-          var order_status = order.order_status
+          
 
-          var inTime = ''
-
-          order_status.forEach(function(e){
-            if(e.status=="进入犹豫期"){
-              inTime = parseInt(e.status_date)
-            }
-          })
+          
 
           if((status=="进入犹豫期"||status=="回访失败"||status=="回访成功")&&(currentTime-inTime>deadline)){
             // console.log(createTime_test)
