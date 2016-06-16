@@ -119,7 +119,7 @@
                                 </div>
 
                                 <div class="col-md-3">
-                                    <a class="btn btn-success" href="javascript:void(0)" ng-click="query()">
+                                    <a class="btn btn-success" href="javascript:void(0)"  onclick="query()">
                                         <i class="glyphicon glyphicon-edit icon-white" ></i>
                                         查询
                                     </a>
@@ -299,8 +299,22 @@
                 }
                    
 
+                function query(){
+                    var element = angular.element(document.getElementById("content"));
+                    var scope = element.scope();
+                    scope.query();
+                    scope.$apply();
+                }
+                
 
-              
+                $(function(){
+                    document.onkeydown = function(e){ 
+                        var ev = document.all ? window.event : e;
+                        if(ev.keyCode==13) {
+                            query()
+                         }
+                    }
+                });  
 
                     
 
