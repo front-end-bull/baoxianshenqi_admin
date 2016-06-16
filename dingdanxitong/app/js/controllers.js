@@ -293,7 +293,7 @@ phonecatControllers.controller('genJinZhongCtrl', ['$scope','$http',
 
           var createTime = new Date(createTime_test).getTime()
           var currentTime = new  Date().getTime()
-          var deadline = 9*24*60*60000
+          var deadline = 6*24*60*60000
 
 
           order.createtime = formatTime(new Date(order.createtime))
