@@ -308,7 +308,20 @@ phonecatControllers.controller('genJinZhongCtrl', ['$scope','$http',
           }
         }
 
-        $scope.orders = orders
+
+
+
+
+
+        $scope.orders = orders.sort(function(x,y){
+          if(x.id<y.id){
+            return 1
+          }
+          if(x.id>y.id){
+            return -1
+          }
+          return 0
+        })
         $scope.totalbaofei = totalbaofei/100
 
 
