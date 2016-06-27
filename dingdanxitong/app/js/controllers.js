@@ -519,7 +519,7 @@ phonecatControllers.controller('xinZengDingDanCtrl', ['$scope','$http',
           var beibaoren_length = beibaorenList.length
           var beibaoren_Array = []
           for(var j=1;j<=beibaoren_length;j++){
-            eval("if(beibaorenList.a_beibaoren"+j+"==1){var beibaoren"+j+"={};beibaoren"+j+".name = $('#beibaoren"+j+"_name').val();beibaoren"+j+".age = $('#beibaoren"+j+"_age').val();beibaoren"+j+".gender = $('#beibaoren"+j+"_gender').val();beibaoren"+j+".id = $('#beibaoren"+j+"_ID').val();beibaoren"+j+".relationship = $('#beibaoren"+j+"_relationship').val();beibaoren_Array.push(beibaoren"+j+");}")
+            eval("if(beibaorenList.a_beibaoren"+j+"==1){var beibaoren"+j+"={};beibaoren"+j+".name = $('#beibaoren"+j+"_name').val();beibaoren"+j+".age = $('#beibaoren"+j+"_age').val();beibaoren"+j+".gender = $('#beibaoren"+j+"_gender').val();beibaoren"+j+".id = $('#beibaoren"+j+"_ID').val();beibaoren"+j+".relationship = $('#beibaoren"+j+"_relationship').val();beibaoren"+j+".phone = $('#beibaoren"+j+"_phone').val();beibaoren_Array.push(beibaoren"+j+");}")
           }
           // console.log(beibaoren_Array)
         //-end-被保人信息
@@ -531,7 +531,7 @@ phonecatControllers.controller('xinZengDingDanCtrl', ['$scope','$http',
           var shouyiren_length = shouyirenList.length
           var shouyiren_Array = []
           for(var j=1;j<=shouyiren_length;j++){
-            eval("if(shouyirenList.a_shouyiren"+j+"==1){var shouyiren"+j+"={};shouyiren"+j+".name = $('#shouyiren"+j+"_name').val();shouyiren"+j+".age = $('#shouyiren"+j+"_age').val();shouyiren"+j+".gender = $('#shouyiren"+j+"_gender').val();shouyiren"+j+".id = $('#shouyiren"+j+"_ID').val();shouyiren"+j+".relationship = $('#shouyiren"+j+"_relationship').val();shouyiren_Array.push(shouyiren"+j+");}")
+            eval("if(shouyirenList.a_shouyiren"+j+"==1){var shouyiren"+j+"={};shouyiren"+j+".name = $('#shouyiren"+j+"_name').val();shouyiren"+j+".age = $('#shouyiren"+j+"_age').val();shouyiren"+j+".gender = $('#shouyiren"+j+"_gender').val();shouyiren"+j+".id = $('#shouyiren"+j+"_ID').val();shouyiren"+j+".relationship = $('#shouyiren"+j+"_relationship').val();shouyiren"+j+".phone = $('#shouyiren"+j+"_phone').val();shouyiren_Array.push(shouyiren"+j+");}")
           }
           // console.log(shouyiren_Array)
         //-end-受益人信息
@@ -619,7 +619,7 @@ phonecatControllers.controller('bianJiDingDanCtrl', ['$scope','$http','$routePar
           shouyirenList.length = shouyiren_num
           eval("shouyirenList.a_shouyiren"+shouyiren_num+" = 1")
           // $('#a_shouyiren'+i).after(html)
-          var html = '<div id="a_shouyiren'+shouyiren_num+'" style="border-top:1px dashed #848484;margin-top:30px;position:relative"><div class="paper-row row" style="margin-top:20px"><div class="col-md-1" style="padding-right:0">姓名:</div><div class="col-md-2" style="padding-left:0"><input id="shouyiren'+shouyiren_num+'_name"></div><div class="col-md-1"></div><div class="col-md-1" style="padding-right:0">性别:</div><div class="col-md-2" style="padding-left:0"><select id="shouyiren'+shouyiren_num+'_gender"><option value="0">男</option><option value="1">女</option></select></div><div class="col-md-1"></div><div class="col-md-1" style="padding-right:0">身份证号:</div><div class="col-md-2" style="padding-left:0"><input id="shouyiren'+shouyiren_num+'_ID"></div><div class="col-md-1"></div></div><div class="paper-row row"><div class="col-md-1" style="padding-right: 0;" >年龄:</div><div class="col-md-2 add-sui" style="padding-left: 0;"><input id="shouyiren'+shouyiren_num+'_age"></input></div><div class="col-md-1"></div><div class="col-md-1" style="padding-right:0">与投保人</div><div class="col-md-2 add-guanxi" style="padding-left:0"><select id="shouyiren'+shouyiren_num+'_relationship"><option value="1">本人</option><option value="2">夫妻</option><option value="3">父子</option><option value="4">母子</option><option value="5">其他</option></select></div></div><div style="position:absolute;left:100%;top:10px;margin-left:-30px;color:red" id="shouyiren'+shouyiren_num+'" onclick="delete_shouyiren(this.id)"><i class="glyphicon glyphicon-remove"></i></div></div>';
+          var html = '<div id="a_shouyiren'+shouyiren_num+'" style="border-top:1px dashed #848484;margin-top:30px;position:relative"><div class="paper-row row" style="margin-top:20px"><div class="col-md-1" style="padding-right:0">姓名:</div><div class="col-md-2" style="padding-left:0"><input id="shouyiren'+shouyiren_num+'_name"></div><div class="col-md-1"></div><div class="col-md-1" style="padding-right:0">性别:</div><div class="col-md-2" style="padding-left:0"><select id="shouyiren'+shouyiren_num+'_gender"><option value="0">男</option><option value="1">女</option></select></div><div class="col-md-1"></div><div class="col-md-1" style="padding-right:0">身份证号:</div><div class="col-md-2" style="padding-left:0"><input id="shouyiren'+shouyiren_num+'_ID"></div><div class="col-md-1"></div></div><div class="paper-row row"><div class="col-md-1" style="padding-right: 0;" >年龄:</div><div class="col-md-2 add-sui" style="padding-left: 0;"><input id="shouyiren'+shouyiren_num+'_age"></input></div><div class="col-md-1"></div><div class="col-md-1" style="padding-right:0">与投保人</div><div class="col-md-2 add-guanxi" style="padding-left:0"><select id="shouyiren'+shouyiren_num+'_relationship"><option value="1">本人</option><option value="2">夫妻</option><option value="3">父子</option><option value="4">母子</option><option value="5">其他</option></select></div>'+'<div class="col-md-1"></div><div class="col-md-1" style="padding-right: 0;">手机:</div><div class="col-md-2" style="padding-left: 0;"><input id="shouyiren'+shouyiren_num+'_phone"></input></div><div class="col-md-1"></div>'+'</div><div style="position:absolute;left:100%;top:10px;margin-left:-30px;color:red" id="shouyiren'+shouyiren_num+'" onclick="delete_shouyiren(this.id)"><i class="glyphicon glyphicon-remove"></i></div></div>';
           $('#a_shouyiren'+i).after(html)
           $('#shouyirenList').val(JSON.stringify(shouyirenList))
         }
@@ -703,6 +703,7 @@ phonecatControllers.controller('bianJiDingDanCtrl', ['$scope','$http','$routePar
                 $scope.beibaoren_age = content.beibaoren.age
                 $scope.beibaoren_gender = content.beibaoren.gender
                 $scope.beibaoren_relationship = content.beibaoren.relationship
+                $scope.beibaoren_phone = content.beibaoren.phone
 
 
                 var products = content.products
@@ -733,6 +734,7 @@ phonecatControllers.controller('bianJiDingDanCtrl', ['$scope','$http','$routePar
                   $("#shouyiren"+h+"_ID").val(shouyiren.id)
                   $("#shouyiren"+h+"_age").val(shouyiren.age)
                   $("#shouyiren"+h+"_relationship").val(shouyiren.relationship)
+                  $("#shouyiren"+h+"_phone").val(shouyiren.phone)
                 }
               }
               isFirst = false
@@ -901,7 +903,7 @@ phonecatControllers.controller('bianJiDingDanCtrl', ['$scope','$http','$routePar
             var beibaoren_length = beibaorenList.length
             var beibaoren_Array = []
             for(var j=1;j<=beibaoren_length;j++){
-              eval("if(beibaorenList.a_beibaoren"+j+"==1){var beibaoren"+j+"={};beibaoren"+j+".name = $('#beibaoren"+j+"_name').val();beibaoren"+j+".age = $('#beibaoren"+j+"_age').val();beibaoren"+j+".gender = $('#beibaoren"+j+"_gender').val();beibaoren"+j+".id = $('#beibaoren"+j+"_ID').val();beibaoren"+j+".relationship = $('#beibaoren"+j+"_relationship').val();beibaoren_Array.push(beibaoren"+j+");}")
+              eval("if(beibaorenList.a_beibaoren"+j+"==1){var beibaoren"+j+"={};beibaoren"+j+".name = $('#beibaoren"+j+"_name').val();beibaoren"+j+".age = $('#beibaoren"+j+"_age').val();beibaoren"+j+".gender = $('#beibaoren"+j+"_gender').val();beibaoren"+j+".id = $('#beibaoren"+j+"_ID').val();beibaoren"+j+".relationship = $('#beibaoren"+j+"_relationship').val();beibaoren"+j+".phone = $('#beibaoren"+j+"_phone').val();beibaoren_Array.push(beibaoren"+j+");}")
             }
             // console.log(beibaoren_Array)
           //-end-被保人信息
@@ -913,7 +915,7 @@ phonecatControllers.controller('bianJiDingDanCtrl', ['$scope','$http','$routePar
             var shouyiren_length = shouyirenList.length
             var shouyiren_Array = []
             for(var j=1;j<=shouyiren_length;j++){
-              eval("if(shouyirenList.a_shouyiren"+j+"==1){var shouyiren"+j+"={};shouyiren"+j+".name = $('#shouyiren"+j+"_name').val();shouyiren"+j+".age = $('#shouyiren"+j+"_age').val();shouyiren"+j+".gender = $('#shouyiren"+j+"_gender').val();shouyiren"+j+".id = $('#shouyiren"+j+"_ID').val();shouyiren"+j+".relationship = $('#shouyiren"+j+"_relationship').val();shouyiren_Array.push(shouyiren"+j+");}")
+              eval("if(shouyirenList.a_shouyiren"+j+"==1){var shouyiren"+j+"={};shouyiren"+j+".name = $('#shouyiren"+j+"_name').val();shouyiren"+j+".age = $('#shouyiren"+j+"_age').val();shouyiren"+j+".gender = $('#shouyiren"+j+"_gender').val();shouyiren"+j+".id = $('#shouyiren"+j+"_ID').val();shouyiren"+j+".relationship = $('#shouyiren"+j+"_relationship').val();shouyiren"+j+".phone = $('#shouyiren"+j+"_phone').val();shouyiren_Array.push(shouyiren"+j+");}")
             }
             // console.log(shouyiren_Array)
           //-end-受益人信息

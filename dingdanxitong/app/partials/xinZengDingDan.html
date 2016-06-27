@@ -161,6 +161,11 @@
                                         <div class="col-md-1"></div>
                                         <div class="col-md-1" style="padding-right: 0;" >与投保人</div>
                                         <div class="col-md-2 add-guanxi" style="padding-left: 0;" ><select id="beibaoren1_relationship" onblur="same(this.id,this.value)"><option value="1">本人</option><option value="2">夫妻</option><option value="3">父子</option><option value="4">母子</option><option value="5">其他</option></select></div>
+
+                                        <div class="col-md-1"></div>
+                                        <div class="col-md-1" style="padding-right: 0;">手机:</div>
+                                        <div class="col-md-2" style="padding-left: 0;"><input id="beibaoren1_phone"></input></div>
+                                        <div class="col-md-1"></div>
                                     </div> 
                                 </div>
 
@@ -189,7 +194,13 @@
                                         <div class="col-md-1"></div>
                                         <div class="col-md-1" style="padding-right: 0;" >与投保人</div>
                                         <div class="col-md-2 add-guanxi" style="padding-left: 0;"><select id="shouyiren1_relationship" onblur="same(this.id,this.value)"><option value="1">本人</option><option value="2">夫妻</option><option value="3">父子</option><option value="4">母子</option><option value="5">其他</option></select></div>
+                                        <div class="col-md-1"></div>
+                                        <div class="col-md-1" style="padding-right: 0;">手机:</div>
+                                        <div class="col-md-2" style="padding-left: 0;"><input id="shouyiren1_phone"></input></div>
+                                        <div class="col-md-1"></div>
                                     </div> 
+
+                                        
                                 </div>
                             
                            
@@ -281,7 +292,6 @@
                 shouyirenList.length = 1
                 $('#shouyirenList').val(JSON.stringify(shouyirenList))
 
-
                 var shouyiren_num = 1
                 function add_shouyiren(){
                     var i = shouyiren_num
@@ -289,7 +299,9 @@
                     shouyirenList.length = shouyiren_num
                     eval("shouyirenList.a_shouyiren"+shouyiren_num+" = 1")
 
-                    var html = '<div id="a_shouyiren'+shouyiren_num+'" style="border-top:1px dashed #848484;margin-top:30px;position:relative"><div class="paper-row row" style="margin-top:20px"><div class="col-md-1" style="padding-right:0">姓名:</div><div class="col-md-2" style="padding-left:0"><input id="shouyiren'+shouyiren_num+'_name"></div><div class="col-md-1"></div><div class="col-md-1" style="padding-right:0">性别:</div><div class="col-md-2" style="padding-left:0"><select id="shouyiren'+shouyiren_num+'_gender"><option value="0">男</option><option value="1">女</option></select></div><div class="col-md-1"></div><div class="col-md-1" style="padding-right:0">身份证号:</div><div class="col-md-2" style="padding-left:0"><input id="shouyiren'+shouyiren_num+'_ID"></div><div class="col-md-1"></div></div><div class="paper-row row"><div class="col-md-1" style="padding-right: 0;" >年龄:</div><div class="col-md-2 add-sui" style="padding-left: 0;"><input id="shouyiren'+shouyiren_num+'_age"></input></div><div class="col-md-1"></div><div class="col-md-1" style="padding-right:0">与投保人</div><div class="col-md-2 add-guanxi" style="padding-left:0"><select id="shouyiren'+shouyiren_num+'_relationship" onblur="same(this.id,this.value)"><option value="1">本人</option><option value="2">夫妻</option><option value="3">父子</option><option value="4">母子</option><option value="5">其他</option></select></div></div><div style="position:absolute;left:100%;top:10px;margin-left:-30px;color:red" id="shouyiren'+shouyiren_num+'" onclick="delete_shouyiren(this.id)"><i class="glyphicon glyphicon-remove"></i></div></div>';
+                    var html = '<div id="a_shouyiren'+shouyiren_num+'" style="border-top:1px dashed #848484;margin-top:30px;position:relative"><div class="paper-row row" style="margin-top:20px"><div class="col-md-1" style="padding-right:0">姓名:</div><div class="col-md-2" style="padding-left:0"><input id="shouyiren'+shouyiren_num+'_name"></div><div class="col-md-1"></div><div class="col-md-1" style="padding-right:0">性别:</div><div class="col-md-2" style="padding-left:0"><select id="shouyiren'+shouyiren_num+'_gender"><option value="0">男</option><option value="1">女</option></select></div><div class="col-md-1"></div><div class="col-md-1" style="padding-right:0">身份证号:</div><div class="col-md-2" style="padding-left:0"><input id="shouyiren'+shouyiren_num+'_ID"></div><div class="col-md-1"></div></div><div class="paper-row row"><div class="col-md-1" style="padding-right: 0;" >年龄:</div><div class="col-md-2 add-sui" style="padding-left: 0;"><input id="shouyiren'+shouyiren_num+'_age"></input></div><div class="col-md-1"></div><div class="col-md-1" style="padding-right:0">与投保人</div><div class="col-md-2 add-guanxi" style="padding-left:0"><select id="shouyiren'+shouyiren_num+'_relationship" onblur="same(this.id,this.value)"><option value="1">本人</option><option value="2">夫妻</option><option value="3">父子</option><option value="4">母子</option><option value="5">其他</option></select></div>'+
+                        '<div class="col-md-1"></div><div class="col-md-1" style="padding-right: 0;">手机:</div><div class="col-md-2" style="padding-left: 0;"><input id="shouyiren'+shouyiren_num+'_phone"></input></div><div class="col-md-1"></div>'
+                    +'</div><div style="position:absolute;left:100%;top:10px;margin-left:-30px;color:red" id="shouyiren'+shouyiren_num+'" onclick="delete_shouyiren(this.id)"><i class="glyphicon glyphicon-remove"></i></div></div>';
                     $('#a_shouyiren'+i).after(html)
                     $('#shouyirenList').val(JSON.stringify(shouyirenList))
 
@@ -319,6 +331,7 @@
                     eval("$('#"+id+"_age').val('"+age+"')")
                     eval("$('#"+id+"_gender').val('"+gender+"')")
                     eval("$('#"+id+"_name').val('"+name+"')")
+
                 }                
 
                }
