@@ -543,6 +543,7 @@ phonecatControllers.controller('xinZengDingDanCtrl', ['$scope','$http',
         toubaoren.id = $scope.toubaoren_id
         toubaoren.bankNum = $scope.toubaoren_bankNum
         toubaoren.age = $scope.toubaoren_age
+        toubaoren.phone = $scope.toubaoren_phone
 
         var postData = {}
         postData.userid = $scope.uid
@@ -592,7 +593,7 @@ phonecatControllers.controller('bianJiDingDanCtrl', ['$scope','$http','$routePar
           if(block_num%3==2){color="#ff8f2e"}
           if(block_num%3==0){color="#2fa4e7"}
           if(block_num%3==1){color="#2bd394"}
-          var html = '<div style="background-color:'+color+';color:#fff;padding-top:10px;padding-bottom:10px;border-radius:20px;position:relative" id="a_block'+block_num+'"><div class="paper-row row"><div class="col-md-1" style="padding-right:0">产品名称:</div><div class="col-md-2" style="padding-left:0"><select id="block'+block_num+'_name" style="color:black"><option value="7165">泰康乐安康</option><option value="7167">华夏健康人生</option> <option value="7160">华夏常青树2015</option><option value="7238">华夏福临门铂金版2015</option></select></div><div class="col-md-1"></div><div class="col-md-1" style="padding-right:0">保额:</div><div class="col-md-2 add-yuan" style="padding-left:0"><input id="block'+block_num+'_baoe"></div><div class="col-md-1"></div><div class="col-md-1" style="padding-right:0">保费:</div><div class="col-md-2 add-yuan" style="padding-left:0"><input id="block'+block_num+'_baofee"></div><div class="col-md-1"></div></div><div class="paper-row row"><div class="col-md-1" style="padding-right:0">保障期间:</div><div class="col-md-2 add-year" style="padding-left:0"><input id="block'+block_num+'_baozhangqijian"></div><div class="col-md-1"></div><div class="col-md-1" style="padding-right:0">缴费年限:</div><div class="col-md-2 add-year" style="padding-left:0"><input id="block'+block_num+'_jiaofeinianxian"></div><div class="col-md-1"></div></div><div style="position:absolute;left:100%;top:10px;margin-left:-30px" id="block'+block_num+'" onclick="delete_block(this.id)"><i class="glyphicon glyphicon-remove"></i></div></div>';
+          var html = '<div style="background-color:'+color+';color:#fff;padding-top:10px;padding-bottom:10px;border-radius:20px;position:relative" id="a_block'+block_num+'"><div class="paper-row row"><div class="col-md-1" style="padding-right:0">产品名称:</div><div class="col-md-2" style="padding-left:0"><select id="block'+block_num+'_name" style="color:black"><option value="7165">泰康乐安康</option><option value="7167">华夏健康人生</option> <option value="7160">华夏常青树2015</option><option value="7238">华夏福临门铂金版2015</option><option value="7273">弘康健康人生重大疾病A款（附加轻症）</option></select></div><div class="col-md-1"></div><div class="col-md-1" style="padding-right:0">保额:</div><div class="col-md-2 add-yuan" style="padding-left:0"><input id="block'+block_num+'_baoe"></div><div class="col-md-1"></div><div class="col-md-1" style="padding-right:0">保费:</div><div class="col-md-2 add-yuan" style="padding-left:0"><input id="block'+block_num+'_baofee"></div><div class="col-md-1"></div></div><div class="paper-row row"><div class="col-md-1" style="padding-right:0">保障期间:</div><div class="col-md-2 add-year" style="padding-left:0"><input id="block'+block_num+'_baozhangqijian"></div><div class="col-md-1"></div><div class="col-md-1" style="padding-right:0">缴费年限:</div><div class="col-md-2 add-year" style="padding-left:0"><input id="block'+block_num+'_jiaofeinianxian"></div><div class="col-md-1"></div></div><div style="position:absolute;left:100%;top:10px;margin-left:-30px" id="block'+block_num+'" onclick="delete_block(this.id)"><i class="glyphicon glyphicon-remove"></i></div></div>';
           $('#a_block'+i).after(html)
           $('#blockList').val(JSON.stringify(blockList))
         }
@@ -697,6 +698,7 @@ phonecatControllers.controller('bianJiDingDanCtrl', ['$scope','$http','$routePar
                 $scope.toubaoren_gender = content.toubaoren.gender
                 $scope.toubaoren_bankNum = content.toubaoren.bankNum
                 $scope.toubaoren_age = content.toubaoren.age
+                $scope.toubaoren_phone = content.toubaoren.phone
 
                 $scope.beibaoren_name = content.beibaoren.name
                 $scope.beibaoren_id = content.beibaoren.id
@@ -927,6 +929,7 @@ phonecatControllers.controller('bianJiDingDanCtrl', ['$scope','$http','$routePar
           toubaoren.id = $scope.toubaoren_id
           toubaoren.bankNum = $scope.toubaoren_bankNum
           toubaoren.age = $scope.toubaoren_age
+          toubaoren.phone = $scope.toubaoren_phone
 
           var postData = {}
           postData.orderid = order_id
