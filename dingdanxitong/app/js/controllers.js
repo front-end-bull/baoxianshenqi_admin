@@ -302,7 +302,7 @@ phonecatControllers.controller('genJinZhongCtrl', ['$scope','$http',
 
           
 
-          if((status=="进入犹豫期"||status=="回访失败"||status=="回访成功")&&(currentTime-inTime>deadline)){
+          if((status=="进入犹豫期"||status=="回访失败"||status=="回访成功"||status=="回执已提交保险公司")&&(currentTime-inTime>deadline)){
             // console.log(createTime_test)
             order.expire = 1
           }
