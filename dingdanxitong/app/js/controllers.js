@@ -294,6 +294,7 @@ phonecatControllers.controller('genJinZhongCtrl', ['$scope','$http',
           var createTime = new Date(createTime_test).getTime()
           var currentTime = new  Date().getTime()
           var deadline = 6*24*60*60000
+          var warn_deadline = 9*24*60*60000
 
 
           order.createtime = formatTime(new Date(order.createtime))
@@ -302,10 +303,21 @@ phonecatControllers.controller('genJinZhongCtrl', ['$scope','$http',
 
           
 
-          if((status=="进入犹豫期"||status=="回访失败"||status=="回访成功"||status=="回执已提交保险公司")&&(currentTime-inTime>deadline)){
+          if(status=="进入犹豫期"||status=="回访失败"||status=="回访成功"||status=="回执已提交保险公司"){
+            if(warn_deadline>currentTime-inTime&&currentTime-inTime>deadline){
+              order.expire = true
+            }else if(currentTime-inTime>=warn_deadline){
+              order.warning = true
+            }
             // console.log(createTime_test)
-            order.expire = 1
+            // order.warning = true
           }
+
+
+
+
+
+
         }
 
 
@@ -326,6 +338,8 @@ phonecatControllers.controller('genJinZhongCtrl', ['$scope','$http',
 
 
         $scope.totalNum = orders.length
+
+        $scope.query()
       })
     }
    
@@ -344,22 +358,24 @@ phonecatControllers.controller('genJinZhongCtrl', ['$scope','$http',
       var status = $('#status').html()
       status = status.replace(/(^\s*)|(\s*$)/g,"")
       status = status.substring(0,status.length-64)
+
+      var isDeleted = [0]
       // console.log(status)
       // console.log(agent_name)
       // console.log(customer_name)
       // console.log(gengxin_startTime)
       // console.log(gengxin_endTime)
-
-
-     
-
+      if(status=='全部（包括删除的订单）'){
+        isDeleted.push(1)
+      }
 
       allOrders.forEach(function(e){
         if(   isName(e.agent_name,agent_name)
             &&isName(e.customer_name,customer_name)
             &&isTime(e.createtime,gengxin_startTime,gengxin_endTime)
             &&isTime(e.firsttime,chuangjian_startTime,chuangjian_endTime)
-            &&(status=='全部'||status=='请选择最新状态'||status==e.status)
+            &&(status=='全部（包括删除的订单）'||status=='全部（不包括删除的订单）'||status=='请选择最新状态'||status==e.status)
+            &&(e.deleted in isDeleted)
           ){
           totalbaofei += e.baofei*100
           orders.push(e)
@@ -470,6 +486,7 @@ phonecatControllers.controller('genJinZhongCtrl', ['$scope','$http',
         })//layer.prompt
     }//$scope.copyOrder
     $scope.getAllOrders()
+    // $scope.query()
   }]);
 
 //新增订单

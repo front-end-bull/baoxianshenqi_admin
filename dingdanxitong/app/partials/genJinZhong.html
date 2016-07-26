@@ -105,7 +105,8 @@
                                         <li><a onclick="setStatus(this.text)" href="javascript:void(0)">回访成功</a></li>
                                         <li><a onclick="setStatus(this.text)" href="javascript:void(0)">佣金已结</a></li>
                                         <li role="separator" class="divider"></li>
-                                        <li><a onclick="setStatus(this.text)" href="javascript:void(0)">全部</a></li>
+                                        <li><a onclick="setStatus(this.text)" href="javascript:void(0)">全部（不包括删除的订单）</a></li>
+                                        <li><a onclick="setStatus(this.text)" href="javascript:void(0)">全部（包括删除的订单）</a></li>
                                       </ul>
                                 </div>
                             </div>
@@ -190,7 +191,7 @@
                                
                                
 
-                                <tr ng-repeat="order in orders" ng-class="{true:'dangerous'}[order.expire==1]">
+                                <tr ng-repeat="order in orders" ng-class="{'danger':order.expire,'warning':order.warning}">
                                     <td>{{order.id}}</td>
                                     <td class="center">{{order.agent_id}}</td>
                                     <td class="center">{{order.agent_name}}</td>
