@@ -275,12 +275,17 @@ phonecatControllers.controller('genJinZhongCtrl', ['$scope','$http',
           var order_status = order.order_status
           var inTime = ''
           var firsttime = ''
+          var receiptTime = ''
+
           order_status.forEach(function(e){
             if(e.status=="进入犹豫期"){
               inTime = parseInt(e.status_date)
             }
             if(e.status=="订单初始化"){
               firsttime = parseInt(e.createtime)
+            }
+            if(e.status=="划款成功"){
+              receiptTime = parseInt(e.status_date)
             }
           })
 
@@ -294,14 +299,30 @@ phonecatControllers.controller('genJinZhongCtrl', ['$scope','$http',
           var createTime = new Date(createTime_test).getTime()
           var currentTime = new  Date().getTime()
           var deadline = 6*24*60*60000
-          var warn_deadline = 9*24*60*60000
+          var warn_deadline = 10*24*60*60000
 
 
           order.createtime = formatTime(new Date(order.createtime))
           var status =  order.status
           
+          receiptTime = new Date(receiptTime)
+          var receiptMonth = receiptTime.getMonth()
+          receiptMonth++
+          var receiptDate = receiptTime.getDate()
 
-          
+          if(receiptDate<=26){
+            receiptMonth++
+          }else{
+            receiptMonth+=2
+          }
+
+          var currentMonth = new Date().getMonth()
+          currentMonth++
+
+          if(currentMonth>=receiptMonth){
+            order.receipt = true
+          }
+
 
           if(status=="进入犹豫期"||status=="回访失败"||status=="回访成功"||status=="回执已提交保险公司"){
             if(warn_deadline>currentTime-inTime&&currentTime-inTime>deadline){
@@ -309,9 +330,9 @@ phonecatControllers.controller('genJinZhongCtrl', ['$scope','$http',
             }else if(currentTime-inTime>=warn_deadline){
               order.warning = true
             }
-            // console.log(createTime_test)
-            // order.warning = true
           }
+
+
 
 
 

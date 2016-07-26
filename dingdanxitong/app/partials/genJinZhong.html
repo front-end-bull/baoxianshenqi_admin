@@ -192,7 +192,7 @@
                                
 
                                 <tr ng-repeat="order in orders" ng-class="{'danger':order.expire,'warning':order.warning}">
-                                    <td>{{order.id}}</td>
+                                    <td>{{order.id}}<i class="glyphicon glyphicon-bell yellow hide" ng-class="{'show':order.receipt}"></i></td>
                                     <td class="center">{{order.agent_id}}</td>
                                     <td class="center">{{order.agent_name}}</td>
                                     <td class="center">{{order.customer_name}}</td>
