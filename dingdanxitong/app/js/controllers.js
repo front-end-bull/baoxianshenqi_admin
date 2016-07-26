@@ -310,7 +310,7 @@ phonecatControllers.controller('genJinZhongCtrl', ['$scope','$http',
           receiptMonth++
           var receiptDate = receiptTime.getDate()
 
-          if(receiptDate<=26){
+          if(receiptDate<26){
             receiptMonth++
           }else{
             receiptMonth+=2
@@ -319,7 +319,7 @@ phonecatControllers.controller('genJinZhongCtrl', ['$scope','$http',
           var currentMonth = new Date().getMonth()
           currentMonth++
 
-          if(currentMonth>=receiptMonth){
+          if((currentMonth>=receiptMonth)&&(status=="划款成功"||status=="保险公司下发合同" ||status=="到时限后弃保" ||status=="合同已转交" )){
             order.receipt = true
           }
 
