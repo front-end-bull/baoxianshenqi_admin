@@ -608,6 +608,23 @@ phonecatControllers.controller('xinZengDingDanCtrl', ['$scope','$http',
 //编辑订单
 phonecatControllers.controller('bianJiDingDanCtrl', ['$scope','$http','$routeParams',
   function($scope,$http,$routeParams) {
+     $scope.change_uid = function(){
+      var uid = $scope.uid
+        $scope.name = ""
+        $scope.company = ""
+        $scope.phonenumber = ""
+      if(uid==""||uid=="null"||uid=="undefined"){return}
+      $http.post('http://'+IP+':3000/get_user_info',{userid:uid}).success(function(data){
+        $scope.name = data.name
+        $scope.company = data.company
+        $scope.phonenumber = data.phonenumber
+
+      })
+    }
+
+    
+
+
 
     var isFirst = true
 
