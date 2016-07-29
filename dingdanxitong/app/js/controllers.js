@@ -290,7 +290,7 @@ phonecatControllers.controller('genJinZhongCtrl', ['$scope','$http',
           })
 
 
-          firsttime = formatTime(new Date(firsttime))
+          firsttime = formatTime_date(new Date(firsttime))
 
           if(firsttime!='NaN-NaN-NaN NaN:NaN:NaN'){order.firsttime = firsttime}else{order.firsttime=''}
 
@@ -302,7 +302,7 @@ phonecatControllers.controller('genJinZhongCtrl', ['$scope','$http',
           var warn_deadline = 10*24*60*60000
 
 
-          order.createtime = formatTime(new Date(order.createtime))
+          order.createtime = formatTime_date(new Date(order.createtime))
           var status =  order.status
           
           receiptTime = new Date(receiptTime)
