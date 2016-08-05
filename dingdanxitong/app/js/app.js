@@ -57,6 +57,17 @@ phonecatApp.config(['$routeProvider',
         controller: 'tuiJianLianXiRenChaXunCtrl'
       }).
 
+      when('/forumList',{
+        templateUrl:'partials/forumList.html',
+        controller:'forumListCtrl'
+      }).
+
+      //帖子操作：新增、编辑
+      when('/postOpt/:option',{
+        templateUrl:'partials/postOpt.html',
+        controller:'postOptCtrl'
+      }).
+
       when('/homePage', {
         templateUrl: 'partials/homePage.html',
         controller: 'homePageCtrl'

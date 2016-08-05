@@ -33,7 +33,12 @@
     body{
       font-family: 'XH','Tan';
     }
-  
+    
+    .w100{
+      width: 100% !important;
+    }
+
+
     .paper-title{
       background-color: #f5f5f5;
       line-height: 2;
@@ -96,7 +101,7 @@
       position: relative;
     }
 
-  *{
+   *{
       box-sizing: border-box;
     }
       .start,.end{
@@ -444,7 +449,7 @@
                     </div>
                     <ul class="nav nav-pills nav-stacked main-menu">
                         <li class="nav-header">预约</li>
-                          <li  id="menu7" onclick="getFocus(this.id)">
+                          <li id="menu7" onclick="getFocus(this.id)">
                               <a class="ajax-link" href="#/yuYue"><i class="glyphicon glyphicon-envelope"></i><span> 预约列表</span></a>
                           </li>
 
@@ -478,11 +483,15 @@
 
                          <li class="nav-header hidden-md">代理人查询</li>
                           <li id="menu8" onclick="getFocus(this.id)">
-                              <a class="ajax-link" href="#/daiLiRenChaXun"><i class="glyphicon glyphicon-edit"></i><span> 代理人查询</span></a>
+                              <a class="ajax-link" href="#/daiLiRenChaXun"><i class="glyphicon glyphicon-search"></i><span> 代理人查询</span></a>
                           </li>
                          <!--  <li id="menu9" onclick="getFocus(this.id)">
                               <a class="ajax-link" href="#/tuiJianLianXiRenChaXun"><i class="glyphicon glyphicon-list-alt"></i><span> 推荐联系人查询</span></a>
                           </li>  -->
+                        <li class="nav-header hidden-md">论坛</li>
+                          <li id="menu9" onclick="getFocus(this.id)">
+                              <a class="ajax-link" href="#/forumList"><i class="glyphicon glyphicon-edit"></i><span> 帖子列表</span></a>
+                          </li>
                     </ul>
                 </div>
             </div>
@@ -560,10 +569,10 @@
       // $('#menu6').removeClass('active')
       $('#menu7').removeClass('active')
       $('#menu8').removeClass('active')
+      $('#menu9').removeClass('active')
       // $('#menu9').removeClass('active')
 
       $('#'+id).addClass('active')
-
     }
   </script>
   

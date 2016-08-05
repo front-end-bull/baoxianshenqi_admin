@@ -7,6 +7,8 @@ var phonecatControllers = angular.module('phonecatControllers', []);
 // const IP = "182.254.212.33" //外网
 // const IP = "192.168.0.109" //pp Mac
 const KEY = "cbb4906093d48f827a7322d85af9ac52";
+const testIP = "192.168.10.250"
+
 function formatTime(time){
     var month = time.getMonth()
     month++
@@ -1067,6 +1069,119 @@ phonecatControllers.controller('tuiJianLianXiRenCtrl', ['$scope','$http',
   function($scope,$http) {
     
   }]);
+
+
+//论坛
+phonecatControllers.controller('forumListCtrl', ['$scope','$http',
+  function($scope,$http) {
+
+    $scope.query = function(){
+      var postData = {
+        key:KEY,
+        isdeleted:0
+      }
+
+      $http.post('http://'+testIP+':3000/all_feed_list',postData).success(function(data){
+        var posts = data.res
+        const MAXLENGTH = 20
+        for(var i in posts){
+          var post = posts[i]
+          if(post.title.length>MAXLENGTH){
+            post.title = post.title.substring(0,MAXLENGTH) + "..."
+          }
+          if(post.content.length>MAXLENGTH){
+            post.content = post.content.substring(0,MAXLENGTH) + "..."
+          }
+          post.createtime = formatTime_date(new Date(post.createtime*1000))
+          post.updatetime = formatTime_date(new Date(post.updatetime*1000))
+
+          posts[i] = post
+        }
+        $scope.posts = posts.sort(function(x,y){
+          if(x.id<y.id){
+            return 1
+          }
+          if(x.id>y.id){
+            return -1
+          }
+          return 0
+        })
+      })
+    }
+    $scope.query()
+
+    $scope.delete =function(feedid,userid){
+      var postData = {
+        key:KEY,
+        feedid:feedid,
+        userid:userid
+      }
+      $http.post('http://'+testIP+':3000/delete_feed_by_admin',postData).success(function(data){
+        console.log(data)
+        $scope.query()
+      })
+    }
+
+    $scope.top = function(feedid,userid,ishot){
+      var postData = {
+        key:KEY,
+        feedid:feedid,
+        ishot:ishot,
+        userid:userid
+      }
+      console.log(postData)
+      $http.post('http://'+testIP+':3000/hot_feed_by_admin',postData).success(function(data){
+        console.log(data)
+        $scope.query()
+      })
+    }
+
+  }]);
+
+//帖子操作：新增、修改
+phonecatControllers.controller('postOptCtrl', ['$scope','$http','$routeParams',
+  function($scope,$http,$routeParams) {
+    var option = $routeParams.option
+    if(option=="create"){
+      $scope.option = "新增"
+    }
+
+    $scope.post = function(){
+
+      var key = KEY
+      var userid = 13
+      var isanonymous = 0
+      var title = $scope.title
+      var content = $scope.content
+      var imgs = ''
+      var tags = ''
+      var location = ''
+
+      var postData = {
+        key:key,
+        userid:userid,
+        isanonymous:isanonymous,
+        title:title,
+        content:content,
+        imgs:imgs,
+        tags:tags,
+        location:location
+      }
+
+      console.log(postData)
+
+      $http.post('http://'+testIP+':3000/create_feed_by_admin',postData).success(function(data){
+       console.log(data)
+       window.location.href='#/forumList'
+      })
+    }
+
+
+
+
+  }]);
+
+  
 
 
 //首页
