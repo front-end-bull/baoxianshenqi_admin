@@ -1149,7 +1149,7 @@ phonecatControllers.controller('postOptCtrl', ['$scope','$http','$routeParams',
     $scope.post = function(){
 
       var key = KEY
-      var userid = 13
+      var userid = $scope.userid
       var isanonymous = 0
       var title = $scope.title
       var content = $scope.content
