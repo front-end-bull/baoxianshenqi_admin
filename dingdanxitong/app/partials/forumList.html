@@ -13,7 +13,7 @@
             <div class="row">
                 <div class="col-md-3 col-sm-3 col-xs-6">
                     <a data-toggle="tooltip" title="$34 new sales." class="well top-block" href="#/postOpt/create">
-                        <i class="glyphicon glyphicon-file yellow"></i>
+                        <i class="glyphicon glyphicon-edit yellow"></i>
 
                         <div>新增帖子</div>
                         <!-- <div>$13320</div> -->
@@ -69,15 +69,15 @@
                                         <td>{{post.updatetime}}</td>
                                         <td>
                                             <a class="btn btn-success" ng-hide="post.ishot" ng-click="top(post.id,post.userid,1)">
-                                                <i class="glyphicon glyphicon-edit icon-white"></i>
+                                                <i class="glyphicon glyphicon-arrow-up icon-white"></i>
                                                 置顶
                                             </a>
                                             <a class="btn btn-warning" ng-show="post.ishot" ng-click="top(post.id,post.userid,0)">
-                                                <i class="glyphicon glyphicon-edit icon-white"></i>
+                                                <i class="glyphicon glyphicon-arrow-down icon-white"></i>
                                                 取消
                                             </a>
                                             <a class="btn btn-danger" ng-click="delete(post.id,post.userid)">
-                                                <i class="glyphicon glyphicon-edit icon-white"></i>
+                                                <i class="glyphicon glyphicon-trash icon-white"></i>
                                                 删除
                                             </a>
                                         </td>
