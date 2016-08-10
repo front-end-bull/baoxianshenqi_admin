@@ -209,7 +209,7 @@ phonecatControllers.controller('yuYueCtrl', ['$scope','$http',
               var yuyues = data.yuyue 
 
               var length = yuyues.length
-              console.log(length)
+              // console.log(length)
 
 
 
@@ -276,7 +276,7 @@ phonecatControllers.controller('yuYueCtrl', ['$scope','$http',
 
         $scope.query = function(){
           $http.get('http://'+IP+':3000/list_yuyue').success(function(data){
-            console.log(data.users)
+            // console.log(data.users)
             var users = data.users
             var length = data.users.length
 
@@ -1050,7 +1050,7 @@ phonecatControllers.controller('bianJiDingDanCtrl', ['$scope','$http','$routePar
           postData.order.toubaoren = toubaoren
           postData.order.yongjin = $scope.yongjin
 
-          console.log(postData)
+          // console.log(postData)
           // console.log(JSON.stringify(postData))
 
           $http.post('http://'+IP+':3000/update_order',postData).success(function(data){
@@ -1169,7 +1169,7 @@ phonecatControllers.controller('forumListCtrl', ['$scope','$http',
           return 0
         })
         $scope.totalCount = ALLPOSTS.length
-
+        // console.log(ALLPOSTS)
 
       })
     }
@@ -1182,7 +1182,7 @@ phonecatControllers.controller('forumListCtrl', ['$scope','$http',
         userid:userid
       }
       $http.post('http://'+testIP+':3000/delete_feed_by_admin',postData).success(function(data){
-        console.log(data)
+        // console.log(data)
         $scope.query()
       })
     }
@@ -1194,9 +1194,9 @@ phonecatControllers.controller('forumListCtrl', ['$scope','$http',
         ishot:ishot,
         userid:userid
       }
-      console.log(postData)
+      // console.log(postData)
       $http.post('http://'+testIP+':3000/hot_feed_by_admin',postData).success(function(data){
-        console.log(data)
+        // console.log(data)
         $scope.query()
       })
     }
@@ -1232,7 +1232,7 @@ phonecatControllers.controller('postOptCtrl', ['$scope','$http','$routeParams',
       }
       $http.post('http://'+testIP+':3000/get_comments_by_feedid_by_admin',postData).success(function(data){
         var comments = data.comments 
-        console.log(comments)
+        // console.log(comments)
 
         comments.forEach(function(e){
           e.date = formatTime_date(new Date(e.createtime*1000))
@@ -1273,10 +1273,10 @@ phonecatControllers.controller('postOptCtrl', ['$scope','$http','$routeParams',
         location:location
       }
 
-      console.log(postData)
+      // console.log(postData)
 
       $http.post('http://'+testIP+':3000/create_feed_by_admin',postData).success(function(data){
-       console.log(data)
+       // console.log(data)
        window.location.href='#/forumList'
       })
     }
