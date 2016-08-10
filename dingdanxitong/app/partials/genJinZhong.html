@@ -12,30 +12,24 @@
             <div class="row">
                 <div class="col-md-3 col-sm-3 col-xs-6">
                     <a data-toggle="tooltip" title="$34 new sales." class="well top-block" href="#/xinZengDingDan">
-                        <i class="glyphicon glyphicon-file yellow"></i>
+                        <i class="glyphicon glyphicon-pencil yellow"></i>
 
                         <div>新增订单</div>
-                        <!-- <div>$13320</div> -->
-                        <span class="notification yellow">+</span>
                     </a>
                 </div>
 
                 <div class="col-md-3 col-sm-3 col-xs-6">
                     <a data-toggle="tooltip" title="$34 new sales." class="well top-block" href="javascript:void(0)" ng-click="copyOrder()">
-                        <i class="glyphicon glyphicon-repeat green"></i>
+                        <i class="glyphicon glyphicon-print green"></i>
 
                         <div>复制订单</div>
-                        <!-- <div>$13320</div> -->
-                        <span class="notification green">+</span>
                     </a>
                 </div>
 
                 <div class="col-md-3 col-sm-3 col-xs-6">
                     <a data-toggle="tooltip" title="$34 new sales." class="well top-block" href="javascript:void(0)" ng-click="delOrder()">
-                        <i class="glyphicon glyphicon-minus red"></i>
+                        <i class="glyphicon glyphicon-trash red"></i>
                         <div>删除订单</div>
-                        <!-- <div>$13320</div> -->
-                        <span class="notification red">-</span>
                     </a>
                 </div>
             </div>
@@ -47,15 +41,7 @@
                     <div class="box-inner">
                         <div class="box-header well">
                             <h2><i class="glyphicon glyphicon-info-sign"></i> 跟进中订单列表</h2>
-
-                            <div class="box-icon">
-                                <a href="javascript:void(0)" class="btn btn-setting btn-round btn-default"><i
-                                        class="glyphicon glyphicon-cog"></i></a>
-                                <a href="javascript:void(0)" class="btn btn-minimize btn-round btn-default"><i
-                                        class="glyphicon glyphicon-chevron-up"></i></a>
-                                <a href="javascript:void(0)" class="btn btn-close btn-round btn-default"><i
-                                        class="glyphicon glyphicon-remove"></i></a>
-                            </div>
+                            <div style="float:right;">保费共 <i class="red" style="font-size:18px;">{{totalbaofei}}</i> 元&nbsp;&nbsp;&nbsp;&nbsp;共 <i class="yellow">{{totalNum}}</i> 条</div>
                         </div>
                         <div class="box-content ">
 
@@ -121,11 +107,11 @@
 
                                 <div class="col-md-3">
                                     <a class="btn btn-success" href="javascript:void(0)"  onclick="query()">
-                                        <i class="glyphicon glyphicon-edit icon-white" ></i>
+                                        <i class="glyphicon glyphicon-ok icon-white" ></i>
                                         查询
                                     </a>
                                     <a class="btn btn-danger" href="javascript:void(0)" ng-click="clear()">
-                                        <i class="glyphicon glyphicon-edit icon-white" ></i>
+                                        <i class="glyphicon glyphicon-remove icon-white" ></i>
                                         清空
                                     </a>
                                 </div>
@@ -236,7 +222,7 @@
                                 </tbody>
                             </table>
 
-                            <div>共 <i class="yellow">{{totalNum}}</i> 条&nbsp;&nbsp;&nbsp;&nbsp;保费共 <i class="red" style="font-size:18px;">{{totalbaofei}}</i>元</div>
+                            
 
                            <!--  <div class="center-block">
                                 <div class="dataTables_paginate paging_bootstrap pagination">

@@ -1,3 +1,4 @@
+
 'use strict';
 
 /* Controllers */
@@ -8,6 +9,50 @@ var phonecatControllers = angular.module('phonecatControllers', []);
 // const IP = "192.168.0.109" //pp Mac
 const KEY = "cbb4906093d48f827a7322d85af9ac52";
 const testIP = "192.168.10.250"
+
+
+
+
+var commissionRules = []
+
+//<option value="7167">华夏健康人生</option>
+commissionRules.push(new commissionRule(7167,5,0.28))
+commissionRules.push(new commissionRule(7167,10,0.45))
+commissionRules.push(new commissionRule(7167,15,0.55))
+commissionRules.push(new commissionRule(7167,20,0.65))
+//<option value="7160">华夏常青树2015</option>
+commissionRules.push(new commissionRule(7160,5,0.28))
+commissionRules.push(new commissionRule(7160,10,0.45))
+commissionRules.push(new commissionRule(7160,15,0.55))
+commissionRules.push(new commissionRule(7160,20,0.65))
+//<option value="7238">华夏福临门铂金版2015</option>
+commissionRules.push(new commissionRule(7238,1,0.04))
+commissionRules.push(new commissionRule(7238,3,0.115))
+commissionRules.push(new commissionRule(7238,5,0.25))
+commissionRules.push(new commissionRule(7238,10,0.4))
+//<option value="7165">泰康乐安康</option>
+commissionRules.push(new commissionRule(7165,1,0.05))
+commissionRules.push(new commissionRule(7165,5,0.17))
+commissionRules.push(new commissionRule(7165,10,0.48))
+commissionRules.push(new commissionRule(7165,15,0.59))
+commissionRules.push(new commissionRule(7165,20,0.7))
+//<option value="7273">弘康健康人生重大疾病A款（附加轻症）</option>
+commissionRules.push(new commissionRule(7273,15,0.45))
+commissionRules.push(new commissionRule(7273,20,0.6))
+commissionRules.push(new commissionRule(7273,30,0.6))
+
+
+function commissionRule(id,duration,percentage){
+  this.id = id
+  this.duration = duration
+  this.percentage = percentage
+}
+
+function getCommission(id,duration,baofee){
+  return commissionRules.filter(function(item){
+    return (item.id == id && item.duration == duration)
+  })[0].percentage*baofee
+}
 
 function formatTime(time){
     var month = time.getMonth()
@@ -262,7 +307,7 @@ phonecatControllers.controller('genJinZhongCtrl', ['$scope','$http',
        $http.post('http://'+IP+':3000/get_all_orders').success(function(data){
         var orders = data.orders
         allOrders = orders
-        console.log(orders)
+        // console.log(orders)
         var totalbaofei = 0
 
 
@@ -437,7 +482,7 @@ phonecatControllers.controller('genJinZhongCtrl', ['$scope','$http',
       $('#chuangjian_endTime').val('')
       $('#gengxin_startTime').val('')
       $('#gengxin_endTime').val('')
-      $('#status').html('全部'+' <span class="caret" style="float:right;margin-top:9px;"></span>')
+      $('#status').html('全部（不包括删除的订单）'+' <span class="caret" style="float:right;margin-top:9px;"></span>')
     }
 
     
@@ -602,6 +647,13 @@ phonecatControllers.controller('xinZengDingDanCtrl', ['$scope','$http',
             layer.msg('新增成功!')
 
         })
+    }
+
+    $scope.setCommission= function(){
+      var id = $('#block1_name').val()
+      var duration = $('#block1_jiaofeinianxian').val()
+      var baofee = $scope.block1_baofee
+      $scope.yongjin = getCommission(id,duration,baofee)
     }
 
   }]);
@@ -1009,6 +1061,14 @@ phonecatControllers.controller('bianJiDingDanCtrl', ['$scope','$http','$routePar
       }
 
       $scope.query()
+
+
+      $scope.setCommission= function(){
+        var id = $('#block1_name').val()
+        var duration = $('#block1_jiaofeinianxian').val()
+        var baofee = $scope.block1_baofee
+        $scope.yongjin = getCommission(id,duration,baofee)
+      }
   }]);
 
 

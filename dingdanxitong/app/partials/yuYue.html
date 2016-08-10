@@ -17,16 +17,18 @@
                     <div class="box-inner">
 
                         <div class="box-header well">
-                            <h2><i class="glyphicon glyphicon-info-sign"></i> 预约列表</h2>
-
-                            <div class="box-icon">
+                            <h2>
+                            <i class="glyphicon glyphicon-info-sign"></i>
+                             预约列表</h2>
+                           <!--  <div class="box-icon">
                                 <a href="javascript:void(0)" class="btn btn-setting btn-round btn-default"><i
                                         class="glyphicon glyphicon-cog"></i></a>
                                 <a href="javascript:void(0)" class="btn btn-minimize btn-round btn-default"><i
                                         class="glyphicon glyphicon-chevron-up"></i></a>
                                 <a href="javascript:void(0)" class="btn btn-close btn-round btn-default"><i
                                         class="glyphicon glyphicon-remove"></i></a>
-                            </div>
+                            </div> -->
+                            <div style="float:right;">共 <i class="yellow">{{totalCount}}</i> 条</div>
                         </div>
 
                         <div class="box-content ">
@@ -71,7 +73,7 @@
                                 </tbody>
                             </table>
                             
-                             <div>共 <i class="yellow">{{totalCount}}</i> 条</div>
+                             
 
                             <!-- <div class="center-block">
                                 <div class="dataTables_paginate paging_bootstrap pagination">
