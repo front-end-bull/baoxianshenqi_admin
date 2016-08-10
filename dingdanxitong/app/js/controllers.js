@@ -10,7 +10,7 @@ var phonecatControllers = angular.module('phonecatControllers', []);
 const KEY = "cbb4906093d48f827a7322d85af9ac52";
 const testIP = "192.168.10.250"
 
-
+var ALLPOSTS = []
 
 
 var commissionRules = []
@@ -1157,7 +1157,9 @@ phonecatControllers.controller('forumListCtrl', ['$scope','$http',
 
           posts[i] = post
         }
-        $scope.posts = posts.sort(function(x,y){
+
+
+        ALLPOSTS = $scope.posts = posts.sort(function(x,y){
           if(x.id<y.id){
             return 1
           }
@@ -1166,6 +1168,9 @@ phonecatControllers.controller('forumListCtrl', ['$scope','$http',
           }
           return 0
         })
+        $scope.totalCount = ALLPOSTS.length
+
+
       })
     }
     $scope.query()
@@ -1202,12 +1207,52 @@ phonecatControllers.controller('forumListCtrl', ['$scope','$http',
 phonecatControllers.controller('postOptCtrl', ['$scope','$http','$routeParams',
   function($scope,$http,$routeParams) {
     var option = $routeParams.option
+    $scope.opt  = option
+
     if(option=="create"){
       $scope.option = "新增"
+    }else{
+      $scope.option = "查看"
+      // console.log(ALLPOSTS)
+      var post = ALLPOSTS.filter(function(item){
+          return item.id = option
+      })[0] 
+      $scope.title = post.title
+      $scope.content = post.content
+      $scope.userid = post.userid
+
+      getComments(option,post.userid)
+    }
+
+    function getComments(feedid,userid){
+      var postData = {
+        key:KEY,
+        feedid:feedid,
+        userid:userid
+      }
+      $http.post('http://'+testIP+':3000/get_comments_by_feedid_by_admin',postData).success(function(data){
+        var comments = data.comments 
+        console.log(comments)
+
+        comments.forEach(function(e){
+          e.date = formatTime_date(new Date(e.createtime*1000))
+          e.time = formatTime_time(new Date(e.createtime*1000))
+        })
+
+        $scope.comments = comments.sort(function(x,y){
+          if(x.id<y.id){
+            return 1
+          }
+          if(x.id>y.id){
+            return -1
+          }
+          return 0
+        })
+        $scope.totalCount = comments.length
+      })
     }
 
     $scope.post = function(){
-
       var key = KEY
       var userid = $scope.userid
       var isanonymous = 0
