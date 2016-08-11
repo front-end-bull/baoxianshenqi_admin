@@ -49,9 +49,14 @@ function commissionRule(id,duration,percentage){
 }
 
 function getCommission(id,duration,baofee){
-  return commissionRules.filter(function(item){
+  var rs = commissionRules.filter(function(item){
     return (item.id == id && item.duration == duration)
-  })[0].percentage*baofee
+  })
+  if(rs.length>0){
+    return rs[0].percentage*baofee
+  }else{
+    return 0
+  }
 }
 
 function formatTime(time){
@@ -1232,11 +1237,12 @@ phonecatControllers.controller('postOptCtrl', ['$scope','$http','$routeParams',
       }
       $http.post('http://'+testIP+':3000/get_comments_by_feedid_by_admin',postData).success(function(data){
         var comments = data.comments 
-        // console.log(comments)
+        console.log(comments)
 
         comments.forEach(function(e){
           e.date = formatTime_date(new Date(e.createtime*1000))
           e.time = formatTime_time(new Date(e.createtime*1000))
+          e.isanonymous = e.isanonymous == 1 ? '匿名':''
         })
 
         $scope.comments = comments.sort(function(x,y){
@@ -1253,7 +1259,6 @@ phonecatControllers.controller('postOptCtrl', ['$scope','$http','$routeParams',
     }
 
     $scope.post = function(){
-      var key = KEY
       var userid = $scope.userid
       var isanonymous = 0
       var title = $scope.title
@@ -1263,7 +1268,7 @@ phonecatControllers.controller('postOptCtrl', ['$scope','$http','$routeParams',
       var location = ''
 
       var postData = {
-        key:key,
+        key:KEY,
         userid:userid,
         isanonymous:isanonymous,
         title:title,
@@ -1281,8 +1286,44 @@ phonecatControllers.controller('postOptCtrl', ['$scope','$http','$routeParams',
       })
     }
 
+    $scope.delete = function(commentid,userid){
+      var userid = userid
+      var feedid = option
+      var commentid = commentid
+
+      var postData = {
+        key:KEY,
+        userid:userid,
+        feedid:feedid,
+        commentid:commentid
+      }
+
+      $http.post('http://'+testIP+':3000/delete_comment_by_admin',postData).success(function(data){
+       getComments(option,$scope.userid)
+      })
+
+    }
+
+    $scope.add = function(){
+      $('#addComment').removeClass('hide')
+      $('#addComment').addClass('show')
+    }
 
 
+    $scope.addComment = function(){
+      // var userid = req.body.userid;
+      // var feedid = req.body.feedid;
+      // var content = req.body.content;
+      // var isanonymous = req.body.isanonymous;
+      // var replyuser = parseInt(req.body.replyuser);
+
+
+    }
+
+    $scope.cancel = function(){
+      $('#addComment').addClass('hide')
+      $('#addComment').removeClass('show')
+    }
 
   }]);
 

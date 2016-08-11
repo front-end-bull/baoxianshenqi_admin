@@ -87,7 +87,7 @@
                                 <div style="background-color: #2bd394;color:white;padding-top: 10px;padding-bottom: 10px;border-radius: 20px;position: relative;" id="a_block1">
                                     <div class="paper-row row">
                                         <div class="col-md-1" style="padding-right: 0;" >产品名称:</div>
-                                        <div class="col-md-2" style="padding-left: 0;"><select style="color: black;" id="block1_name">
+                                        <div class="col-md-2" style="padding-left: 0;"><select style="color: black;" id="block1_name" ng-model="block1_name" ng-change="setCommission()" >
                                             <option value="7165">泰康乐安康</option>
                                             <option value="7167">华夏健康人生</option>
                                             <option value="7160">华夏常青树2015</option>
@@ -108,7 +108,7 @@
                                         <div class="col-md-2 add-year" style="padding-left: 0;"><input id="block1_baozhangqijian"></input></div>
                                         <div class="col-md-1"></div>
                                         <div class="col-md-1" style="padding-right: 0;">缴费年限:</div>
-                                        <div class="col-md-2 add-year" style="padding-left: 0;"><input id="block1_jiaofeinianxian"></input></div>
+                                        <div class="col-md-2 add-year" style="padding-left: 0;"><input id="block1_jiaofeinianxian" ng-model="block1_jiaofeinianxian" ng-change="setCommission()"></input></div>
                                         <div class="col-md-1"></div>
                                     </div> 
 
