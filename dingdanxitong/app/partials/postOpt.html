@@ -94,9 +94,10 @@
                         </div>
 
                         <div id="addComment" class="hide">
-                            <div><label for="" style="position: relative;top: -187px;">评论：</label><textarea name="" id="" cols="30" rows="10"></textarea></div>
-                            <div><label for="">userID:</label><input type="text"></div>
-                            <div><label for="">匿名:</label><input type="checkbox" name="anonymous" value="1"></div>
+                            <div><label for="" style="position: relative;top: -187px;">评论：</label><textarea name="" cols="30" rows="10" ng-model="content_comment" id="content_comment"></textarea></div>
+                            <div><label for="">userid:</label><input type="text" ng-model="userid_comment" id="userid_comment"></div>
+                            <div><label for="">replyid:</label><input type="text" ng-model="replyid"></div>
+                            <div><label for="">匿名:</label><input type="checkbox" name="anonymous" value="1" ng-model="isanonymous"></div>
                             <div style="padding-left:280px;">
                                  <a href="javascript:void(0)" class="btn btn-minimize btn-round btn-default" style="margin-right:10px;" ng-click="addComment()"><i
                                         class="glyphicon glyphicon-ok" style="color:#2bd394;line-height:2;"></i></a>

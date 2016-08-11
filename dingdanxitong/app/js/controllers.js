@@ -647,7 +647,7 @@ phonecatControllers.controller('xinZengDingDanCtrl', ['$scope','$http',
         // console.log(postData)
         // console.log(JSON.stringify(postData))
 
-        $http.post('http://'+IP+':3000/add_order',postData).success(function(data){
+        $http.post('http://'+IP+':3000/add_order',poftData).success(function(data){
             // console.log(data)
             layer.msg('新增成功!')
 
@@ -1311,13 +1311,46 @@ phonecatControllers.controller('postOptCtrl', ['$scope','$http','$routeParams',
 
 
     $scope.addComment = function(){
-      // var userid = req.body.userid;
-      // var feedid = req.body.feedid;
-      // var content = req.body.content;
-      // var isanonymous = req.body.isanonymous;
-      // var replyuser = parseInt(req.body.replyuser);
+      var userid = $scope.userid_comment
+      var feedid = option
+      var content = $scope.content_comment
+      var isanonymous = $scope.isanonymous
+      var replyuser = $scope.replyid
 
+      if(content==undefined||content==''){
+        layer.tips('评论内容不能为空','#content_comment')
+        return 
+      }
 
+      if(userid==undefined||userid==''){
+        layer.tips('userid不能为空','#userid_comment')
+        return 
+      }
+
+      if(isanonymous==undefined||isanonymous==false){
+        isanonymous = 0
+      }else if(isanonymous==true){
+        isanonymous = 1
+      }
+
+      if(replyuser==undefined){
+        replyuser = 0
+      }
+
+      var postData = {
+        key:KEY,
+        userid:userid,
+        isanonymous:isanonymous,
+        content:content,
+        replyuser:replyuser,
+        feedid:feedid
+      }
+
+      $http.post('http://'+testIP+':3000/create_comment_by_admin',postData).success(function(data){
+        console.log(data)
+        $scope.cancel()
+        getComments(option,$scope.userid)
+      })
     }
 
     $scope.cancel = function(){
