@@ -1288,7 +1288,8 @@ phonecatControllers.controller('postOptCtrl', ['$scope','$http','$routeParams',
 
     $scope.delete = function(commentid,userid){
       var userid = userid
-      var feedid = option
+      var feedid = parseInt(option)
+
       var commentid = commentid
 
       var postData = {
@@ -1298,7 +1299,9 @@ phonecatControllers.controller('postOptCtrl', ['$scope','$http','$routeParams',
         commentid:commentid
       }
 
+      // console.log(postData)
       $http.post('http://'+testIP+':3000/delete_comment_by_admin',postData).success(function(data){
+        // console.log(data)
        getComments(option,$scope.userid)
       })
 
