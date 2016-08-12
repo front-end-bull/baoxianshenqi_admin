@@ -1263,8 +1263,8 @@ phonecatControllers.controller('postOptCtrl', ['$scope','$http','$routeParams',
       var isanonymous = 0
       var title = $scope.title
       var content = $scope.content
-      var imgs = ''
-      var tags = ''
+      var imgs = '[]'
+      var tags = '[]'
       var location = ''
 
       var postData = {
