@@ -53,7 +53,7 @@ function getCommission(id,duration,baofee){
     return (item.id == id && item.duration == duration)
   })
   if(rs.length>0){
-    return rs[0].percentage*10000*baofee/10000
+    return rs[0].percentage*100000*baofee/100000
   }else{
     return 0
   }
