@@ -647,7 +647,7 @@ phonecatControllers.controller('xinZengDingDanCtrl', ['$scope','$http',
         // console.log(postData)
         // console.log(JSON.stringify(postData))
 
-        $http.post('http://'+IP+':3000/add_order',poftData).success(function(data){
+        $http.post('http://'+IP+':3000/add_order',postData).success(function(data){
             // console.log(data)
             layer.msg('新增成功!')
 
