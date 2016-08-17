@@ -8,7 +8,8 @@ var phonecatControllers = angular.module('phonecatControllers', []);
 // const IP = "182.254.212.33" //外网
 // const IP = "192.168.0.109" //pp Mac
 const KEY = "cbb4906093d48f827a7322d85af9ac52";
-const testIP = "192.168.10.250"
+// const testIP = "192.168.10.250"
+const testIP = "182.254.212.33"
 
 var ALLPOSTS = []
 
@@ -1154,9 +1155,9 @@ phonecatControllers.controller('forumListCtrl', ['$scope','$http',
           if(post.title.length>MAXLENGTH){
             post.title = post.title.substring(0,MAXLENGTH) + "..."
           }
-          if(post.content.length>MAXLENGTH){
-            post.content = post.content.substring(0,MAXLENGTH) + "..."
-          }
+          // if(post.content.length>MAXLENGTH){
+          //   post.content = post.content.substring(0,MAXLENGTH) + "..."
+          // }
           post.createtime = formatTime_date(new Date(post.createtime*1000))
           post.updatetime = formatTime_date(new Date(post.updatetime*1000))
 
@@ -1223,7 +1224,7 @@ phonecatControllers.controller('postOptCtrl', ['$scope','$http','$routeParams',
           return item.id = option
       })[0] 
       $scope.title = post.title
-      $scope.content = post.content
+      // $scope.content = post.content
       $scope.userid = post.userid
 
       getComments(option,post.userid)
