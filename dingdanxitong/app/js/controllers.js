@@ -1152,8 +1152,9 @@ phonecatControllers.controller('forumListCtrl', ['$scope','$http',
         const MAXLENGTH = 20
         for(var i in posts){
           var post = posts[i]
+          post.title_short = post.title
           if(post.title.length>MAXLENGTH){
-            post.title = post.title.substring(0,MAXLENGTH) + "..."
+            post.title_short = post.title.substring(0,MAXLENGTH) + "..."
           }
           // if(post.content.length>MAXLENGTH){
           //   post.content = post.content.substring(0,MAXLENGTH) + "..."
@@ -1221,7 +1222,7 @@ phonecatControllers.controller('postOptCtrl', ['$scope','$http','$routeParams',
       $scope.option = "查看"
       // console.log(ALLPOSTS)
       var post = ALLPOSTS.filter(function(item){
-          return item.id = option
+          return item.id == option
       })[0] 
       $scope.title = post.title
       // $scope.content = post.content
@@ -1238,7 +1239,7 @@ phonecatControllers.controller('postOptCtrl', ['$scope','$http','$routeParams',
       }
       $http.post('http://'+testIP+':3000/get_comments_by_feedid_by_admin',postData).success(function(data){
         var comments = data.comments 
-        console.log(comments)
+        // console.log(comments)
 
         comments.forEach(function(e){
           e.date = formatTime_date(new Date(e.createtime*1000))
