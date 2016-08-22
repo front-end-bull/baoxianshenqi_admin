@@ -193,6 +193,39 @@ function isTime(time,startTime,endTime){
   }
 }
 
+
+
+
+function isOverTime(time,startTime,endTime){
+  time = new Date(time).getTime()
+  if(timeIsTrue(startTime)&&timeIsTrue(endTime)){
+    startTime = new Date(startTime+" 00:00:00").getTime()
+    endTime = new Date(endTime+" 23:59:59").getTime()
+    if(startTime<=time && time <=endTime){
+      return true
+    }else{
+      return false
+    }
+  }else if(!timeIsTrue(startTime)&&timeIsTrue(endTime)){
+    endTime = new Date(endTime+" 23:59:59").getTime()
+    if(time<=endTime){
+      return true
+    }else{
+      return false
+    }
+  }else if(timeIsTrue(startTime)&&!timeIsTrue(endTime)){
+    startTime = new Date(startTime+" 00:00:00").getTime()
+    if(startTime<=time){
+      return true
+    }else{
+      return false
+    }
+  }else{
+    return 'empty'
+  }
+}
+
+
 function compareTime(startTime,endTime){
   if(timeIsTrue(startTime)&&timeIsTrue(endTime)){
     startTime = new Date(startTime+" 00:00:00").getTime()
@@ -315,6 +348,7 @@ phonecatControllers.controller('genJinZhongCtrl', ['$scope','$http',
         allOrders = orders
         // console.log(orders)
         var totalbaofei = 0
+        var totalyongjin = 0
 
 
 
@@ -324,6 +358,9 @@ phonecatControllers.controller('genJinZhongCtrl', ['$scope','$http',
 
           if(order.baofei==''){order.baofei = 0}
           totalbaofei += order.baofei*100
+
+          if(order.yongjin==''){order.yongjin = 0}
+          totalyongjin += order.yongjin*100
 
           var order_status = order.order_status
           var inTime = ''
@@ -373,25 +410,21 @@ phonecatControllers.controller('genJinZhongCtrl', ['$scope','$http',
           currentMonth++
 
           if((currentMonth>=receiptMonth)&&(status=="划款成功"||status=="保险公司下发合同" ||status=="到时限后弃保" ||status=="合同已转交" )){
-            order.receipt = true
+            // order.receipt = true
+            order.promptType = 'receipt'
           }
-
 
           if(status=="进入犹豫期"||status=="回访失败"||status=="回访成功"||status=="回执已提交保险公司"){
             if(warn_deadline>currentTime-inTime&&currentTime-inTime>deadline){
-              order.expire = true
+              // order.expire = true
+              order.promptType = 'expire'
+
             }else if(currentTime-inTime>=warn_deadline){
-              order.warning = true
+              // order.warning = true
+              order.promptType = 'warning'
+
             }
           }
-
-
-
-
-
-
-
-
         }
 
 
@@ -409,6 +442,7 @@ phonecatControllers.controller('genJinZhongCtrl', ['$scope','$http',
           return 0
         })
         $scope.totalbaofei = totalbaofei/100
+        $scope.totalyongjin = totalyongjin/100
 
 
         $scope.totalNum = orders.length
@@ -422,6 +456,10 @@ phonecatControllers.controller('genJinZhongCtrl', ['$scope','$http',
 
       var orders = []
       var totalbaofei = 0
+      var totalyongjin = 0
+
+
+      var promptType = $scope.promptType
 
       var agent_name = $scope.query_agent_name
       var customer_name = $scope.query_customer_name
@@ -446,12 +484,16 @@ phonecatControllers.controller('genJinZhongCtrl', ['$scope','$http',
       allOrders.forEach(function(e){
         if(   isName(e.agent_name,agent_name)
             &&isName(e.customer_name,customer_name)
-            &&isTime(e.createtime,gengxin_startTime,gengxin_endTime)
+            &&(
+                isOverTime(e.createtime,gengxin_startTime,gengxin_endTime) == 'empty' || (isOverTime(e.createtime,gengxin_startTime,gengxin_endTime)&&e.status=='佣金已结')
+              )
             &&isTime(e.firsttime,chuangjian_startTime,chuangjian_endTime)
             &&(status=='全部（包括删除的订单）'||status=='全部（不包括删除的订单）'||status=='请选择最新状态'||status==e.status)
             &&(e.deleted in isDeleted)
+            &&(typeof promptType ==='undefined' || promptType=='' || e.promptType==promptType)
           ){
           totalbaofei += e.baofei*100
+          totalyongjin += e.yongjin*100
           orders.push(e)
         }
       })
@@ -477,6 +519,7 @@ phonecatControllers.controller('genJinZhongCtrl', ['$scope','$http',
 
       $scope.orders = orders
       $scope.totalbaofei = totalbaofei/100
+      $scope.totalyongjin = totalyongjin/100
       $scope.totalNum = orders.length
 
     }
@@ -484,11 +527,12 @@ phonecatControllers.controller('genJinZhongCtrl', ['$scope','$http',
     $scope.clear = function(){
       $scope.query_agent_name = ''
       $scope.query_customer_name = ''
+      $scope.promptType = ''
       $('#chuangjian_startTime').val('')
       $('#chuangjian_endTime').val('')
       $('#gengxin_startTime').val('')
       $('#gengxin_endTime').val('')
-      $('#status').html('全部（不包括删除的订单）'+' <span class="caret" style="float:right;margin-top:9px;"></span>')
+      $('#status').html('请选择最新状态'+' <span class="caret" style="float:right;margin-top:9px;"></span>')
     }
 
     

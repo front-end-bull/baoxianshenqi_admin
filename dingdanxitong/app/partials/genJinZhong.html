@@ -41,7 +41,7 @@
                     <div class="box-inner">
                         <div class="box-header well">
                             <h2><i class="glyphicon glyphicon-info-sign"></i> 跟进中订单列表</h2>
-                            <div style="float:right;">保费共 <i class="red" style="font-size:18px;">{{totalbaofei}}</i> 元&nbsp;&nbsp;&nbsp;&nbsp;共 <i class="yellow">{{totalNum}}</i> &nbsp;条</div>
+                            <div style="float:right;">佣金共 <i class="red" style="font-size:18px;">{{totalyongjin}}</i> 元&nbsp;&nbsp;&nbsp;&nbsp;保费共 <i class="red" style="font-size:18px;">{{totalbaofei}}</i> 元&nbsp;&nbsp;&nbsp;&nbsp;共 <i class="yellow">{{totalNum}}</i> &nbsp;条</div>
                         </div>
                         <div class="box-content ">
 
@@ -99,12 +99,20 @@
                             </div>
                             
                             <div class="row" style="margin: 10px 0;">
-                                <div class="col-md-9">
-                                    <label style="width:80px" for="">更新时间</label>
+                                <div class="col-md-12">
+                                    <label style="width:80px" for="">结佣时间</label>
                                     <input id="gengxin_startTime" style="padding-left:8px;line-height: 31px;width: 200px;" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" placeholder="请选择起始日期" onchange="compareGX()">
                                     -
                                     <input id="gengxin_endTime" style="padding-left:8px;line-height: 31px;width: 200px;" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" placeholder="请选择截止日期" onchange="compareGX()">
                                 </div>
+
+                                
+                            </div>
+
+                            <div class="row" style="margin:20px 0;">
+                                <div class="col-md-3"><label for="" style="width:80px;">需要回执</label><input type="radio" value="receipt" ng-model="promptType"></div>
+                                <div class="col-md-3"><label for="" style="width:80px;">需要回访</label><input type="radio" value="expire" ng-model="promptType"></div>
+                                <div class="col-md-3"><label for="" style="width:80px;">需要打款</label><input type="radio" value="warning" ng-model="promptType"></div>
 
                                 <div class="col-md-3">
                                     <a class="btn btn-success" href="javascript:void(0)"  onclick="query()">
@@ -117,6 +125,7 @@
                                     </a>
                                 </div>
                             </div>
+
 
                             <div class="row" style="margin: 20px 0;">
                                 <div class="col-md-4"></div>
@@ -178,8 +187,8 @@
                                
                                
 
-                                <tr ng-repeat="order in orders" ng-class="{'danger':order.expire,'warning':order.warning}">
-                                    <td>{{order.id}}<i class="glyphicon glyphicon-bell yellow hide" ng-class="{'show':order.receipt}"></i></td>
+                                <tr ng-repeat="order in orders" ng-class="{'danger':order.promptType=='expire','warning':order.promptType=='warning'}">
+                                    <td>{{order.id}}<i class="glyphicon glyphicon-bell yellow hide" ng-class="{'show':order.promptType=='receipt'}"></i></td>
                                     <td class="center">{{order.agent_id}}</td>
                                     <td class="center">{{order.agent_name}}</td>
                                     <td class="center">{{order.customer_name}}</td>
