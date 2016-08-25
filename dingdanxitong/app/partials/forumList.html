@@ -48,7 +48,7 @@
                                 </thead>
 
                                 <tbody class="updateUser">
-                                    <tr ng-repeat="post in posts">
+                                    <tr ng-repeat="post in posts" ng-class="{'warning':post.isanonymous==1}">
                                         <td>{{post.id}}</td>
                                         <td >
                                         <span style="color:white;background:#2fa4e7;border-radius:2px;padding:4px;" ng-show="post.ishot">[置顶]</span> 
