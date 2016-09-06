@@ -44,11 +44,46 @@
                                 style="border-color:#e0e0e0;" ng-disabled="opt!='create'"></textarea>
                                 </div>
                             </div> 
-
+                            
                             <div class="paper-row row">
                                 <div class="col-md-1" style="padding-right: 0;" >userID:</div>
                                 <div class="col-md-10" style="padding-left: 0;"><input ng-model="userid" class="w100" ng-disabled="opt!='create'"></input></div>
                             </div> 
+
+
+
+                            
+
+                            <div class="paper-row row" ng-hide="opt!='create'">
+                                <div class="col-md-1" style="padding-right: 0;">
+                                </div>
+                                <div class="col-md-10" style="padding-left: 0;">
+                                    <a class="btn btn-success" onclick="upload_postOpt()">
+                                        <i class="glyphicon glyphicon-plus icon-white"></i>
+                                        上传图片
+                                    </a>
+                                </div>
+                            </div> 
+
+                            <div class="paper-row row" ng-hide="opt!='create'">
+                                <div class="col-md-1" style="padding-right: 0;" >图片地址:</div>
+                                <div class="col-md-10" style="padding-left: 0;"><input id="parentIframe" class="w100"  ng-disabled="true"></input>
+                                </div>
+                            </div> 
+
+
+                            <div class="paper-row row" ng-hide="opt=='create' || imgObjs.length==0">
+                                <div class="col-md-1" style="padding-right: 0;" >图片预览:</div>
+                                <div ng-repeat="imgObj in imgObjs" class="col-md-3" style="padding-left:0;">
+                                    <a href="{{imgObj.url}}" target="_blank"> 
+                                        <img src="{{imgObj.thumbnail}}" alt="">
+                                    </a>
+                                </div>
+                            </div> 
+
+
+
+
 
                             <div class="paper-title" ng-hide="opt=='create'">
                                评论列表
@@ -117,7 +152,19 @@
 
 
             <script type="text/javascript">
+                function upload_postOpt(){
+                    $('parentIframe').val('')
 
+                    layer.open({
+                      type: 2,
+                      area: ['1000px', '600px'],
+                      fix: false, //不固定
+                      maxmin: true,
+                      content: '../../qiniuUpload/postOpt.html'
+                    });
+                }
+                
+                
               
             </script>
     

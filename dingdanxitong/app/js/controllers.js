@@ -8,8 +8,8 @@ var phonecatControllers = angular.module('phonecatControllers', []);
 // const IP = "182.254.212.33" //外网
 // const IP = "192.168.0.109" //pp Mac
 const KEY = "cbb4906093d48f827a7322d85af9ac52";
-// const testIP = "192.168.10.250"
-const testIP = "182.254.212.33"
+const testIP = "192.168.10.250"
+// const testIP = "182.254.212.33"
 
 var ALLPOSTS = []
 
@@ -1271,6 +1271,39 @@ phonecatControllers.controller('postOptCtrl', ['$scope','$http','$routeParams',
       $scope.title = post.title
       // $scope.content = post.content
       $scope.userid = post.userid
+      var imgs = post.imgs
+
+
+      console.log(imgs)
+
+      imgs = JSON.parse(imgs)
+
+      var thumbnail_imgs = imgs.map(function(img){
+        var index = img.indexOf('?')
+
+        var suffix = '?imageView2/2/w/200/h/200'
+
+        if(index==-1){
+          return img + suffix
+        }else{
+          return img.substring(0,index) + suffix
+        }
+      })
+
+
+
+      var imgObjs = []
+      for(var i=0;i<imgs.length;i++){
+        var imgObj = {
+          url:imgs[i],
+          thumbnail:thumbnail_imgs[i]
+        }
+        imgObjs.push(imgObj)
+      }
+
+
+      $scope.imgObjs = imgObjs
+      
 
       getComments(option,post.userid)
     }
@@ -1309,7 +1342,7 @@ phonecatControllers.controller('postOptCtrl', ['$scope','$http','$routeParams',
       var isanonymous = 0
       var title = $scope.title
       var content = $scope.content
-      var imgs = '[]'
+      var imgs = '['+ $('#parentIframe').val() +']'
       var tags = '[]'
       var location = ''
 
@@ -1327,7 +1360,7 @@ phonecatControllers.controller('postOptCtrl', ['$scope','$http','$routeParams',
       // console.log(postData)
 
       $http.post('http://'+testIP+':3000/create_feed_by_admin',postData).success(function(data){
-       // console.log(data)
+       console.log(data)
        window.location.href='#/forumList'
       })
     }
