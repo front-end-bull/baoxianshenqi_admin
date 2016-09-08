@@ -1620,6 +1620,12 @@ phonecatControllers.controller('withdrawCashCtrl', ['$scope','$http',
   }]);
 
 
+phonecatControllers.controller('uploadPicCtrl', ['$scope','$http',
+  function($scope,$http) {
+    
+  }]);
+
+
 //首页
 phonecatControllers.controller('homePageCtrl', ['$scope','$http',
   function($scope,$http) {

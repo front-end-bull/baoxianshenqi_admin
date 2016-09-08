@@ -34,6 +34,23 @@
       font-family: 'XH','Tan';
     }
     
+    iframe.uploadPic{
+      width: 100%;
+      /*border:1px solid #f3f3f3;*/
+      border:none;
+      min-height: 550px;
+    }
+
+    .fixed{
+      position: fixed;
+      top: 20px;
+    }
+
+
+    .serious{
+      width: 100%;
+    }
+
     .w100{
       width: 100% !important;
     }
@@ -436,7 +453,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.html"> 
+            <a class="navbar-brand" href="#/homePage"> 
                 <!-- <img alt="Charisma Logo" src="img/logo20.png" class="hidden-xs"/> -->
                 <span  style="font-family: 'tan';font-size: 23px;" id="header-title">
                   <span>订</span><span>单</span><span>管</span><span>理</span><span>系</span><span>统</span>
@@ -472,7 +489,7 @@
     <div class="row">
         
         <!-- left menu starts -->
-        <div class="col-sm-2 col-lg-2">
+        <div class="col-sm-2 col-lg-2" id="sidebar">
             <div class="sidebar-nav">
                 <div class="nav-canvas">
                     <div class="nav-sm nav nav-stacked">
@@ -542,7 +559,7 @@
 
                          <li class="nav-header hidden-md">上传</li>
                           <li id="menu13" onclick="getFocus(this.id)">
-                              <a class="ajax-link" href="../qiniuUpload/index.html"><i class="glyphicon glyphicon-file"></i><span> 图片上传</span></a>
+                              <a class="ajax-link" href="#/uploadPic"><i class="glyphicon glyphicon-file"></i><span> 图片上传</span></a>
                           </li>
 
                                                
@@ -630,6 +647,23 @@
 
       $('#'+id).addClass('active')
     }
+
+
+    var content_left
+
+    $(window).scroll(function () {
+
+      if($(window).scrollTop()>=60){
+        $('#sidebar').addClass('fixed')
+        $('#content').css({'position':'relative',left:content_left+'px'})
+      }else{
+        $('#sidebar').removeClass('fixed')
+        $('#content').css({'position':'static',left:0})
+        content_left = $('#content').offset().left
+        // console.log(content_left)
+      }
+
+    });
   </script>
   
 </body>

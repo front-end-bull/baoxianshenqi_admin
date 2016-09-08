@@ -72,6 +72,11 @@ phonecatApp.config(['$routeProvider',
         controller:'withdrawCashCtrl'
       }).
 
+      when('/uploadPic',{
+        templateUrl:'partials/uploadPic.html',
+        controller:'uploadPicCtrl'
+      }).
+
 
       //帖子操作：新增、编辑
       when('/postOpt/:option',{
