@@ -1,0 +1,89 @@
+
+            <div>
+                <ul class="breadcrumb">
+                    <li>
+                        <a href="javascript:void(0)">用户管理</a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">审核提现</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="row">
+                <div class="box col-md-12">
+                    <div class="box-inner">
+
+                        <div class="box-header well">
+                            <h2><i class="glyphicon glyphicon-info-sign"></i> 提现申请列表</h2>
+                            <div style="float:right;">共 <i class="yellow">{{totalCount}}</i> &nbsp;条</div>
+                        </div>
+
+                        <div class="box-content ">
+
+                            <table class="table table-striped table-bordered bootstrap-datatable datatable responsive">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>userid</th>
+                                        <th>提现金额</th>
+                                        <th>提现方式</th>
+                                        <th>创建时间</th>
+                                        <!-- <th>更新时间</th> -->
+                                        <th>状态</th>
+                                        <th>操作</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody class="updateUser">
+                                    <tr ng-repeat="tixian in tixians">
+                                        <td>{{tixian.id}}</td>
+                                        <td>{{tixian.userid}}</td>
+                                        <td>{{tixian.amount}}</td>
+                                        <td>{{tixian.typeDes}}</td>
+                                        <td>{{tixian.createtime}}</td>
+                                        <!-- <td>{{tixian.updatetime}}</td> -->
+                                        <td>{{tixian.statusDes}}</td>
+                                        <td ng-show="tixian.status==0">
+                                            <a class="btn btn-success" ng-click="approve(tixian.id,1)">
+                                                <i class="glyphicon glyphicon-ok icon-white"></i>
+                                                通过
+                                            </a>
+                                            <a class="btn btn-warning" ng-click="approve(tixian.id,2)">
+                                                <i class="glyphicon glyphicon-ban-circle icon-white"></i>
+                                                拒绝
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            
+                             <!-- <div>共 <i class="yellow">{{totalCount}}</i> 条</div> -->
+
+                            <!-- <div class="center-block">
+                                <div class="dataTables_paginate paging_bootstrap pagination">
+                                    <ul class="pagination">
+                                        <li class="prev disabled"><a href="#">← Previous</a></li>
+                                        <li class="active"><a href="#">1</a></li><li><a href="#">2</a></li>
+                                        <li><a href="#">3</a></li><li><a href="#">4</a></li>
+                                        <li class="next"><a href="#">Next → </a></li>
+                                    </ul>
+                                </div>
+                            </div> -->
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+<script>
+
+
+
+
+</script>
+       
+               
+                
+            
+    
+

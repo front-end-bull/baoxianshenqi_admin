@@ -1,13 +1,16 @@
             <div>
                 <ul class="breadcrumb">
                     <li>
-                        <a href="#/postOpt">论坛</a>
+                        <a href="javascript:void(0)">论坛</a>
+                    </li>
+                    <li ng-hide="opt=='break'">
+                        <a href="javascript:void(0)">帖子列表</a>
+                    </li>
+                    <li ng-show="opt=='break'">
+                        <a href="javascript:void(0)">作弊处理</a>
                     </li>
                     <li>
-                        <a href="#/postOpt">帖子列表</a>
-                    </li>
-                    <li>
-                        <a href="#/postOpt">{{option}}帖子</a>
+                        <a href="javascript:void(0)">{{option}}</a>
                     </li>
                 </ul>
             </div>
@@ -18,19 +21,22 @@
                 <div class="box col-md-12">
                     <div class="box-inner">
                         <div class="box-header well">
-                            <h2><i class="glyphicon glyphicon-info-sign"></i> {{option}}帖子</h2>
+                            <h2><i class="glyphicon glyphicon-info-sign"></i> {{option}}</h2>
 
                             <div class="box-icon">
                                
                                 <a href="javascript:void(0)" class="btn btn-minimize btn-round btn-default" ng-click="post()" ng-show="opt=='create'"><i
                                         class="glyphicon glyphicon-ok" style="color:#2bd394;"></i></a>
-                                <a href="#/forumList" class="btn btn-close btn-round btn-default" ><i
+                                <a ng-hide='opt=="break"' href="#/forumList" class="btn btn-close btn-round btn-default" ><i
+                                        class="glyphicon glyphicon-remove" style="color: red;"></i></a>
+                                <a ng-show='opt=="break"' href="#/breakRuleList" class="btn btn-close btn-round btn-default" ><i
                                         class="glyphicon glyphicon-remove" style="color: red;"></i></a>
                             </div>
                         </div>
                         <div class="box-content">
                             <div class="paper-row row">
-                                <div class="col-md-1" style="padding-right: 0;" >标题:</div>
+                                <div ng-hide="opt=='break'" class="col-md-1" style="padding-right: 0;" >标题:</div>
+                                <div ng-show="opt=='break'" class="col-md-1" style="padding-right: 0;" >内容:</div>
                                 <div class="col-md-10" style="padding-left: 0;">
                                 <textarea name="" id="" cols="30" rows="10" ng-model="title" class="w100"
                                 style="border-color:#e0e0e0;" ng-disabled="opt!='create'"></textarea>
@@ -45,7 +51,7 @@
                                 </div>
                             </div> 
                             
-                            <div class="paper-row row">
+                            <div class="paper-row row" ng-hide="opt=='break'">
                                 <div class="col-md-1" style="padding-right: 0;" >userID:</div>
                                 <div class="col-md-10" style="padding-left: 0;"><input ng-model="userid" class="w100" ng-disabled="opt!='create'"></input></div>
                             </div> 
@@ -85,12 +91,12 @@
 
 
 
-                            <div class="paper-title" ng-hide="opt=='create'">
+                            <div class="paper-title" ng-hide="opt=='create'||opt=='break'">
                                评论列表
                                 <div style="float:right;">共 <i class="yellow">{{totalCount}}</i> &nbsp;条&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
                             </div>
 
-                            <div class="box-content" ng-hide="opt=='create'">
+                            <div class="box-content" ng-hide="opt=='create'||opt=='break'">
                                 <a class="btn btn-success" href="javascript:void(0)"  ng-click="add()" style="margin-bottom:10px;">
                                     <i class="glyphicon glyphicon-pencil icon-white" ></i>
                                     添加

@@ -491,8 +491,9 @@
                           </li> -->
                          
                           <li id="menu2" onclick="getFocus(this.id)">
-                              <a class="ajax-link" href="#/genJinZhong"><i class="glyphicon glyphicon-eye-open"></i><span> 跟进中</span></a>
+                              <a class="ajax-link" href="#/genJinZhong"><i class="glyphicon glyphicon-eye-open"></i><span> 订单列表</span></a>
                           </li>
+
 
                           <!-- <li id="menu3" onclick="getFocus(this.id)">
                              <a href="#/yiWanCheng"><i class="glyphicon glyphicon-lock"></i><span> 已完成</span></a>
@@ -512,22 +513,40 @@
                               <a class="ajax-link" href="#/woDeXinXi"><i class="glyphicon glyphicon-list-alt"></i><span> 我的信息</span></a>
                           </li> -->
 
-                         <li class="nav-header hidden-md">代理人</li>
-                          <li id="menu8" onclick="getFocus(this.id)">
-                              <a class="ajax-link" href="#/daiLiRenChaXun"><i class="glyphicon glyphicon-search"></i><span> 代理人查询</span></a>
-                          </li>
+                        <li class="nav-header hidden-md">用户管理</li>
+                        <li id="menu8" onclick="getFocus(this.id)">
+                            <a class="ajax-link" href="#/daiLiRenChaXun"><i class="glyphicon glyphicon-search"></i><span> 代理人查询</span></a>
+                        </li>
+
+                        <li id="menu11" onclick="getFocus(this.id)">
+                            <a class="ajax-link" href="#/withdrawCash"><i class="glyphicon glyphicon-ok-sign"></i><span> 审核提现</span></a>
+                        </li>
                          <!--  <li id="menu9" onclick="getFocus(this.id)">
                               <a class="ajax-link" href="#/tuiJianLianXiRenChaXun"><i class="glyphicon glyphicon-list-alt"></i><span> 推荐联系人查询</span></a>
                           </li>  -->
                         <li class="nav-header hidden-md">论坛</li>
-                          <li id="menu9" onclick="getFocus(this.id)">
-                              <a class="ajax-link" href="#/forumList"><i class="glyphicon glyphicon-file"></i><span> 帖子列表</span></a>
+                        <li id="menu9" onclick="getFocus(this.id)">
+                            <a class="ajax-link" href="#/forumList"><i class="glyphicon glyphicon-file"></i><span> 帖子列表</span></a>
+                        </li>
+
+                       
+
+                        <li id="menu10" onclick="getFocus(this.id)">
+                            <a class="ajax-link" href="#/breakRuleList"><i class="glyphicon glyphicon-fire"></i><span> 作弊处理</span></a>
+                        </li>
+
+                        <li id="menu12" onclick="getFocus(this.id)">
+                            <a class="ajax-link" href="#/draftBox"><i class="glyphicon glyphicon-edit"></i><span> 草稿箱</span></a>
+                        </li>
+
+
+                         <li class="nav-header hidden-md">上传</li>
+                          <li id="menu13" onclick="getFocus(this.id)">
+                              <a class="ajax-link" href="../qiniuUpload/index.html"><i class="glyphicon glyphicon-file"></i><span> 图片上传</span></a>
                           </li>
 
-                       <!--  <li class="nav-header hidden-md">上传</li>
-                          <li id="menu9" onclick="getFocus(this.id)">
-                              <a class="ajax-link" href="../qiniuUpload/index.html"><i class="glyphicon glyphicon-file"></i><span> 图片上传</span></a>
-                          </li> -->
+                                               
+
                     </ul>
                 </div>
             </div>
@@ -603,6 +622,10 @@
       $('#menu7').removeClass('active')
       $('#menu8').removeClass('active')
       $('#menu9').removeClass('active')
+      $('#menu10').removeClass('active')
+      $('#menu11').removeClass('active')
+      $('#menu12').removeClass('active')
+      $('#menu13').removeClass('active')
       // $('#menu9').removeClass('active')
 
       $('#'+id).addClass('active')

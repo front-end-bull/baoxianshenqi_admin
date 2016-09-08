@@ -62,6 +62,17 @@ phonecatApp.config(['$routeProvider',
         controller:'forumListCtrl'
       }).
 
+      when('/breakRuleList',{
+        templateUrl:'partials/breakRuleList.html',
+        controller:'breakRuleListCtrl'
+      }).
+
+      when('/withdrawCash',{
+        templateUrl:'partials/withdrawCash.html',
+        controller:'withdrawCashCtrl'
+      }).
+
+
       //帖子操作：新增、编辑
       when('/postOpt/:option',{
         templateUrl:'partials/postOpt.html',

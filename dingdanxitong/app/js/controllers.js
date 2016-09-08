@@ -8,8 +8,8 @@ var phonecatControllers = angular.module('phonecatControllers', []);
 // const IP = "182.254.212.33" //外网
 // const IP = "192.168.0.109" //pp Mac
 const KEY = "cbb4906093d48f827a7322d85af9ac52";
-const testIP = "192.168.10.250"
-// const testIP = "182.254.212.33"
+// const testIP = "192.168.10.250"
+const testIP = "182.254.212.33"
 
 var ALLPOSTS = []
 
@@ -1261,20 +1261,41 @@ phonecatControllers.controller('postOptCtrl', ['$scope','$http','$routeParams',
     $scope.opt  = option
 
     if(option=="create"){
-      $scope.option = "新增"
+      $scope.option = "新增帖子"
     }else{
-      $scope.option = "查看"
+      
+
       // console.log(ALLPOSTS)
-      var post = ALLPOSTS.filter(function(item){
+      // console.log(option.substring(1))
+
+
+      var post      
+      if(option.indexOf('B')==0){
+        $scope.opt  = 'break'
+        $scope.option = "查看详情"
+        post = ALLPOSTS.filter(function(item){
+          return item.spamid == (option.substring(1))
+        })[0]
+      }else{
+        $scope.option = "查看帖子"
+        post = ALLPOSTS.filter(function(item){
           return item.id == option
-      })[0] 
+        })[0] 
+      }
+
+      // console.log(post)
+
       $scope.title = post.title
       // $scope.content = post.content
       $scope.userid = post.userid
+
+
+      // console.log('-userid: '+post.userid)
+
       var imgs = post.imgs
 
 
-      console.log(imgs)
+      // console.log(imgs)
 
       imgs = JSON.parse(imgs)
 
@@ -1316,7 +1337,7 @@ phonecatControllers.controller('postOptCtrl', ['$scope','$http','$routeParams',
       }
       $http.post('http://'+testIP+':3000/get_comments_by_feedid_by_admin',postData).success(function(data){
         var comments = data.comments 
-        // console.log(comments)
+        console.log(comments)
 
         comments.forEach(function(e){
           e.date = formatTime_date(new Date(e.createtime*1000))
@@ -1443,6 +1464,160 @@ phonecatControllers.controller('postOptCtrl', ['$scope','$http','$routeParams',
   }]);
 
   
+phonecatControllers.controller('breakRuleListCtrl', ['$scope','$http',
+  function($scope,$http) {
+
+    $scope.query = function(){
+      var postData = {
+        key:KEY
+        // isdeleted:0
+      }
+
+      $http.post('http://'+testIP+':3000/list_all_spam_request',postData).success(function(data){
+        var posts = data.spams
+
+
+        const MAXLENGTH = 20
+        for(var i in posts){
+          var post = posts[i]
+          post.title = post.content
+          post.title_short = post.title
+          if(post.title.length>MAXLENGTH){
+            post.title_short = post.title.substring(0,MAXLENGTH) + "..."
+          }
+          // if(post.content.length>MAXLENGTH){
+          //   post.content = post.content.substring(0,MAXLENGTH) + "..."
+          // }
+          post.createtime = formatTime_date(new Date(post.createtime*1000))
+          post.updatetime = formatTime_date(new Date(post.updatetime*1000))
+
+          posts[i] = post
+        }
+
+
+        ALLPOSTS = $scope.posts = posts.sort(function(x,y){
+          if(x.id<y.id){
+            return 1
+          }
+          if(x.id>y.id){
+            return -1
+          }
+          return 0
+        })
+        $scope.totalCount = ALLPOSTS.length
+        // console.log(ALLPOSTS)
+
+      })
+    }
+    $scope.query()
+
+    $scope.break =function(id,status){
+      var postData = {
+        key:KEY,
+        id:id,
+        status:status
+      }
+      $http.post('http://'+testIP+':3000/confirm_spam',postData).success(function(data){
+        console.log(data)
+        $scope.query()
+      })
+    }
+
+    
+
+  }]);
+
+
+
+
+
+
+
+
+
+
+phonecatControllers.controller('withdrawCashCtrl', ['$scope','$http',
+  function($scope,$http) {
+
+    var des = [
+      {
+        code:0,
+        text:'等待操作'
+      },
+      {
+        code:1,
+        text:'通过'
+      },
+      {
+        code:2,
+        text:'拒绝'
+      }
+    ]
+
+    var type = [
+      {
+        code:0,
+        text:'微信'
+      }
+    ]
+
+
+    $scope.query = function(){
+      var postData = {
+        key:KEY
+      }
+
+      $http.post('http://'+testIP+':3000/list_tixian_requests',postData).success(function(data){
+        var tixians = data.tixians
+        console.log(tixians)
+
+        // const MAXLENGTH = 20
+        for(var i in tixians){
+          var tixian = tixians[i]
+          // tixian.createtime = formatTime_date(new Date(tixian.createtime*1000))
+          tixian.updatetime = formatTime_date(new Date(tixian.updatetime*1000))
+          des.forEach(function(d){
+            if(d.code==tixian.status){
+              tixian.statusDes = d.text
+            }
+          })
+
+          type.forEach(function(t){
+            if(t.code==tixian.type){
+              tixian.typeDes = t.text
+            }
+          })
+          // console.log(tixian)
+          tixians[i] = tixian
+        }
+
+        $scope.tixians = tixians.sort(function(x,y){
+          if(x.id<y.id){
+            return 1
+          }
+          if(x.id>y.id){
+            return -1
+          }
+          return 0
+        })
+        $scope.totalCount = tixians.length
+      })
+    }
+    $scope.query()
+
+    $scope.approve =function(id,status){
+      var postData = {
+        key:KEY,
+        id:id,
+        status:status
+      }
+      $http.post('http://'+testIP+':3000/confirm_tixian',postData).success(function(data){
+        console.log(data)
+        $scope.query()
+      })
+    }
+
+  }]);
 
 
 //首页

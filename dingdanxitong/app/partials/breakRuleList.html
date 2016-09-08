@@ -5,28 +5,17 @@
                         <a href="javascript:void(0)">论坛</a>
                     </li>
                     <li>
-                        <a href="javascript:void(0)">帖子列表</a>
+                        <a href="javascript:void(0)">作弊处理</a>
                     </li>
                 </ul>
             </div>
-
-            <div class="row">
-                <div class="col-md-3 col-sm-3 col-xs-6">
-                    <a data-toggle="tooltip" title="$34 new sales." class="well top-block" href="#/postOpt/create">
-                        <i class="glyphicon glyphicon-pencil yellow"></i>
-                        <div>新增帖子</div>
-                    </a>
-                </div>
-            </div>
-
-            
 
             <div class="row">
                 <div class="box col-md-12">
                     <div class="box-inner">
 
                         <div class="box-header well">
-                            <h2><i class="glyphicon glyphicon-info-sign"></i> 帖子列表</h2>
+                            <h2><i class="glyphicon glyphicon-info-sign"></i> 举报作弊列表</h2>
                             <div style="float:right;">共 <i class="yellow">{{totalCount}}</i> &nbsp;条</div>
                         </div>
 
@@ -36,42 +25,40 @@
                                 <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>标题</th>
-                                        <th>userID</th>
-                                        <th>用户姓名</th>
+                                        <th>spamid</th>
+                                        <th>内容</th>
+                                        <th>举报人ID</th>
+                                        <th>举报人</th>
+                                        <th>发帖人ID</th>
+                                        <th>发帖人</th>
                                         <th>发帖日期</th>
-                                        <th>更新时间</th>
-                                        <th>喜欢数</th>
-                                        <th>评论数</th>
+                                        <!-- <th>更新时间</th> -->
                                         <th>操作</th>
                                     </tr>
                                 </thead>
 
                                 <tbody class="updateUser">
-                                    <tr ng-repeat="post in posts" ng-class="{'warning':post.isanonymous==1,'danger':post.isspam==1}">
+                                    <tr ng-repeat="post in posts">
                                         <td>{{post.id}}</td>
-                                        <td >
+                                        <td>{{post.spamid}}</td>
+                                        <td>
                                         <span style="color:white;background:#2fa4e7;border-radius:2px;padding:4px;" ng-show="post.ishot">[置顶]</span> 
-                                        <a href="#/postOpt/{{post.id}}">{{post.title_short}}</a></td>
+                                        <a href="#/postOpt/B{{post.spamid}}">{{post.title_short}}</a></td>
+                                        <td>{{post.jubaouserid}}</td>
+                                        <td>{{post.jubaoname}}</td>
+
                                         <td>{{post.userid}}</td>
                                         <td>{{post.username}}</td>
                                         <td>{{post.createtime}}</td>
-                                        <td>{{post.updatetime}}</td>
-                                        <td>{{post.liked}}</td>
-                                        <td>{{post.comments}}</td>
-
+                                        <!-- <td>{{post.updatetime}}</td> -->
                                         <td>
-                                            <a class="btn btn-success" ng-show="post.ishot==0" ng-click="top(post.id,post.userid,'-1')">
-                                                <i class="glyphicon glyphicon-arrow-up icon-white"></i>
-                                                置顶
+                                            <a class="btn btn-warning" ng-click="break(post.id,1)">
+                                                <i class="glyphicon glyphicon-fire icon-white"></i>
+                                                作弊
                                             </a>
-                                            <a class="btn btn-warning" ng-show="post.ishot!=0" ng-click="top(post.id,post.userid,0)">
-                                                <i class="glyphicon glyphicon-arrow-down icon-white"></i>
-                                                取消
-                                            </a>
-                                            <a class="btn btn-danger" ng-click="delete(post.id,post.userid)">
-                                                <i class="glyphicon glyphicon-trash icon-white"></i>
-                                                删除
+                                            <a class="btn btn-success" ng-click="break(post.id,2)">
+                                                <i class="glyphicon glyphicon-ok-circle icon-white"></i>
+                                                通过
                                             </a>
                                         </td>
                                     </tr>
