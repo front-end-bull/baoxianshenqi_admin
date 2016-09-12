@@ -1137,15 +1137,17 @@ phonecatControllers.controller('daiLiRenChaXunCtrl', ['$scope','$http',
 
       var postData = {
         q:queryStr,
-        type:type
+        type:type,
+        key:KEY
       }
+
 
       $http.post('http://'+IP+':3000/query_users',postData).success(function(data){
         // console.log(data)   
         // console.log(data.users)
         var users = data.users
         for(var i in users){
-          console.log(' -第'+i+'位: '+users[i])
+          // console.log(' -第'+i+'位: '+users[i])
           users[i] = JSON.parse(users[i])
         }
         $scope.users = users  
@@ -1153,24 +1155,37 @@ phonecatControllers.controller('daiLiRenChaXunCtrl', ['$scope','$http',
       })
     }
 
-    $scope.isChange = function(){
-      // console.log(isChange)
-      isChange = true
-    }
+    // $scope.isChange = function(){
+    //   // console.log(isChange)
+    //   isChange = true
+    // }
+    // $scope.updateName = function(id,name){
+    //   // console.log(id)
+    //   // console.log(name)
+    //   // console.log(isChange)
+    //   if(isChange){
 
+    //     $http.get('http://'+IP+':3000/change_username?key='+KEY+'&userid='+id+'&username='+name).success(function(data){
+    //       layer.msg('姓名修改成功!')
+    //     })
+    //     isChange = false
+    //   }
+    // }
 
-    $scope.updateName = function(id,name){
-      // console.log(id)
-      // console.log(name)
-      // console.log(isChange)
-      if(isChange){
-        var KEY = "cbb4906093d48f827a7322d85af9ac52"
-
-        $http.get('http://'+IP+':3000/change_username?key='+KEY+'&userid='+id+'&username='+name).success(function(data){
-          layer.msg('姓名修改成功!')
-        })
-        isChange = false
+    $scope.update = function(id,name,value){
+      var postData = {
+        userid:id,
+        name:name,
+        value:value,
+        key:KEY
       }
+      // console.log(postData)
+      $http.post('http://'+IP+':3000/update_user_by_admin',postData).success(function(data){
+          // console.log(data)
+          if(data.code==0){
+            layer.msg('修改成功!')
+          }
+        })
     }
   }]);
 
@@ -1337,7 +1352,7 @@ phonecatControllers.controller('postOptCtrl', ['$scope','$http','$routeParams',
       }
       $http.post('http://'+testIP+':3000/get_comments_by_feedid_by_admin',postData).success(function(data){
         var comments = data.comments 
-        console.log(comments)
+        // console.log(comments)
 
         comments.forEach(function(e){
           e.date = formatTime_date(new Date(e.createtime*1000))
@@ -1381,7 +1396,7 @@ phonecatControllers.controller('postOptCtrl', ['$scope','$http','$routeParams',
       // console.log(postData)
 
       $http.post('http://'+testIP+':3000/create_feed_by_admin',postData).success(function(data){
-       console.log(data)
+       // console.log(data)
        window.location.href='#/forumList'
       })
     }
@@ -1399,9 +1414,9 @@ phonecatControllers.controller('postOptCtrl', ['$scope','$http','$routeParams',
         commentid:commentid
       }
 
-      // console.log(postData)
+      console.log(postData)
       $http.post('http://'+testIP+':3000/delete_comment_by_admin',postData).success(function(data){
-        // console.log(data)
+        console.log(data)
        getComments(option,$scope.userid)
       })
 
@@ -1569,7 +1584,7 @@ phonecatControllers.controller('withdrawCashCtrl', ['$scope','$http',
 
       $http.post('http://'+testIP+':3000/list_tixian_requests',postData).success(function(data){
         var tixians = data.tixians
-        console.log(tixians)
+        // console.log(tixians)
 
         // const MAXLENGTH = 20
         for(var i in tixians){

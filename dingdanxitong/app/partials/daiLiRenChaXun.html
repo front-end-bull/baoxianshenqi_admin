@@ -49,14 +49,18 @@
                                 <thead>
                                     <tr>
                                         <th>UID</th>
+                                        <th>官方</th>
                                         <th>姓名</th>
+                                        <th>性别</th>
+                                        <th>微信ID</th>
+                                        <th>积分</th>
+                                        <th>账户余额</th>
                                         <th>手机号</th>
+                                        <th>验证码</th>
                                         <th>身份证号</th>
                                         <th>城市</th>
                                         <th>推荐人ID</th>
                                         <th>状态</th> 
-                                        <th>IP</th>
-                                        <th>Agent</th>
                                         <th>是否作弊</th>
                                     </tr>
                                 </thead>
@@ -64,16 +68,49 @@
                                 <tbody class="updateUser">
                                     
                                     <tr ng-repeat="user in users" ng-class="{true:'dangerous'}[user.spam==1]" >
-                                        <td>{{user.id}}</td>
-                                        <td><input type="text" ng-model="user.name"  ng-change="isChange()"  ng-blur="updateName(user.id,user.name)"></td>
-                                        <td>{{user.phonenumber}}</td>
-                                        <td>{{user.shengfenzheng}}</td>
-                                        <td>{{user.phone_city}}</td>
-                                        <td>{{user.promotecode}}</td>
-                                        <td>{{user.status}}</td>
-                                        <td>{{user.clientip}}</td>
-                                        <td>{{user.clientagent}}</td>
-                                        <td>{{user.spam}}</td>
+                                        <td>
+                                            <span style="color: white;background: #2fa4e7;border-radius: 2px;padding: 4px;" ng-show="user.guanfang===0||user.guanfang==='0'">官</span>
+                                            {{user.id}}
+                                        </td>
+                                        <td>
+                                            <input type="text" ng-model="user.guanfang"  ng-blur="update(user.id,'guanfang',user.guanfang)" style="width:100%;height:100%;max-width:30px;">
+                                        </td>
+                                        <td>
+                                            <input type="text" ng-model="user.username"  ng-blur="update(user.id,'username',user.username)" style="width:100%;height:100%;max-width:60px;">
+                                        </td>
+                                        <td>
+                                            <input type="text" ng-model="user.sex"  ng-blur="update(user.id,'sex',user.sex)" style="width:100%;height:100%;max-width:30px;">
+                                        </td>
+                                        <td>
+                                            {{user.weixinid}}
+                                        </td>
+                                        <td>
+                                            <input type="text" ng-model="user.points"  ng-blur="update(user.id,'points',user.points)" style="width:100%;height:100%;max-width:60px;">
+                                        </td>
+                                        <td>
+                                            <input type="text" ng-model="user.zhanghuyue"  ng-blur="update(user.id,'zhanghuyue',user.zhanghuyue)" style="width:100%;height:100%;max-width:60px;">
+                                        </td>
+                                        <td>
+                                            {{user.phonenumber}}
+                                        </td>
+                                        <td>
+                                            {{user.activecode}}
+                                        </td>
+                                        <td>
+                                            {{user.shengfenzheng}}
+                                        </td>
+                                        <td>
+                                            {{user.phone_city}}
+                                        </td>
+                                        <td>
+                                            {{user.promotecode}}
+                                        </td>
+                                        <td>
+                                            <input type="text" ng-model="user.status"  ng-blur="update(user.id,'status',user.status)" style="width:100%;height:100%;max-width:30px;">
+                                        </td>
+                                        <td>
+                                        <input type="text" ng-model="user.spam"  ng-blur="update(user.id,'spam',user.spam)" style="width:100%;height:100%;max-width:30px;">
+                                        </td>
                                       <!--   <td>
                                             <a class="btn btn-success" href="javascript:void(0)" ng-click="beizhu(user.userid)">
                                                 <i class="glyphicon glyphicon-edit icon-white" ></i>

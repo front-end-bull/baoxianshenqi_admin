@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="css/animate.min.css" />
   <script>
     const IP = "182.254.212.33"
-    // const IP = "192.168.0.250"
+    // const IP = "192.168.10.250"
     // const IP = "192.168.0.101"
   </script>
   <style>
@@ -652,22 +652,20 @@
     var content_left
     var sidebar_width
 
-    $(window).scroll(function () {
+    // $(window).scroll(function () {
 
-      if($(window).scrollTop()>=60){
-        $('#sidebar').addClass('fixed')
-        $('#sidebar').css({width:sidebar_width+30+'px'})
-        $('#content').css({'position':'relative',left:content_left+'px'})
-      }else{
-        $('#sidebar').removeClass('fixed')
-        $('#content').css({'position':'static',left:0})
-        content_left = parseInt(($('#content').offset().left-5)*100)/100
-        sidebar_width = parseInt(($('#sidebar').width())*100)/100
-        // console.log(content_left)
-        console.log(sidebar_width)
-      }
+    //   if($(window).scrollTop()>=60){
+    //     $('#sidebar').addClass('fixed')
+    //     $('#sidebar').css({width:sidebar_width+30+'px'})
+    //     $('#content').css({'position':'relative',left:content_left+'px'})
+    //   }else{
+    //     $('#sidebar').removeClass('fixed')
+    //     $('#content').css({'position':'static',left:0})
+    //     content_left = parseInt(($('#content').offset().left-5)*100)/100
+    //     sidebar_width = parseInt(($('#sidebar').width())*100)/100
+    //   }
 
-    });
+    // });
   </script>
   
 </body>
