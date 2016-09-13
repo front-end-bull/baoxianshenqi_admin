@@ -1225,15 +1225,16 @@ phonecatControllers.controller('forumListCtrl', ['$scope','$http',
         }
 
 
-        ALLPOSTS = $scope.posts = posts.sort(function(x,y){
-          if(x.id<y.id){
-            return 1
-          }
-          if(x.id>y.id){
-            return -1
-          }
-          return 0
-        })
+        ALLPOSTS = $scope.posts = posts
+        // .sort(function(x,y){
+        //   if(x.id<y.id){
+        //     return 1
+        //   }
+        //   if(x.id>y.id){
+        //     return -1
+        //   }
+        //   return 0
+        // })
         $scope.totalCount = ALLPOSTS.length
         // console.log(ALLPOSTS)
 
@@ -1344,33 +1345,97 @@ phonecatControllers.controller('postOptCtrl', ['$scope','$http','$routeParams',
       getComments(option,post.userid)
     }
 
+
+
+
+    function OURTEAM(userid,username){
+      this.userid = userid
+      this.username = username
+    }
+
+
     function getComments(feedid,userid){
+
+      var OURTEAMs = []
+
+      OURTEAMs.push(new OURTEAM('12','彭鹏'))
+      OURTEAMs.push(new OURTEAM('13','陈雷'))
+      OURTEAMs.push(new OURTEAM('988','范珅'))
+      OURTEAMs.push(new OURTEAM('3645','余辉'))
+      OURTEAMs.push(new OURTEAM('1585','李翔'))
+      // OURTEAMs.push(new OURTEAM('12','李翔'))
+      OURTEAMs.push(new OURTEAM('165634','岳勇'))
+      OURTEAMs.push(new OURTEAM('981','冯亮'))
+      OURTEAMs.push(new OURTEAM('154705','郝斌'))
+      OURTEAMs.push(new OURTEAM('144752','冯之龙'))
+      OURTEAMs.push(new OURTEAM('15573','冯之龙'))
+      OURTEAMs.push(new OURTEAM('1031','冯之龙'))
+      OURTEAMs.push(new OURTEAM('139096','冯之龙'))
+      OURTEAMs.push(new OURTEAM('139066','冯之龙'))
+      OURTEAMs.push(new OURTEAM('4473','王蒙'))
+      OURTEAMs.push(new OURTEAM('15939','Lxy'))
+      
+
       var postData = {
-        key:KEY,
-        feedid:feedid,
-        userid:userid
+        key:KEY
       }
-      $http.post('http://'+testIP+':3000/get_comments_by_feedid_by_admin',postData).success(function(data){
-        var comments = data.comments 
-        // console.log(comments)
+      $http.post('http://'+testIP+':3000/get_robot_user_list',postData).success(function(data){
+        // console.log(data)
+        if(data.code==0){
+          data.users.forEach(function(user){
+            user = JSON.parse(user)
+            OURTEAMs.push(new OURTEAM(user.id+'','马甲号'))
+          })
 
-        comments.forEach(function(e){
-          e.date = formatTime_date(new Date(e.createtime*1000))
-          e.time = formatTime_time(new Date(e.createtime*1000))
-          e.isanonymous = e.isanonymous == 1 ? '匿名':''
-        })
 
-        $scope.comments = comments.sort(function(x,y){
-          if(x.id<y.id){
-            return 1
+
+          var postData = {
+            key:KEY,
+            feedid:feedid,
+            userid:userid
           }
-          if(x.id>y.id){
-            return -1
-          }
-          return 0
-        })
-        $scope.totalCount = comments.length
+          $http.post('http://'+testIP+':3000/get_comments_by_feedid_by_admin',postData).success(function(data){
+            var comments = data.comments 
+            // console.log(comments)
+
+            comments.forEach(function(e){
+              e.date = formatTime_date(new Date(e.createtime*1000))
+              e.time = formatTime_time(new Date(e.createtime*1000))
+              e.isanonymous = e.isanonymous == 1 ? '匿名':''
+
+              OURTEAMs.forEach(function(user){
+                if(e.userid == user.userid){
+                  e.realName = user.username
+                }
+              })
+
+            })
+
+            console.log(comments)
+
+
+            $scope.comments = comments.sort(function(x,y){
+              if(x.id<y.id){
+                return 1
+              }
+              if(x.id>y.id){
+                return -1
+              }
+              return 0
+            })
+            $scope.totalCount = comments.length
+          })
+
+
+
+
+
+
+        }else{
+          console.log(data)
+        }
       })
+
     }
 
     $scope.post = function(){

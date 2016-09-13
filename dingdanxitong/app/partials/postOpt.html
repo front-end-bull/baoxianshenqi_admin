@@ -117,11 +117,12 @@
                                     </thead>
 
                                     <tbody class="updateUser">
-                                        <tr ng-repeat="comment in comments">
+                                        <tr ng-repeat="comment in comments" ng-class="{'warning':comment.realName}">
                                             <td>{{comment.id}}</td>
                                             <td style="Word-break: break-all;">{{comment.content}}</td>
                                             <td>{{comment.userid}}</td>
-                                            <td>{{comment.username}}</td>
+                                            <td>{{comment.username}}<span ng-show="comment.realName"><br>({{comment.realName}})</span>
+                                            </td>
                                             <td>{{comment.isanonymous}}</td>
                                             <td>{{comment.date}}</td>
                                             <td>{{comment.time}}</td>
