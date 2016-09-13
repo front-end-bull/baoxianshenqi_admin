@@ -1144,7 +1144,7 @@ phonecatControllers.controller('daiLiRenChaXunCtrl', ['$scope','$http',
 
       $http.post('http://'+IP+':3000/query_users',postData).success(function(data){
         // console.log(data)   
-        // console.log(data.users)
+        console.log(data.users)
         var users = data.users
         for(var i in users){
           // console.log(' -第'+i+'位: '+users[i])
@@ -1638,6 +1638,92 @@ phonecatControllers.controller('withdrawCashCtrl', ['$scope','$http',
 phonecatControllers.controller('uploadPicCtrl', ['$scope','$http',
   function($scope,$http) {
     
+  }]);
+
+
+phonecatControllers.controller('createRobotCtrl', ['$scope','$http',
+  function($scope,$http) {
+    $scope.add = function(){
+      
+      var username = $scope.username
+
+      var postData = {
+        key:KEY,
+        username:username
+      }
+
+      // console.log(username)
+      // console.log(postData)
+
+      $http.post('http://'+testIP+':3000/add_robot_user',postData).success(function(data){
+         if(data.code==0){
+            $('#addBtn_createRobot').hide()
+            $('#userid_createRobot').val(data.userid)
+          }else{
+            console.log(data)
+            layer.msg('生成失败!')
+
+          }
+        // console.log(data)
+        // console.log(123)
+        // $scope.query()
+      })
+
+
+
+    }
+  }]);
+
+
+phonecatControllers.controller('robotListCtrl', ['$scope','$http',
+  function($scope,$http) {
+    // console.log("I'm coming!")
+    function query(){
+    // console.log("I'm coming!")
+
+        var postData = {
+          key:KEY
+        }
+        $http.post('http://'+testIP+':3000/get_robot_user_list',postData).success(function(data){
+          // console.log(data)
+          // console.log(123)
+          // $scope.query()
+          var users = []
+          data.users.forEach(function(user){
+            user = JSON.parse(user)
+            users.push(user)
+
+          })
+
+          console.log(users)
+
+          $scope.users = users
+
+        })
+    }      
+
+    query()
+
+
+
+    $scope.update = function(id,name,value){
+      var postData = {
+        userid:id,
+        name:name,
+        value:value,
+        key:KEY
+      }
+      // console.log(postData)
+      $http.post('http://'+IP+':3000/update_user_by_admin',postData).success(function(data){
+          // console.log(data)
+          if(data.code==0){
+            layer.msg('修改成功!')
+          }
+        })
+    }
+
+    
+
   }]);
 
 

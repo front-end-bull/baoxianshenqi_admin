@@ -1,0 +1,86 @@
+            <div>
+                <ul class="breadcrumb">
+                    <li>
+                        <a href="javascript:void(0)">用户管理</a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">代理人查询</a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">新增马甲号</a>
+                    </li>
+                </ul>
+            </div>
+
+          
+
+            <div class="row">
+                <div class="box col-md-12">
+                    <div class="box-inner">
+                        <div class="box-header well">
+                            <h2><i class="glyphicon glyphicon-info-sign"></i> 新增马甲号</h2>
+
+                            <div class="box-icon">
+                               
+                                <!-- <a href="javascript:void(0)" class="btn btn-minimize btn-round btn-default" ng-click="post()"><i
+                                        class="glyphicon glyphicon-ok" style="color:#2bd394;"></i></a> -->
+                                <a href="#/robotList" class="btn btn-close btn-round btn-default" ><i
+                                        class="glyphicon glyphicon-remove" style="color: red;"></i></a>
+                            </div>
+                        </div>
+                        <div class="box-content">
+                            <div class="paper-title" >
+                               基本信息
+                            </div>
+
+                                <div class="paper-row row">
+                                    <div class="col-md-1" style="padding-right: 0;" >姓名:</div>
+                                    <div class="col-md-2" style="padding-left: 0;"><input  ng-model="username" id="username_createRobot"></input></div>
+                                    <div class="col-md-9" id="addBtn_createRobot">
+                                        <a class="btn btn-success" href="javascript:void(0)" ng-click="add()">
+                                                <i class="glyphicon glyphicon-plus icon-white" ></i>
+                                                生成
+                                        </a>
+                                    </div>
+                                </div> 
+
+                                <div class="paper-row row">
+                                    <div class="col-md-1" style="padding-right: 0;" >userid:</div>
+                                    <div class="col-md-2" style="padding-left: 0;"><input id="userid_createRobot" disabled="true"></input></div>
+                                </div> 
+
+
+
+                            <div class="paper-title" >
+                               上传logo
+                            </div>
+
+                                <div class="paper-row row">
+                                    <div class="col-md-12">
+                                        <a class="btn btn-success" href="javascript:void(0)" onclick="upload_createRobot()">
+                                                <i class="glyphicon glyphicon-plus icon-white" ></i>
+                                                上传图片
+                                        </a>
+                                    </div>
+                                </div> 
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+         <script type="text/javascript">
+              function upload_createRobot(){
+                    // $('parentIframe').val('')
+
+                    layer.open({
+                      type: 2,
+                      area: ['1000px', '600px'],
+                      fix: false, //不固定
+                      maxmin: true,
+                      content: '../../qiniuUpload/createRobot.html'
+                    });
+                }
+         </script>

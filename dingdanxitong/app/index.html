@@ -535,6 +535,10 @@
                             <a class="ajax-link" href="#/daiLiRenChaXun"><i class="glyphicon glyphicon-search"></i><span> 代理人查询</span></a>
                         </li>
 
+                        <li id="menu14" onclick="getFocus(this.id)">
+                            <a class="ajax-link" href="#/robotList"><i class="glyphicon glyphicon-user"></i><span> 马甲号管理</span></a>
+                        </li>
+
                         <li id="menu11" onclick="getFocus(this.id)">
                             <a class="ajax-link" href="#/withdrawCash"><i class="glyphicon glyphicon-ok-sign"></i><span> 审核提现</span></a>
                         </li>
@@ -643,6 +647,7 @@
       $('#menu11').removeClass('active')
       $('#menu12').removeClass('active')
       $('#menu13').removeClass('active')
+      $('#menu14').removeClass('active')
       // $('#menu9').removeClass('active')
 
       $('#'+id).addClass('active')

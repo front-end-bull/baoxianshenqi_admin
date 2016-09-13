@@ -51,6 +51,17 @@ phonecatApp.config(['$routeProvider',
         controller: 'daiLiRenChaXunCtrl'
       }).
 
+      when('/createRobot', {
+        templateUrl: 'partials/createRobot.html',
+        controller: 'createRobotCtrl'
+      }).
+
+      when('/robotList', {
+        templateUrl: 'partials/robotList.html',
+        controller: 'robotListCtrl'
+      }).
+
+
       //推荐联系人查询
       when('/tuiJianLianXiRenChaXun', {
         templateUrl: 'partials/tuiJianLianXiRenChaXun.html',
