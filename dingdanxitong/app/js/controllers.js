@@ -14,6 +14,14 @@ const testIP = "182.254.212.33"
 var ALLPOSTS = []
 
 
+
+function OURTEAM(userid,username){
+  this.userid = userid
+  this.username = username
+}
+
+
+
 var commissionRules = []
 
 //<option value="7167">华夏健康人生</option>
@@ -1201,42 +1209,89 @@ phonecatControllers.controller('forumListCtrl', ['$scope','$http',
   function($scope,$http) {
 
     $scope.query = function(){
+
+
+      var OURTEAMs = []
+
+      OURTEAMs.push(new OURTEAM('12','彭鹏'))
+      OURTEAMs.push(new OURTEAM('13','陈雷'))
+      OURTEAMs.push(new OURTEAM('14','任相维'))
+      OURTEAMs.push(new OURTEAM('120603','熊亚辉'))
+      OURTEAMs.push(new OURTEAM('988','范珅'))
+      OURTEAMs.push(new OURTEAM('3645','余辉'))
+      OURTEAMs.push(new OURTEAM('1585','李翔'))
+      // OURTEAMs.push(new OURTEAM('12','李翔'))
+      OURTEAMs.push(new OURTEAM('165634','岳勇'))
+      OURTEAMs.push(new OURTEAM('981','冯亮'))
+      OURTEAMs.push(new OURTEAM('154705','郝斌'))
+      OURTEAMs.push(new OURTEAM('144752','冯之龙'))
+      OURTEAMs.push(new OURTEAM('15573','冯之龙'))
+      OURTEAMs.push(new OURTEAM('1031','冯之龙'))
+      OURTEAMs.push(new OURTEAM('139096','冯之龙'))
+      OURTEAMs.push(new OURTEAM('139066','冯之龙'))
+      OURTEAMs.push(new OURTEAM('4473','王蒙'))
+      OURTEAMs.push(new OURTEAM('15939','Lxy'))
+      
+
       var postData = {
-        key:KEY,
-        isdeleted:0
+        key:KEY
       }
+      $http.post('http://'+testIP+':3000/get_robot_user_list',postData).success(function(data){
+        // console.log(data)
+        if(data.code==0){
+          data.users.forEach(function(user){
+            user = JSON.parse(user)
+            OURTEAMs.push(new OURTEAM(user.id+'','马甲号'))
+          })
 
-      $http.post('http://'+testIP+':3000/all_feed_list',postData).success(function(data){
-        var posts = data.res
-        const MAXLENGTH = 20
-        for(var i in posts){
-          var post = posts[i]
-          post.title_short = post.title
-          if(post.title.length>MAXLENGTH){
-            post.title_short = post.title.substring(0,MAXLENGTH) + "..."
-          }
-          // if(post.content.length>MAXLENGTH){
-          //   post.content = post.content.substring(0,MAXLENGTH) + "..."
-          // }
-          post.createtime = formatTime_date(new Date(post.createtime*1000))
-          post.updatetime = formatTime_date(new Date(post.updatetime*1000))
+            var postData = {
+              key:KEY,
+              isdeleted:0
+            }
 
-          posts[i] = post
+            $http.post('http://'+testIP+':3000/all_feed_list',postData).success(function(data){
+              var posts = data.res
+              const MAXLENGTH = 20
+              for(var i in posts){
+                var post = posts[i]
+                post.title_short = post.title
+                if(post.title.length>MAXLENGTH){
+                  post.title_short = post.title.substring(0,MAXLENGTH) + "..."
+                }
+                // if(post.content.length>MAXLENGTH){
+                //   post.content = post.content.substring(0,MAXLENGTH) + "..."
+                // }
+                post.createtime = formatTime_date(new Date(post.createtime*1000))
+                post.updatetime = formatTime_date(new Date(post.updatetime*1000))
+
+                OURTEAMs.forEach(function(user){
+                  if(post.userid == user.userid){
+                    post.realName = user.username
+                  }
+                })
+
+
+
+                posts[i] = post
+              }
+
+
+              ALLPOSTS = $scope.posts = posts
+              // .sort(function(x,y){
+              //   if(x.id<y.id){
+              //     return 1
+              //   }
+              //   if(x.id>y.id){
+              //     return -1
+              //   }
+              //   return 0
+              // })
+              $scope.totalCount = ALLPOSTS.length
+              // console.log(ALLPOSTS)
+
+            })
+
         }
-
-
-        ALLPOSTS = $scope.posts = posts
-        // .sort(function(x,y){
-        //   if(x.id<y.id){
-        //     return 1
-        //   }
-        //   if(x.id>y.id){
-        //     return -1
-        //   }
-        //   return 0
-        // })
-        $scope.totalCount = ALLPOSTS.length
-        // console.log(ALLPOSTS)
 
       })
     }
@@ -1348,10 +1403,7 @@ phonecatControllers.controller('postOptCtrl', ['$scope','$http','$routeParams',
 
 
 
-    function OURTEAM(userid,username){
-      this.userid = userid
-      this.username = username
-    }
+    
 
 
     function getComments(feedid,userid){
@@ -1360,6 +1412,8 @@ phonecatControllers.controller('postOptCtrl', ['$scope','$http','$routeParams',
 
       OURTEAMs.push(new OURTEAM('12','彭鹏'))
       OURTEAMs.push(new OURTEAM('13','陈雷'))
+      OURTEAMs.push(new OURTEAM('14','任相维'))
+      OURTEAMs.push(new OURTEAM('120603','熊亚辉'))
       OURTEAMs.push(new OURTEAM('988','范珅'))
       OURTEAMs.push(new OURTEAM('3645','余辉'))
       OURTEAMs.push(new OURTEAM('1585','李翔'))

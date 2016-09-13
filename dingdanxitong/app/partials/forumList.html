@@ -48,13 +48,16 @@
                                 </thead>
 
                                 <tbody class="updateUser">
-                                    <tr ng-repeat="post in posts" ng-class="{'warning':post.isanonymous==1,'danger':post.isspam==1}">
+                                    <tr ng-repeat="post in posts" ng-class="{'success':post.isanonymous==1,'warning':post.realName,'danger':post.isspam==1}">
                                         <td>{{post.id}}</td>
                                         <td >
                                         <span style="color:white;background:#2fa4e7;border-radius:2px;padding:4px;" ng-show="post.ishot">[置顶]</span> 
                                         <a href="#/postOpt/{{post.id}}">{{post.title_short}}</a></td>
                                         <td>{{post.userid}}</td>
-                                        <td>{{post.username}}</td>
+                                        <td>{{post.username}}
+                                            <span ng-show="post.realName"><br>({{post.realName}})</span>
+                                            <span ng-show="post.isanonymous==1"><br>(匿名)</span>
+                                        </td>
                                         <td>{{post.createtime}}</td>
                                         <td>{{post.updatetime}}</td>
                                         <td>{{post.liked}}</td>
