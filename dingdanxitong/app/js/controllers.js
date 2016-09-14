@@ -1464,6 +1464,9 @@ phonecatControllers.controller('postOptCtrl', ['$scope','$http','$routeParams',
               e.time = formatTime_time(new Date(e.createtime*1000))
               e.isanonymous = e.isanonymous == 1 ? '匿名':''
 
+              e.scale = 1
+              e.expression = {"transform":"none"}
+
               OURTEAMs.forEach(function(user){
                 if(e.userid == user.userid){
                   e.realName = user.username
@@ -1472,10 +1475,10 @@ phonecatControllers.controller('postOptCtrl', ['$scope','$http','$routeParams',
 
             })
 
-            // console.log(comments)
 
 
-            $scope.comments = comments.sort(function(x,y){
+            var mainComments = comments.sort(function(x,y){
+
               if(x.id<y.id){
                 return 1
               }
@@ -1483,11 +1486,40 @@ phonecatControllers.controller('postOptCtrl', ['$scope','$http','$routeParams',
                 return -1
               }
               return 0
+            }).filter(function(item){
+              return item.replyuser == 0
             })
+
+            var restComments = comments.filter(function(item){
+              return item.replyuser != 0
+            }).sort(function(x,y){
+
+              if(x.id<y.id){
+                return -1
+              }
+              if(x.id>y.id){
+                return 1
+              }
+              return 0
+            })
+
+            for(var i = 0;i<restComments.length;i++){
+              for(var j = 0;j<mainComments.length;j++){
+                if(restComments[i].replyuser == mainComments[j].id){
+                  restComments[i].scale = parseFloat(mainComments[j].scale * 9500 / 10000).toFixed(2)
+                  restComments[i].expression = {"transform":"scale("+restComments[i].scale+")"}
+
+                  mainComments.splice(j+1,0,restComments[i])
+                }
+              }
+            }
+
+
+            // console.log(mainComments)
+            $scope.comments = mainComments
+
             $scope.totalCount = comments.length
           })
-
-
 
 
 
@@ -1591,7 +1623,7 @@ phonecatControllers.controller('postOptCtrl', ['$scope','$http','$routeParams',
       }
 
       $http.post('http://'+testIP+':3000/create_comment_by_admin',postData).success(function(data){
-        console.log(data)
+        // console.log(data)
         $scope.cancel()
         getComments(option,$scope.userid)
       })
@@ -1865,3 +1897,4 @@ phonecatControllers.controller('homePageCtrl', ['$scope','$http',
 
 
 
+  

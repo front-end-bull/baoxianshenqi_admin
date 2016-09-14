@@ -15,7 +15,8 @@
                 </ul>
             </div>
 
-          
+           
+
 
             <div class="row">
                 <div class="box col-md-12">
@@ -106,7 +107,7 @@
                                     <thead>
                                         <tr>
                                             <th>ID</th>
-                                            <th>评论内容</th>
+                                            <th style="max-width:50%;">评论内容</th>
                                             <th>userID</th>
                                             <th>用户姓名</th>
                                             <th>是否匿名</th>
@@ -117,7 +118,9 @@
                                     </thead>
 
                                     <tbody class="updateUser">
-                                        <tr ng-repeat="comment in comments" ng-class="{'warning':comment.realName}">
+                                        
+
+                                        <tr ng-repeat="comment in comments" ng-class="{'warning':comment.realName}" ng-style="comment.expression">
                                             <td>{{comment.id}}</td>
                                             <td style="Word-break: break-all;">{{comment.content}}</td>
                                             <td>{{comment.userid}}</td>
