@@ -37,20 +37,21 @@
                                 <thead>
                                     <tr>
                                         <th>UID</th>
-                                        <th>官方</th>
+                                        <!-- <th>官方</th> -->
                                         <th>姓名</th>
-                                        <th>性别</th>
-                                        <th>微信ID</th>
+                                        <th>公司</th>
+                                        <!-- <th>性别</th> -->
+                                        <!-- <th>微信ID</th> -->
                                         <th>积分</th>
                                         <th>账户余额</th>
                                         <th>手机号</th>
                                         <th>验证码</th>
-                                        <th>身份证号</th>
-                                        <th>城市</th>
-                                        <th>推荐人ID</th>
+                                        <!-- <th>身份证号</th> -->
+                                        <!-- <th>城市</th> -->
+                                        <!-- <th>推荐人ID</th> -->
                                         <th>状态</th> 
                                         <th>头像ID</th>
-                                        <th>是否作弊</th>
+                                        <!-- <th>是否作弊</th> -->
                                     </tr>
                                 </thead>
 
@@ -61,18 +62,25 @@
                                             <span style="color: white;background: #2fa4e7;border-radius: 2px;padding: 4px;" ng-show="user.guanfang===0||user.guanfang==='0'">官</span>
                                             {{user.id}}
                                         </td>
-                                        <td>
+                                        <!-- <td>
                                             <input type="text" ng-model="user.guanfang"  ng-blur="update(user.id,'guanfang',user.guanfang)" style="width:100%;height:100%;max-width:30px;">
-                                        </td>
+                                        </td> -->
+                                        
                                         <td>
                                             <input type="text" ng-model="user.username"  ng-blur="update(user.id,'username',user.username)" style="width:100%;height:100%;max-width:60px;">
                                         </td>
                                         <td>
+                                            <select ng-model="user.company" ng-options="company.id as company.name for company in companys" ng-blur="update(user.id,'company',user.company)" style="width:100%;height:100%;max-width:100px;font-size:17px;">
+                                            </select>
+                                            <!-- {{user.company}} -->
+
+                                        </td>
+                                     <!--    <td>
                                             <input type="text" ng-model="user.sex"  ng-blur="update(user.id,'sex',user.sex)" style="width:100%;height:100%;max-width:30px;">
-                                        </td>
-                                        <td>
+                                        </td> -->
+                                        <!-- <td>
                                             {{user.weixinid}}
-                                        </td>
+                                        </td> -->
                                         <td>
                                             <input type="text" ng-model="user.points"  ng-blur="update(user.id,'points',user.points)" style="width:100%;height:100%;max-width:60px;">
                                         </td>
@@ -85,30 +93,25 @@
                                         <td>
                                             {{user.activecode}}
                                         </td>
-                                        <td>
+                                     <!--    <td>
                                             {{user.shengfenzheng}}
-                                        </td>
-                                        <td>
+                                        </td> -->
+                                      <!--   <td>
                                             {{user.phone_city}}
-                                        </td>
-                                        <td>
+                                        </td> -->
+                                       <!--  <td>
                                             {{user.promotecode}}
-                                        </td>
+                                        </td> -->
                                         <td>
                                             <input type="text" ng-model="user.status"  ng-blur="update(user.id,'status',user.status)" style="width:100%;height:100%;max-width:30px;">
                                         </td>
                                         <td>
                                             {{user.avatarid}}
                                         </td>
-                                        <td>
-                                        <input type="text" ng-model="user.spam"  ng-blur="update(user.id,'spam',user.spam)" style="width:100%;height:100%;max-width:30px;">
-                                        </td>
-                                      <!--   <td>
-                                            <a class="btn btn-success" href="javascript:void(0)" ng-click="beizhu(user.userid)">
-                                                <i class="glyphicon glyphicon-edit icon-white" ></i>
-                                                备注
-                                            </a>
+                                       <!--  <td>
+                                            <input type="text" ng-model="user.spam"  ng-blur="update(user.id,'spam',user.spam)" style="width:100%;height:100%;max-width:30px;">
                                         </td> -->
+                                     
                                     </tr>
                                
                                 
