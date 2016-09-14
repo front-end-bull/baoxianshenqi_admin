@@ -54,7 +54,17 @@
                             
                             <div class="paper-row row" ng-hide="opt=='break'">
                                 <div class="col-md-1" style="padding-right: 0;" >userID:</div>
-                                <div class="col-md-10" style="padding-left: 0;"><input ng-model="userid" class="w100" ng-disabled="opt!='create'"></input></div>
+                                <div class="col-md-10" style="padding-left: 0;">
+                                    <input ng-model="userid" class="w100" disabled="disabled"></input>
+                                </div>
+                            </div> 
+
+
+                            <div class="paper-row row" ng-hide="opt!='create'">
+                                <div class="col-md-1" style="padding-right: 0;" >用户姓名:</div>
+                                <div class="col-md-10" style="padding-left: 0;">
+                                    <select   ng-options="user.id as user.name for user in robotList" ng-model="userid"></select>
+                                </div>
                             </div> 
 
 
@@ -107,7 +117,7 @@
                                     <thead>
                                         <tr>
                                             <th>ID</th>
-                                            <th style="max-width:50%;">评论内容</th>
+                                            <thf>评论内容</th>
                                             <th>userID</th>
                                             <th>用户姓名</th>
                                             <th>是否匿名</th>
@@ -143,7 +153,11 @@
 
                         <div id="addComment" class="hide">
                             <div><label for="" style="position: relative;top: -187px;">评论：</label><textarea name="" cols="30" rows="10" ng-model="content_comment" id="content_comment"></textarea></div>
-                            <div><label for="">userid:</label><input type="text" ng-model="userid_comment" id="userid_comment"></div>
+                            <div>
+                                <label for="">userid:</label>
+                                <!-- <input type="text" ng-model="userid_comment" id="userid_comment"> -->
+                                <select id="userid_comment" ng-model="userid_comment" ng-options="user.id as user.name for user in robotList"></select>
+                            </div>
                             <div><label for="">replyid:</label><input type="text" ng-model="replyid"></div>
                             <div><label for="">匿名:</label><input type="checkbox" name="anonymous" value="1" ng-model="isanonymous"></div>
                             <div style="padding-left:280px;">

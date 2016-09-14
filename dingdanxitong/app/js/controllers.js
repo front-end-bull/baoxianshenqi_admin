@@ -28,6 +28,32 @@ function OURTEAM(userid,username){
 }
 
 
+function getRobotList(){
+  var users = []
+  var postData = {
+    key:KEY
+  }
+  $.ajax({
+      url:"http://"+IP+":3000/get_robot_user_list",
+      type:'post',
+      data:postData,
+      success:function(data){
+        JSON.parse(data).users.forEach(function(user){
+          user = JSON.parse(user)
+          COMPANYS.forEach(function(company){
+            if(company.id==user.company){
+              user.username = user.username + "("+company.name+")"
+            }
+          })
+          users.push({id:user.id,name:user.username})
+        })
+      }
+  })
+  return users
+}      
+
+var ROBOTLIST = getRobotList()
+
 
 var commissionRules = []
 
@@ -1337,9 +1363,12 @@ phonecatControllers.controller('postOptCtrl', ['$scope','$http','$routeParams',
   function($scope,$http,$routeParams) {
     var option = $routeParams.option
     $scope.opt  = option
+    $scope.robotList = ROBOTLIST
+
 
     if(option=="create"){
       $scope.option = "新增帖子"
+      console.log($scope.robotList)
     }else{
       
 
@@ -1551,10 +1580,8 @@ phonecatControllers.controller('postOptCtrl', ['$scope','$http','$routeParams',
         location:location
       }
 
-      // console.log(postData)
 
       $http.post('http://'+testIP+':3000/create_feed_by_admin',postData).success(function(data){
-       // console.log(data)
        window.location.href='#/forumList'
       })
     }
@@ -1609,7 +1636,7 @@ phonecatControllers.controller('postOptCtrl', ['$scope','$http','$routeParams',
         isanonymous = 1
       }
 
-      if(replyuser==undefined){
+      if(replyuser==undefined || replyuser ==''){
         replyuser = 0
       }
 
@@ -1630,6 +1657,11 @@ phonecatControllers.controller('postOptCtrl', ['$scope','$http','$routeParams',
     }
 
     $scope.cancel = function(){
+      $scope.userid_comment = ''
+      $scope.content_comment = ''
+      $scope.isanonymous = false
+      $scope.replyid = ''
+
       $('#addComment').addClass('hide')
       $('#addComment').removeClass('show')
     }
@@ -1817,6 +1849,11 @@ phonecatControllers.controller('createRobotCtrl', ['$scope','$http',
          if(data.code==0){
             $('#addBtn_createRobot').hide()
             $('#userid_createRobot').val(data.userid)
+
+
+            ROBOTLIST = getRobotList()
+
+
           }else{
             console.log(data)
             layer.msg('生成失败!')
