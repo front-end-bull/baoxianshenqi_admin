@@ -33,6 +33,7 @@ function getRobotList(){
   var postData = {
     key:KEY
   }
+  users.push({id:162210,name:'保险神器'})
   $.ajax({
       url:"http://"+IP+":3000/get_robot_user_list",
       type:'post',
