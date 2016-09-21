@@ -43,6 +43,17 @@
                                 style="border-color:#e0e0e0;" ng-disabled="opt!='create'"></textarea>
                                 </div>
                             </div> 
+                            
+                            
+                            <div class="paper-row row" ng-hide="opt=='break'">
+                                <div class="col-md-1" style="padding-right: 0;" >匿名:</div>
+                                <div class="col-md-10" style="padding-left: 0;">
+                                    <input ng-model="isanonymous" ng-disabled="opt!='create'" type="checkbox"></input>
+                                </div>
+                            </div>
+
+
+
 
                             <div class="paper-row row" style="display:none;">
                                 <div class="col-md-1" style="padding-right: 0;" >内容:</div>

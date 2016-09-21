@@ -1369,7 +1369,7 @@ phonecatControllers.controller('postOptCtrl', ['$scope','$http','$routeParams',
 
     if(option=="create"){
       $scope.option = "新增帖子"
-      console.log($scope.robotList)
+      // console.log($scope.robotList)
     }else{
       
 
@@ -1396,7 +1396,7 @@ phonecatControllers.controller('postOptCtrl', ['$scope','$http','$routeParams',
       $scope.title = post.title
       // $scope.content = post.content
       $scope.userid = post.userid
-
+      $scope.isanonymous = post.isanonymous==1 ? true :false 
 
       // console.log('-userid: '+post.userid)
 
@@ -1563,12 +1563,18 @@ phonecatControllers.controller('postOptCtrl', ['$scope','$http','$routeParams',
 
     $scope.post = function(){
       var userid = $scope.userid
-      var isanonymous = 0
+      var isanonymous = $scope.isanonymous
       var title = $scope.title
       var content = $scope.content
       var imgs = '['+ $('#parentIframe').val() +']'
       var tags = '[]'
       var location = ''
+
+      if(isanonymous==undefined||isanonymous==false){
+        isanonymous = 0
+      }else if(isanonymous == true){
+        isanonymous = 1
+      }
 
       var postData = {
         key:KEY,
