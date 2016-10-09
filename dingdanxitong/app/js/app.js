@@ -51,6 +51,15 @@ phonecatApp.config(['$routeProvider',
         controller: 'daiLiRenChaXunCtrl'
       }).
 
+      //代理人查询
+      when('/queryAgent', {
+        templateUrl: 'partials/queryAgent.html',
+        controller: 'daiLiRenChaXunCtrl'
+      }).
+
+
+
+
       when('/createRobot', {
         templateUrl: 'partials/createRobot.html',
         controller: 'createRobotCtrl'
