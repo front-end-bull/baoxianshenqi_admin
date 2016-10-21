@@ -1244,6 +1244,8 @@ phonecatControllers.controller('tuiJianLianXiRenCtrl', ['$scope','$http',
 phonecatControllers.controller('forumListCtrl', ['$scope','$http',
   function($scope,$http) {
 
+    const PERNUM = 20
+
     $scope.query = function(){
 
 
@@ -1335,8 +1337,8 @@ phonecatControllers.controller('forumListCtrl', ['$scope','$http',
 
               var totalNum = ALLPOSTS.length
               $scope.totalCount = totalNum
-              $scope.currentPosts = posts.slice(0,10)
-              var totalPages = Math.ceil(totalNum/10)
+              $scope.currentPosts = posts.slice(0,PERNUM)
+              var totalPages = Math.ceil(totalNum/PERNUM)
               
               var pages = []
               for(var i = 1;i<totalPages +1 ;i++){
@@ -1350,7 +1352,7 @@ phonecatControllers.controller('forumListCtrl', ['$scope','$http',
               $scope.totalPageNum = totalPages
 
               $scope.startNum = 1
-              $scope.endNum = 10 > totalNum ? totalNum : 10
+              $scope.endNum = PERNUM > totalNum ? totalNum : PERNUM
 
             })
 
@@ -1367,11 +1369,11 @@ phonecatControllers.controller('forumListCtrl', ['$scope','$http',
         currentPage =  $scope.currentPage + 1
       }
 
-      $scope.currentPosts = ALLPOSTS.slice((currentPage-1)*10,currentPage*10)
+      $scope.currentPosts = ALLPOSTS.slice((currentPage-1)*PERNUM,currentPage*PERNUM)
       $scope.currentPage = currentPage
 
-      $scope.startNum = currentPage*10-9
-      $scope.endNum = currentPage * 10 < $scope.totalCount ? currentPage *10 : $scope.totalCount
+      $scope.startNum = (currentPage-1)*PERNUM+1
+      $scope.endNum = currentPage * PERNUM < $scope.totalCount ? currentPage *PERNUM : $scope.totalCount
     }
 
     $scope.delete =function(feedid,userid){
