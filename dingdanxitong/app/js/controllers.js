@@ -19,7 +19,7 @@ const COMPANYS = [{id:-1, name:"无"},{id:1000, name:"热销"},{id:3, name:"国�
 
 
 var ALLPOSTS = []
-
+  
 
 
 function OURTEAM(userid,username){
@@ -83,6 +83,8 @@ commissionRules.push(new commissionRule(7165,20,0.7))
 commissionRules.push(new commissionRule(7273,15,0.45))
 commissionRules.push(new commissionRule(7273,20,0.6))
 commissionRules.push(new commissionRule(7273,30,0.6))
+// <option value="3977">人保寿险百万身价惠民两全保险</option><option value="5756">同方全球康建一生终身重疾险</option>
+
 
 
 function commissionRule(id,duration,percentage){
@@ -794,7 +796,10 @@ phonecatControllers.controller('bianJiDingDanCtrl', ['$scope','$http','$routePar
           if(block_num%3==2){color="#ff8f2e"}
           if(block_num%3==0){color="#2fa4e7"}
           if(block_num%3==1){color="#2bd394"}
-          var html = '<div style="background-color:'+color+';color:#fff;padding-top:10px;padding-bottom:10px;border-radius:20px;position:relative" id="a_block'+block_num+'"><div class="paper-row row"><div class="col-md-1" style="padding-right:0">产品名称:</div><div class="col-md-2" style="padding-left:0"><select id="block'+block_num+'_name" style="color:black"><option value="7165">泰康乐安康</option><option value="7167">华夏健康人生</option> <option value="7160">华夏常青树2015</option><option value="7238">华夏福临门铂金版2015</option><option value="7273">弘康健康人生重大疾病A款（附加轻症）</option></select></div><div class="col-md-1"></div><div class="col-md-1" style="padding-right:0">保额:</div><div class="col-md-2 add-yuan" style="padding-left:0"><input id="block'+block_num+'_baoe"></div><div class="col-md-1"></div><div class="col-md-1" style="padding-right:0">保费:</div><div class="col-md-2 add-yuan" style="padding-left:0"><input id="block'+block_num+'_baofee"></div><div class="col-md-1"></div></div><div class="paper-row row"><div class="col-md-1" style="padding-right:0">保障期间:</div><div class="col-md-2 add-year" style="padding-left:0"><input id="block'+block_num+'_baozhangqijian"></div><div class="col-md-1"></div><div class="col-md-1" style="padding-right:0">缴费年限:</div><div class="col-md-2 add-year" style="padding-left:0"><input id="block'+block_num+'_jiaofeinianxian"></div><div class="col-md-1"></div></div><div style="position:absolute;left:100%;top:10px;margin-left:-30px" id="block'+block_num+'" onclick="delete_block(this.id)"><i class="glyphicon glyphicon-remove"></i></div></div>';
+          var html = '<div style="background-color:'+color+';color:#fff;padding-top:10px;padding-bottom:10px;border-radius:20px;position:relative" id="a_block'+block_num+'"><div class="paper-row row"><div class="col-md-1" style="padding-right:0">产品名称:</div><div class="col-md-2" style="padding-left:0"><select id="block'+block_num+'_name" style="color:black">'
+<option 
+        +'<option value="7165">泰康乐安康</option><option value="7167">华夏健康人生</option> <option value="7160">华夏常青树2015</option><option value="7238">华夏福临门铂金版2015</option><option value="7273">弘康健康人生重大疾病A款（附加轻症）</option><option value="3977">人保寿险百万身价惠民两全保险</option><option value="5756">同方全球康建一生终身重疾险</option>'
+        +'</select></div><div class="col-md-1"></div><div class="col-md-1" style="padding-right:0">保额:</div><div class="col-md-2 add-yuan" style="padding-left:0"><input id="block'+block_num+'_baoe"></div><div class="col-md-1"></div><div class="col-md-1" style="padding-right:0">保费:</div><div class="col-md-2 add-yuan" style="padding-left:0"><input id="block'+block_num+'_baofee"></div><div class="col-md-1"></div></div><div class="paper-row row"><div class="col-md-1" style="padding-right:0">保障期间:</div><div class="col-md-2 add-year" style="padding-left:0"><input id="block'+block_num+'_baozhangqijian"></div><div class="col-md-1"></div><div class="col-md-1" style="padding-right:0">缴费年限:</div><div class="col-md-2 add-year" style="padding-left:0"><input id="block'+block_num+'_jiaofeinianxian"></div><div class="col-md-1"></div></div><div style="position:absolute;left:100%;top:10px;margin-left:-30px" id="block'+block_num+'" onclick="delete_block(this.id)"><i class="glyphicon glyphicon-remove"></i></div></div>';
           $('#a_block'+i).after(html)
           $('#blockList').val(JSON.stringify(blockList))
         }
@@ -1285,13 +1290,23 @@ phonecatControllers.controller('forumListCtrl', ['$scope','$http',
 
             $http.post('http://'+testIP+':3000/all_feed_list',postData).success(function(data){
               var posts = data.res
+              // console.log(posts)
+
               const MAXLENGTH = 20
+              const MAXLENGTH_NAME = 5
               for(var i in posts){
                 var post = posts[i]
                 post.title_short = post.title
-                if(post.title.length>MAXLENGTH){
+                if(post.title.length > MAXLENGTH){
                   post.title_short = post.title.substring(0,MAXLENGTH) + "..."
                 }
+
+                post.username_short = post.username
+                if(post.username_short.length > MAXLENGTH_NAME){
+                  post.username_short = post.username.substring(0,MAXLENGTH_NAME)  + "..."
+                }
+
+
                 // if(post.content.length>MAXLENGTH){
                 //   post.content = post.content.substring(0,MAXLENGTH) + "..."
                 // }
@@ -1534,19 +1549,22 @@ phonecatControllers.controller('postOptCtrl', ['$scope','$http','$routeParams',
             })
 
             for(var i = 0;i<restComments.length;i++){
+              // console.log(restComments[i])
               for(var j = 0;j<mainComments.length;j++){
                 if(restComments[i].replyuser == mainComments[j].id){
                   restComments[i].scale = parseFloat(mainComments[j].scale * 9500 / 10000).toFixed(2)
                   restComments[i].expression = {"transform":"scale("+restComments[i].scale+")"}
+
 
                   mainComments.splice(j+1,0,restComments[i])
                 }
               }
             }
 
-
+            // console.log(restComments)
             // console.log(mainComments)
             $scope.comments = mainComments
+            // $scope.comments = comments
 
             $scope.totalCount = comments.length
           })
