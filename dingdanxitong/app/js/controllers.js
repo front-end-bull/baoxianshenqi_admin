@@ -15,9 +15,6 @@ const testIP = "182.254.212.33"
 const COMPANYS = [{id:-1, name:"无"},{id:1000, name:"热销"},{id:3, name:"国寿"},{id:8, name:"平安"},{id:14, name:"新华"},{id:6, name:"太平"},{id:7, name:"太平洋"},{id:2, name:"泰康"},{id:22, name:"人保健康"},{id:33, name:"民生"},{id:27, name:"华夏"},{id:1, name:"友邦"},{id:12, name:"光大永明"},{id:10, name:"信泰"},{id:37, name:"中宏"},{id:40, name:"华泰"},{id:16, name:"人保寿"},{id:23, name:"中英人寿"},{id:38, name:"幸福"},{id:58, name:"中韩"},{id:28, name:"建信"},{id:42, name:"百年"},{id:19, name:"合众人寿"},{id:48, name:"珠江"},{id:35, name:"英大"},{id:34, name:"长城"},{id:5, name:"中意"},{id:17, name:"阳光"},{id:45, name:"北大方正"},{id:18, name:"中德安联"},{id:56, name:"德华安顾"},{id:47, name:"东吴"},{id:43, name:"君龙"},{id:21, name:"同方"},{id:29, name:"中荷"},{id:24, name:"陆家嘴国泰"},{id:26, name:"富德生命"},{id:31, name:"工银安盛"},{id:9, name:"信诚"},{id:36, name:"农银"},{id:13, name:"国华"},{id:55, name:"天安"},{id:46, name:"和谐健康"},{id:70, name:"国联"},{id:59, name:"弘康"},{id:39, name:"吉祥人寿"},{id:41, name:"瑞泰人寿"},{id:15, name:"恒安标准"},{id:49, name:"长生人寿"},{id:30, name:"交银康联"},{id:20, name:"安邦人寿"},{id:63, name:"中融人寿"},{id:50, name:"前海人寿"},{id:64, name:"中邮人寿"},{id:44, name:"利安人寿"},{id:72, name:"众安"},{id:1009, name:"香港"}];
 
 
-
-
-
 var ALLPOSTS = []
   
 
@@ -737,7 +734,7 @@ phonecatControllers.controller('xinZengDingDanCtrl', ['$scope','$http',
         // console.log(JSON.stringify(postData))
 
         $http.post('http://'+IP+':3000/add_order',postData).success(function(data){
-            // console.log(data)
+            console.log(data)
             layer.msg('新增成功!')
 
         })
@@ -1335,8 +1332,25 @@ phonecatControllers.controller('forumListCtrl', ['$scope','$http',
               //   }
               //   return 0
               // })
-              $scope.totalCount = ALLPOSTS.length
-              // console.log(ALLPOSTS)
+
+              var totalNum = ALLPOSTS.length
+              $scope.totalCount = totalNum
+              $scope.currentPosts = posts.slice(0,10)
+              var totalPages = Math.ceil(totalNum/10)
+              
+              var pages = []
+              for(var i = 1;i<totalPages +1 ;i++){
+                var page = {}
+                page.num = i
+                pages.push(page)
+              }
+
+              $scope.totalPages = pages
+              $scope.currentPage = 1
+              $scope.totalPageNum = totalPages
+
+              $scope.startNum = 1
+              $scope.endNum = 10 > totalNum ? totalNum : 10
 
             })
 
@@ -1345,6 +1359,20 @@ phonecatControllers.controller('forumListCtrl', ['$scope','$http',
       })
     }
     $scope.query()
+
+    $scope.gotoPage = function(currentPage){
+      if(currentPage == 'pre'){
+        currentPage =  $scope.currentPage - 1
+      }else if(currentPage == 'next'){
+        currentPage =  $scope.currentPage + 1
+      }
+
+      $scope.currentPosts = ALLPOSTS.slice((currentPage-1)*10,currentPage*10)
+      $scope.currentPage = currentPage
+
+      $scope.startNum = currentPage*10-9
+      $scope.endNum = currentPage * 10 < $scope.totalCount ? currentPage *10 : $scope.totalCount
+    }
 
     $scope.delete =function(feedid,userid){
       var postData = {
