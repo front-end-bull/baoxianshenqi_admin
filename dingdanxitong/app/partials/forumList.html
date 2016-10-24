@@ -48,7 +48,9 @@
                                 </thead>
 
                                 <tbody class="updateUser">
-                                    <tr ng-repeat="post in currentPosts" ng-class="{'success':post.isanonymous==1,'warning':post.realName,'danger':post.isspam==1}">
+                                    <!-- <tr ng-repeat="post in currentPosts" ng-class="{'success':post.isanonymous==1,'warning':post.realName,'danger':post.isspam==1}"> -->
+                                    <tr ng-repeat="post in posts" ng-class="{'success':post.isanonymous==1,'warning':post.realName,'danger':post.isspam==1}">
+
                                         <td>{{post.id}}</td>
                                         <td >
                                         <span style="color:white;background:#2fa4e7;border-radius:2px;padding:4px;" ng-show="post.ishot">[置顶]</span> 
@@ -82,7 +84,7 @@
                                 </tbody>
                             </table>
 
-                            <div class="row">
+                        <!--     <div class="row">
                                 <div class="col-md-12">
                                     <div class="dataTables_info" id="DataTables_Table_0_info">
                                         Showing {{startNum}} to {{endNum}} of {{totalCount}} entries
@@ -99,7 +101,7 @@
                                         </ul>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                             
                              <!-- <div>共 <i class="yellow">{{totalCount}}</i> 条</div> -->
 
