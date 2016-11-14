@@ -1268,8 +1268,14 @@ phonecatControllers.controller('forumListCtrl', ['$scope','$http',
       OURTEAMs.push(new OURTEAM('139096','冯之龙'))
       OURTEAMs.push(new OURTEAM('139066','冯之龙'))
       OURTEAMs.push(new OURTEAM('4473','王蒙'))
-      OURTEAMs.push(new OURTEAM('15939','Lxy'))
+      // OURTEAMs.push(new OURTEAM('15939','Lxy'))
+      OURTEAMs.push(new OURTEAM('165725','李小页'))
       
+
+      OURTEAMs.push(new OURTEAM('102130','马甲号'))
+      OURTEAMs.push(new OURTEAM('155501','马甲号'))
+      OURTEAMs.push(new OURTEAM('120603','马甲号'))
+
 
       var postData = {
         key:KEY
@@ -1288,12 +1294,13 @@ phonecatControllers.controller('forumListCtrl', ['$scope','$http',
             }
 
             $http.post('http://'+testIP+':3000/all_feed_list',postData).success(function(data){
-              var posts = data.res
-              // console.log(posts)
+              var posts = data.res.data
+              console.log(posts)
 
               const MAXLENGTH = 20
               const MAXLENGTH_NAME = 5
               for(var i in posts){
+
                 var post = posts[i]
                 post.title_short = post.title
                 if(post.title.length > MAXLENGTH){
@@ -1918,9 +1925,6 @@ phonecatControllers.controller('createRobotCtrl', ['$scope','$http',
         // console.log(123)
         // $scope.query()
       })
-
-
-
     }
   }]);
 
@@ -1938,7 +1942,7 @@ phonecatControllers.controller('robotListCtrl', ['$scope','$http',
           key:KEY
         }
         $http.post('http://'+testIP+':3000/get_robot_user_list',postData).success(function(data){
-          // console.log(data)
+          console.log(data)
           // console.log(123)
           // $scope.query()
           var users = []
